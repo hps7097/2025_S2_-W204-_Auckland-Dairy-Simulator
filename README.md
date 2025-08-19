@@ -1,2 +1,1 @@
-Download .exe file
-Run on a Windows System
+Download .exe file to run on any operating system that accepts .exe files
