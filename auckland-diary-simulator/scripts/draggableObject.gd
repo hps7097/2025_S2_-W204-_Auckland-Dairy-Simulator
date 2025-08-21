@@ -7,7 +7,7 @@ var offset: Vector2
 var initialPos: Vector2
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if draggable:
 		if Input.is_action_just_pressed("click"):
 			initialPos = global_position
@@ -21,9 +21,8 @@ func _process(delta: float) -> void:
 			if is_inside_dropable:
 				tween.tween_property(self, "position", body_ref.position, 0.2).set_ease(Tween.EASE_OUT)
 			else:
-				tween.tween_property(self, "global_position", global_position + Vector2(0, 50), 0.1).set_ease(Tween.EASE_IN)
+				tween.tween_property(self, "global_position", global_position, 0.1).set_ease(Tween.EASE_IN)
 			
-
 
 func _on_area_2d_mouse_entered() -> void:
 	if !global.is_dragging:
