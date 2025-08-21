@@ -1,28 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctaplnp6urvrl"]
+[gd_scene load_steps=3 format=3 uid="uid://ctaplnp6urvrl"]
 
-[ext_resource type="Script" uid="uid://c5fhwt8vacvuw" path="res://scripts/character_body_2d.gd" id="1_6e5ks"]
-[ext_resource type="Texture2D" uid="uid://bupm1d3ul74ob" path="res://icon.svg" id="2_mm707"]
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vox2t"]
-distance = -1033.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fyubj"]
-size = Vector2(128, 128)
+[ext_resource type="PackedScene" uid="uid://dy20m3mlng3a7" path="res://scenes/object.tscn" id="1_6e5ks"]
+[ext_resource type="PackedScene" uid="uid://b6e1i7tte4ujh" path="res://scenes/platform.tscn" id="2_mm707"]
 
 [node name="DayScreen" type="Node2D"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="object" parent="." instance=ExtResource("1_6e5ks")]
+position = Vector2(819, 304)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(933, 0)
-shape = SubResource("WorldBoundaryShape2D_vox2t")
+[node name="platform" parent="." instance=ExtResource("2_mm707")]
+position = Vector2(901, 581)
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(100, 500)
-script = ExtResource("1_6e5ks")
-
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-texture = ExtResource("2_mm707")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("RectangleShape2D_fyubj")
+[node name="platform2" parent="." instance=ExtResource("2_mm707")]
+position = Vector2(543, 590)
