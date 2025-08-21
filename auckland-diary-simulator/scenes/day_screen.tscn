@@ -1,15 +1,22 @@
 [gd_scene load_steps=3 format=3 uid="uid://ctaplnp6urvrl"]
 
-[ext_resource type="PackedScene" uid="uid://dy20m3mlng3a7" path="res://scenes/object.tscn" id="1_6e5ks"]
-[ext_resource type="PackedScene" uid="uid://b6e1i7tte4ujh" path="res://scenes/platform.tscn" id="2_mm707"]
+[ext_resource type="PackedScene" uid="uid://dy20m3mlng3a7" path="res://scenes/draggableObject.tscn" id="1_6e5ks"]
+[ext_resource type="PackedScene" uid="uid://b6e1i7tte4ujh" path="res://scenes/snappableArea.tscn" id="2_mm707"]
 
 [node name="DayScreen" type="Node2D"]
 
-[node name="object" parent="." instance=ExtResource("1_6e5ks")]
-position = Vector2(819, 304)
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
 
-[node name="platform" parent="." instance=ExtResource("2_mm707")]
+[node name="snappableArea" parent="." instance=ExtResource("2_mm707")]
 position = Vector2(901, 581)
 
-[node name="platform2" parent="." instance=ExtResource("2_mm707")]
+[node name="snappableArea2" parent="." instance=ExtResource("2_mm707")]
 position = Vector2(543, 590)
+
+[node name="draggableObject" parent="." instance=ExtResource("1_6e5ks")]
+position = Vector2(819, 304)
