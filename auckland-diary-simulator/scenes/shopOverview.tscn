@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dl3q0g6ug6c3"]
+
+[ext_resource type="Texture2D" uid="uid://bupm1d3ul74ob" path="res://icon.svg" id="1_ogeot"]
+
+[node name="shopOverviewMain" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1280, 496)
+rotation = 3.14159
+scale = Vector2(10, 3.875)
+texture = ExtResource("1_ogeot")
+centered = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-6.10352e-05, 248)
+scale = Vector2(10, 3.875)
+texture = ExtResource("1_ogeot")
