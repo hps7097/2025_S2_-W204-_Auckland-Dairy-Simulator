@@ -1,18 +1,41 @@
-[gd_scene load_steps=2 format=3 uid="uid://dl3q0g6ug6c3"]
+[gd_scene load_steps=5 format=3 uid="uid://dl3q0g6ug6c3"]
 
-[ext_resource type="Texture2D" uid="uid://bupm1d3ul74ob" path="res://icon.svg" id="1_ogeot"]
+[ext_resource type="Texture2D" uid="uid://cwkl25te8naim" path="res://assets/_viewportTest.png" id="2_fphiu"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fphiu"]
+blend_mode = 3
+
+[sub_resource type="Gradient" id="Gradient_7l8q0"]
+colors = PackedColorArray(0.054902, 0.0235294, 0.0352941, 0.588235, 0.18845, 0.119973, 0.189886, 0)
+metadata/_snap_count = 100
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kfl73"]
+gradient = SubResource("Gradient_7l8q0")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0.834862)
+metadata/_snap_count = 44
 
 [node name="shopOverviewMain" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(1280, 496)
-rotation = 3.14159
-scale = Vector2(10, 3.875)
-texture = ExtResource("1_ogeot")
+position = Vector2(-640, 0)
+texture = ExtResource("2_fphiu")
 centered = false
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(-6.10352e-05, 248)
-scale = Vector2(10, 3.875)
-texture = ExtResource("1_ogeot")
+[node name="ColorRect" type="ColorRect" parent="Sprite2D"]
+material = SubResource("CanvasItemMaterial_fphiu")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.829346, 0.846579, 0.81017, 0.298039)
+metadata/_edit_use_anchors_ = true
+
+[node name="ShadowGradient2" type="TextureRect" parent="Sprite2D"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_kfl73")

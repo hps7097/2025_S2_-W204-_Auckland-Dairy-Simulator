@@ -8,12 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://dy20m3mlng3a7" path="res://scenes/draggableObject.tscn" id="4_5rx4b"]
 
 [sub_resource type="Gradient" id="Gradient_7l8q0"]
-colors = PackedColorArray(0.054902, 0.0235294, 0.0352941, 0.784314, 0.18845, 0.119973, 0.189886, 0)
+colors = PackedColorArray(0.054902, 0.0235294, 0.0352941, 0.588235, 0.18845, 0.119973, 0.189886, 0)
+metadata/_snap_count = 100
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_5rx4b"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kfl73"]
 gradient = SubResource("Gradient_7l8q0")
 fill_from = Vector2(0, 1)
-fill_to = Vector2(0, 0)
+fill_to = Vector2(0, 0.834862)
+metadata/_snap_count = 44
 
 [node name="main" type="Control"]
 layout_mode = 3
@@ -33,11 +35,11 @@ expand_mode = 5
 stretch_mode = 6
 
 [node name="NPC" type="Node2D" parent="."]
-position = Vector2(329, 496)
+position = Vector2(300, 450)
 
 [node name="Sprite2D" type="Sprite2D" parent="NPC"]
-position = Vector2(33, 0)
-scale = Vector2(3, 3)
+position = Vector2(40, -40)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_qeyhs")
 
 [node name="Control" type="Control" parent="NPC"]
@@ -56,19 +58,12 @@ mouse_filter = 2
 [node name="ShadowGradient" type="TextureRect" parent="UI"]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 0.333
-anchor_bottom = 1.0
-offset_top = -524.0
-offset_right = 0.640015
-offset_bottom = -223.55
-grow_horizontal = 2
-grow_vertical = 0
-texture = SubResource("GradientTexture2D_5rx4b")
+offset_right = 640.0
+offset_bottom = 700.0
+texture = SubResource("GradientTexture2D_kfl73")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="UI"]
-custom_minimum_size = Vector2(1280, 496)
+custom_minimum_size = Vector2(1280, 500)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -76,10 +71,11 @@ anchor_right = 1.0
 grow_horizontal = 0
 size_flags_vertical = 3
 stretch = true
+stretch_shrink = 3
 
 [node name="SubViewport" type="SubViewport" parent="UI/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(1280, 496)
+size = Vector2i(426, 166)
 render_target_update_mode = 4
 
 [node name="shopOverviewMain" parent="UI/SubViewportContainer/SubViewport" instance=ExtResource("3_5rx4b")]
