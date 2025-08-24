@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwkl25te8naim"
-path="res://.godot/imported/_ViewportTest.png-e2ba09a7e05969522edd9f0bcf7369f6.ctex"
+uid="uid://ik7wkeal8k2t"
+path="res://.godot/imported/16x16 Run Cycle-Sheet.png-d5d3d97018815d70a099350cf1a56ee6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/_ViewportTest.png"
-dest_files=["res://.godot/imported/_ViewportTest.png-e2ba09a7e05969522edd9f0bcf7369f6.ctex"]
+source_file="res://assets/ErisEsra's Character Templates/16x16 Run Cycle-Sheet.png"
+dest_files=["res://.godot/imported/16x16 Run Cycle-Sheet.png-d5d3d97018815d70a099350cf1a56ee6.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwkl25te8naim"
-path="res://.godot/imported/_ViewportTest.png-e2ba09a7e05969522edd9f0bcf7369f6.ctex"
+uid="uid://dl1evrf7a3s4y"
+path="res://.godot/imported/_ViewportFreezerChest.png-0e34c8c7f190d833b162504ce8c405cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/_ViewportTest.png"
-dest_files=["res://.godot/imported/_ViewportTest.png-e2ba09a7e05969522edd9f0bcf7369f6.ctex"]
+source_file="res://assets/_ViewportFreezerChest.png"
+dest_files=["res://.godot/imported/_ViewportFreezerChest.png-0e34c8c7f190d833b162504ce8c405cf.ctex"]
 
 [params]
 
