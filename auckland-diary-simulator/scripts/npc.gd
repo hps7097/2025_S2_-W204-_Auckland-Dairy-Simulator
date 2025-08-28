@@ -11,7 +11,7 @@ var lastDirection = 2  # 0=up, 1=right, 2=down, 3=left
 func _ready() -> void:
 	if path_follow == null:
 		push_error("PathFollow2D is null! Check the node path.")
-		return
+		return 
 	path_follow.loop = loop_path
 	last_position = path_follow.position
 	# Start NPC at the first point of the path
