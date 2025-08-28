@@ -1,13 +1,14 @@
 extends Node2D
 
 var draggable = false
+var selected = false
 var is_inside_dropable = false
 var is_inside_till = true
 var is_inside_desk = false
 var is_hovering_till = true
 var is_hovering_desk = false
 var body_ref
-var offset: Vector2
+var dropPos
 var initialPos: Vector2
 var scaleBy: float = 1
 @onready var drop_shadow: Sprite2D = $DropShadow
@@ -17,46 +18,64 @@ var scaleBy: float = 1
 func _ready() -> void:
 	sprite_2d.region_rect = Rect2(128 * randi_range(0, 3), 0, 128, 128)  # (x, y, w, h)
 	scale = Vector2(scaleBy, scaleBy)
+	dropPos = position
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
-	if draggable:
-		if Input.is_action_just_pressed("click"):
-			z_index = 1
+func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if Input.is_action_just_pressed("click"):
+		if MouseManager.current_dragged == null:
+			MouseManager.current_dragged = self
+			selected = true;
+			# Bring this object to the front
+			MouseManager.top_z_index += 1
+			z_index = MouseManager.top_z_index
 			initialPos = global_position
-			offset = get_global_mouse_position() - global_position
 			MouseManager.is_dragging = true
 			var tweenShadowAlpha = get_tree().create_tween()
 			var tweenShadowPos = get_tree().create_tween()
 			tweenShadowAlpha.tween_property(drop_shadow, "modulate", Color(1, 1, 1, 0.3), 0.2).set_ease(Tween.EASE_OUT)
 			tweenShadowPos.tween_property(drop_shadow, "position", Vector2(0,20 + 70 / scaleBy), 0.2).set_ease(Tween.EASE_OUT)
-			
-		if Input.is_action_pressed("click"):
-			global_position = get_global_mouse_position() - offset
-			
-		elif Input.is_action_just_released("click"):
-			MouseManager.is_dragging = false
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta: float) -> void:
+	if selected:
+		global_position = lerp(global_position, get_global_mouse_position(), 25 * delta)
+		if get_global_mouse_position().x < global_position.x:
+			sprite_2d.flip_h = true;
+			sprite_2d.look_at(get_global_mouse_position())
+			sprite_2d.rotation_degrees += 180
+		else:
+			sprite_2d.flip_h = false;
+			sprite_2d.look_at(get_global_mouse_position())
+	else:
+		MouseManager.is_dragging = false
+		sprite_2d.rotation = lerp_angle(sprite_2d.rotation, 0, 10 * delta)
+		if is_inside_dropable:
+			position = lerp(position, body_ref.position, 20 * delta)
+		elif not is_hovering_till && not is_hovering_desk:
+			dropPos = initialPos
+			global_position = lerp(global_position, initialPos, 20 * delta)
+		else:
+			position = lerp(position, dropPos, 20 * delta)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if selected and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+			MouseManager.current_dragged = null
+			selected = false;
+			dropPos = position + Vector2(0, 70);
 			var tween = get_tree().create_tween()
 			var tweenShadowAlpha = get_tree().create_tween()
 			var tweenShadowPos = get_tree().create_tween()
-			tweenShadowAlpha.tween_property(drop_shadow, "modulate", Color(1, 1, 1, 0), 0.2).set_ease(Tween.EASE_OUT)
-			tweenShadowPos.tween_property(drop_shadow, "position", Vector2(0,35), 0.2).set_ease(Tween.EASE_OUT)
-			
+			tweenShadowAlpha.tween_property(drop_shadow, "modulate", Color(1, 1, 1, 0), 0.1).set_ease(Tween.EASE_OUT)
+			tweenShadowPos.tween_property(drop_shadow, "position", Vector2(0,35), 0.1).set_ease(Tween.EASE_OUT)
+		
 			# Tween location depending if dropped in a snappable area, the table, or nothing
-			if is_inside_dropable:
-				tween.tween_property(self, "position", body_ref.position, 0.2).set_ease(Tween.EASE_OUT)
-			elif not is_hovering_till && not is_hovering_desk:
-				tween.tween_property(self, "global_position", initialPos, 0.1).set_ease(Tween.EASE_IN)
-			else:
-				tween.tween_property(self, "position", position + Vector2(0, 50), 0.2).set_ease(Tween.EASE_OUT)
-	elif MouseManager.is_dragging:
-		z_index = 0
 			
 
 func _on_area_2d_mouse_entered() -> void:
 	if !MouseManager.is_dragging:
 		draggable = true
-		scale = Vector2(scaleBy + 0.05, scaleBy + 0.05)
+		scale = Vector2(scaleBy + 0.1, scaleBy + 0.1)
 
 func _on_area_2d_mouse_exited() -> void:
 	if !MouseManager.is_dragging:
