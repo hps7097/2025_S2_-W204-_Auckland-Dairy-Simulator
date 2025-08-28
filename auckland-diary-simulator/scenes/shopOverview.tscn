@@ -155,6 +155,7 @@ position = Vector2(-274.5, 80)
 shape = SubResource("SegmentShape2D_0br7i")
 
 [node name="InsideColorFilter" type="ColorRect" parent="."]
+visible = false
 z_index = 4096
 material = SubResource("CanvasItemMaterial_fphiu")
 anchors_preset = 15
@@ -169,6 +170,7 @@ color = Color(0.822292, 0.826012, 0.740056, 0.298039)
 metadata/_edit_use_anchors_ = true
 
 [node name="DoorShine" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -411.0
@@ -177,6 +179,7 @@ offset_right = -371.0
 offset_bottom = 137.0
 
 [node name="ColorFilter2" type="TextureRect" parent="DoorShine"]
+visible = false
 z_index = 4096
 material = SubResource("CanvasItemMaterial_5r3pi")
 layout_mode = 0
@@ -186,6 +189,7 @@ texture = SubResource("GradientTexture2D_e27pt")
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorFilter3" type="TextureRect" parent="DoorShine"]
+visible = false
 z_index = 4096
 material = SubResource("CanvasItemMaterial_5r3pi")
 layout_mode = 0
@@ -196,6 +200,7 @@ flip_v = true
 metadata/_edit_use_anchors_ = true
 
 [node name="ShadowGradient" type="TextureRect" parent="."]
+visible = false
 z_index = 4096
 offset_left = -640.0
 offset_right = -210.0

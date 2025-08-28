@@ -4,7 +4,8 @@ var draggable = false
 var is_inside_dropable = false
 var is_inside_till = true
 var is_inside_desk = false
-var is_hovering_placeable = true
+var is_hovering_till = true
+var is_hovering_desk = false
 var body_ref
 var offset: Vector2
 var initialPos: Vector2
@@ -44,7 +45,7 @@ func _physics_process(delta: float) -> void:
 			# Tween location depending if dropped in a snappable area, the table, or nothing
 			if is_inside_dropable:
 				tween.tween_property(self, "position", body_ref.position, 0.2).set_ease(Tween.EASE_OUT)
-			elif not is_inside_desk && not is_inside_till:
+			elif not is_hovering_till && not is_hovering_desk:
 				tween.tween_property(self, "global_position", initialPos, 0.1).set_ease(Tween.EASE_IN)
 			else:
 				tween.tween_property(self, "position", position + Vector2(0, 50), 0.2).set_ease(Tween.EASE_OUT)
@@ -84,11 +85,16 @@ func rescale():
 
 
 func _on_hover_check_area_entered(area: Area2D) -> void:
-	if area.is_in_group('till') || area.is_in_group('desk') :
-		is_hovering_placeable = true
+	if area.is_in_group('till'):
+		is_hovering_till = true
+	if area.is_in_group('desk'):
+		is_hovering_desk = true
 
 func _on_hover_check_area_exited(area: Area2D) -> void:
-		is_hovering_placeable = false
+	if area.is_in_group('till'):
+		is_hovering_till = false
+	if area.is_in_group('desk'):
+		is_hovering_desk = false
 
 
 func _on_centre_area_area_entered(area: Area2D) -> void:
