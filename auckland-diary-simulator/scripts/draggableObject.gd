@@ -47,7 +47,6 @@ func _physics_process(delta: float) -> void:
 			sprite_2d.flip_h = false;
 			sprite_2d.look_at(get_global_mouse_position())
 	else:
-		MouseManager.is_dragging = false
 		sprite_2d.rotation = lerp_angle(sprite_2d.rotation, 0, 10 * delta)
 		if is_inside_dropable:
 			position = lerp(position, body_ref.position, 20 * delta)
@@ -62,6 +61,7 @@ func _input(event: InputEvent) -> void:
 		if selected and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 			MouseManager.current_dragged = null
 			selected = false;
+			MouseManager.is_dragging = false
 			dropPos = position + Vector2(0, 70);
 			var tween = get_tree().create_tween()
 			var tweenShadowAlpha = get_tree().create_tween()
