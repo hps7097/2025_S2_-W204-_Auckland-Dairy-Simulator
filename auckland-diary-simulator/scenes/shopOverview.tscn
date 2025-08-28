@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dl3q0g6ug6c3"]
+[gd_scene load_steps=26 format=3 uid="uid://dl3q0g6ug6c3"]
 
 [ext_resource type="Script" uid="uid://i3x1g5sormma" path="res://scripts/viewportObj.gd" id="2_5r3pi"]
 [ext_resource type="Texture2D" uid="uid://dnlj0lxe6oblb" path="res://assets/_ViewportBack.png" id="2_20r31"]
@@ -21,6 +21,12 @@ size = Vector2(141, 17)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tk8sh"]
 size = Vector2(18, 18)
+
+[sub_resource type="Curve2D" id="Curve2D_5r3pi"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 1, 64, 0, 0, 0, 0, -2, 89, 0, 0, 0, 0, -30, 104, 0, 0, 0, 0, -64, 102, 0, 0, 0, 0, -140, 116, 0, 0, 0, 0, -181, 121, 0, 0, 0, 0, -208, 149, 0, 0, 0, 0, -262, 156, 0, 0, 0, 0, -269, 108, 0, 0, 0, 0, -265, 84)
+}
+point_count = 11
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xjx6o"]
 size = Vector2(3, 82)
@@ -116,33 +122,51 @@ script = ExtResource("7_5r3pi")
 [node name="NPC" parent="." instance=ExtResource("5_20r31")]
 position = Vector2(-331, 0)
 
+[node name="AnimatedSprite2D" parent="NPC" index="0"]
+position = Vector2(0, 19)
+
+[node name="Path2D" parent="NPC" index="2"]
+curve = SubResource("Curve2D_5r3pi")
+
+[node name="PathFollow2D" parent="NPC/Path2D" index="0"]
+position = Vector2(-181.449, 121.355)
+rotation = 2.71993
+progress = 252.333
+
 [node name="ViewportForeground" type="Sprite2D" parent="."]
+visible = false
 z_index = 4096
 position = Vector2(-575, 161)
 texture = ExtResource("6_wb5qm")
 
 [node name="OutsideWall" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2(-359.5, 85)
 
 [node name="ViewportDivider" type="Sprite2D" parent="OutsideWall"]
+visible = false
 z_index = 4096
 position = Vector2(-1, 0)
 texture = ExtResource("7_tk8sh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OutsideWall"]
+visible = false
 z_index = 4096
 position = Vector2(-1, -44)
 shape = SubResource("RectangleShape2D_xjx6o")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="OutsideWall"]
+visible = false
 z_index = 4096
 position = Vector2(-1, 58)
 shape = SubResource("RectangleShape2D_2mflr")
 
 [node name="WallHitboxes" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2(-359.5, 85)
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="WallHitboxes"]
+visible = false
 position = Vector2(-139, 107)
 shape = SubResource("RectangleShape2D_alsh6")
 
@@ -201,4 +225,5 @@ offset_left = -640.0
 offset_right = -210.0
 offset_bottom = 170.0
 texture = SubResource("GradientTexture2D_kfl73")
-metadata/_edit_use_anchors_ = true
+
+[editable path="NPC"]
