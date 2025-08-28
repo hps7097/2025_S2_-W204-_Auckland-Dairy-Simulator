@@ -101,7 +101,7 @@ region = Rect2(32, 64, 16, 32)
 atlas = ExtResource("3_7n8xq")
 region = Rect2(48, 64, 16, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_bll4x"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_7n8xq"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -206,39 +206,44 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_abqhh"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4wlns"]
 size = Vector2(10, 10)
 
 [sub_resource type="Curve2D" id="Curve2D_7n8xq"]
-bake_interval = 0.01
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 450, -144, 0, 0, 0, 0, 447, -50, 0, 0, 0, 0, 409, -39, 0, 0, 0, 0, 373, -57, 0, 0, 0, 0, 260, -53, 0, 0, 0, 0, 226, -3, 0, 0, 0, 0, 184, 4, 0, 0, 0, 0, 184, -44, 0, 0, 0, 0, 203, -53, 0, 0, 0, 0, 247, -47, 0, 0, 0, 0, 284, -4, 0, 0, 0, 0, 364, -5, 0, 0, 0, 0, 394, -38, 0, 0, 0, 0, 473, -49, 0, 0, 0, 0, 460, -148)
+}
+point_count = 15
 
-[node name="NPC" type="CharacterBody2D"]
+[node name="NPC" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_7n8xq")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1, 1)
-sprite_frames = SubResource("SpriteFrames_bll4x")
-animation = &"idleFront"
-
-[node name="DropShadow" type="TextureRect" parent="AnimatedSprite2D"]
+[node name="DropShadow" type="TextureRect" parent="CharacterBody2D"]
 modulate = Color(1, 1, 1, 0.3)
-z_index = 1
 z_as_relative = false
-offset_left = -7.0
-offset_top = 12.0
-offset_right = 9.0
-offset_bottom = 18.0
+offset_left = -8.0
+offset_top = -3.0
+offset_right = 8.0
+offset_bottom = 3.0
 texture = ExtResource("2_7n8xq")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 14)
-shape = SubResource("RectangleShape2D_abqhh")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_7n8xq")
+animation = &"idleFront"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_4wlns")
 
 [node name="Path2D" type="Path2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(-457, 134)
 curve = SubResource("Curve2D_7n8xq")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(0, 16)
-rotation = -1.5708
+position = Vector2(453, -148)
+rotation = 1.58006

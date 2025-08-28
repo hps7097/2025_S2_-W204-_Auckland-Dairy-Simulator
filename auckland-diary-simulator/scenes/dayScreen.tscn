@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b6e1i7tte4ujh" path="res://scenes/snappableArea.tscn" id="3_7l8q0"]
 [ext_resource type="PackedScene" uid="uid://dy20m3mlng3a7" path="res://scenes/draggableObject.tscn" id="4_5rx4b"]
 [ext_resource type="Texture2D" uid="uid://bied52v5xw86t" path="res://assets/_Monitor.png" id="5_5rx4b"]
-[ext_resource type="Script" uid="uid://bd05y8rijxihn" path="res://scenes/rich_text_label.gd" id="6_i333y"]
+[ext_resource type="Script" uid="uid://bd05y8rijxihn" path="res://scripts/rich_text_label.gd" id="6_i333y"]
 [ext_resource type="Texture2D" uid="uid://c4rb8x7jmtjin" path="res://assets/_MonitorBase.png" id="6_wxbpj"]
 
 [sub_resource type="Gradient" id="Gradient_7l8q0"]
