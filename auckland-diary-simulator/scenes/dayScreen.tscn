@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b6e1i7tte4ujh" path="res://scenes/snappableArea.tscn" id="3_7l8q0"]
 [ext_resource type="PackedScene" uid="uid://dy20m3mlng3a7" path="res://scenes/draggableObject.tscn" id="4_5rx4b"]
 [ext_resource type="Texture2D" uid="uid://bied52v5xw86t" path="res://assets/_Monitor.png" id="5_5rx4b"]
-[ext_resource type="Script" uid="uid://bd05y8rijxihn" path="res://scenes/rich_text_label.gd" id="6_i333y"]
+[ext_resource type="Script" uid="uid://b80lpuqomceh2" path="res://scripts/rich_text_label.gd" id="6_i333y"]
 [ext_resource type="Texture2D" uid="uid://c4rb8x7jmtjin" path="res://assets/_MonitorBase.png" id="6_wxbpj"]
 
 [sub_resource type="Gradient" id="Gradient_7l8q0"]
@@ -205,10 +205,17 @@ texture = ExtResource("6_wxbpj")
 position = Vector2(1224, 768)
 
 [node name="snappableArea2" parent="." instance=ExtResource("3_7l8q0")]
-position = Vector2(80, 832)
+position = Vector2(53, 841)
+scale = Vector2(0.8, 1.6)
+
+[node name="ColorRect" parent="snappableArea2" index="1"]
+metadata/_edit_use_anchors_ = true
 
 [node name="draggableObject2" parent="." instance=ExtResource("4_5rx4b")]
 position = Vector2(443, 852)
 
 [node name="draggableObject" parent="." instance=ExtResource("4_5rx4b")]
 position = Vector2(230, 856)
+
+[editable path="snappableArea"]
+[editable path="snappableArea2"]

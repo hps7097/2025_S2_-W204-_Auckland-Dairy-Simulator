@@ -19,26 +19,30 @@ func _ready() -> void:
 	sprite_2d.region_rect = Rect2(128 * randi_range(0, 3), 0, 128, 128)  # (x, y, w, h)
 	scale = Vector2(scaleBy, scaleBy)
 	dropPos = position
+	MouseManager.push(self)
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if Input.is_action_just_pressed("click"):
 		if MouseManager.current_dragged == null:
-			MouseManager.current_dragged = self
-			selected = true;
-			# Bring this object to the front
-			MouseManager.top_z_index += 1
-			z_index = MouseManager.top_z_index
-			initialPos = global_position
-			MouseManager.is_dragging = true
-			var tweenShadowAlpha = get_tree().create_tween()
-			var tweenShadowPos = get_tree().create_tween()
-			tweenShadowAlpha.tween_property(drop_shadow, "modulate", Color(1, 1, 1, 0.3), 0.2).set_ease(Tween.EASE_OUT)
-			tweenShadowPos.tween_property(drop_shadow, "position", Vector2(0,20 + 70 / scaleBy), 0.2).set_ease(Tween.EASE_OUT)
+			var area = MouseManager.pick_top_object(event.position)
+			if area == self:
+				MouseManager.current_dragged = self
+				MouseManager.push(self)
+				selected = true;
+				# Bring this object to the front
+				MouseManager.top_z_index += 1
+				z_index = MouseManager.top_z_index
+				initialPos = global_position
+				MouseManager.is_dragging = true
+				var tweenShadowAlpha = get_tree().create_tween()
+				var tweenShadowPos = get_tree().create_tween()
+				tweenShadowAlpha.tween_property(drop_shadow, "modulate", Color(1, 1, 1, 0.3), 0.2).set_ease(Tween.EASE_OUT)
+				tweenShadowPos.tween_property(drop_shadow, "position", Vector2(0,20 + 70 / scaleBy), 0.2).set_ease(Tween.EASE_OUT)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if selected:
-		global_position = lerp(global_position, get_global_mouse_position(), 25 * delta)
+		global_position = lerp(global_position, get_global_mouse_position() + Vector2(-1, 0), 25 * delta)
 		if get_global_mouse_position().x < global_position.x:
 			sprite_2d.flip_h = true;
 			sprite_2d.look_at(get_global_mouse_position())
@@ -52,7 +56,7 @@ func _physics_process(delta: float) -> void:
 			position = lerp(position, body_ref.position, 20 * delta)
 		elif not is_hovering_till && not is_hovering_desk:
 			dropPos = initialPos
-			global_position = lerp(global_position, initialPos, 20 * delta)
+			global_position = lerp(global_position, initialPos, 10 * delta)
 		else:
 			position = lerp(position, dropPos, 20 * delta)
 
@@ -62,8 +66,7 @@ func _input(event: InputEvent) -> void:
 			MouseManager.current_dragged = null
 			selected = false;
 			MouseManager.is_dragging = false
-			dropPos = position + Vector2(0, 70);
-			var tween = get_tree().create_tween()
+			dropPos = position + Vector2(0, 50);
 			var tweenShadowAlpha = get_tree().create_tween()
 			var tweenShadowPos = get_tree().create_tween()
 			tweenShadowAlpha.tween_property(drop_shadow, "modulate", Color(1, 1, 1, 0), 0.1).set_ease(Tween.EASE_OUT)
@@ -74,11 +77,28 @@ func _input(event: InputEvent) -> void:
 
 func _on_area_2d_mouse_entered() -> void:
 	if !MouseManager.is_dragging:
+		if MouseManager.is_hovering:
+			var area = MouseManager.pick_top_object(get_global_mouse_position())
+			if area == self:
+				MouseManager.signalAllObjects()
+			else:
+				return;
+		draggable = true
+		MouseManager.is_hovering = true
+		scale = Vector2(scaleBy + 0.1, scaleBy + 0.1)
+
+func check_top() -> void:
+	var area = MouseManager.pick_top_object(get_global_mouse_position())
+	if area == self:
 		draggable = true
 		scale = Vector2(scaleBy + 0.1, scaleBy + 0.1)
+	else:
+		draggable = false
+		scale = Vector2(scaleBy, scaleBy)
 
 func _on_area_2d_mouse_exited() -> void:
 	if !MouseManager.is_dragging:
+		MouseManager.signalAllObjects()
 		draggable = false
 		scale = Vector2(scaleBy, scaleBy)
 
@@ -106,14 +126,28 @@ func rescale():
 func _on_hover_check_area_entered(area: Area2D) -> void:
 	if area.is_in_group('till'):
 		is_hovering_till = true
+		is_inside_till = true
+		scaleBy = 1
+		rescale()
 	if area.is_in_group('desk'):
 		is_hovering_desk = true
+		is_inside_desk = true
+		scaleBy = 2
+		rescale()
 
 func _on_hover_check_area_exited(area: Area2D) -> void:
 	if area.is_in_group('till'):
 		is_hovering_till = false
+		is_inside_till = false
+		if is_inside_desk:
+			scaleBy = 2
+			rescale()
 	if area.is_in_group('desk'):
 		is_hovering_desk = false
+		is_inside_desk = false
+		if is_inside_till:
+			scaleBy = 1
+			rescale()
 
 
 func _on_centre_area_area_entered(area: Area2D) -> void:
