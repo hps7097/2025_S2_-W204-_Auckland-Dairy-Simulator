@@ -1,22 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://bk8xwdncm35eh"]
+[gd_scene load_steps=7 format=3 uid="uid://bh3wg1f5bf60v"]
 
 [ext_resource type="Script" uid="uid://cr5f47dq5vycy" path="res://scripts/scanner.gd" id="1_5n3fm"]
+[ext_resource type="Texture2D" uid="uid://b5n3nroj1e2uc" path="res://assets/_ScannerRay.png" id="2_kruw0"]
 [ext_resource type="Texture2D" uid="uid://baksvsdcvcwev" path="res://assets/_Scanners.png" id="3_kruw0"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_guh5m"]
-size = Vector2(4, 4)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_guh5m"]
 radius = 46.8402
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_guh5m"]
+size = Vector2(4, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kruw0"]
+size = Vector2(2, 2)
+
 [node name="object" type="Node2D"]
 script = ExtResource("1_5n3fm")
-
-[node name="CentreArea" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CentreArea"]
-shape = SubResource("RectangleShape2D_guh5m")
-debug_color = Color(0.912, 0, 0.726, 0.641)
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -24,15 +22,39 @@ debug_color = Color(0.912, 0, 0.726, 0.641)
 shape = SubResource("CircleShape2D_guh5m")
 debug_color = Color(0, 0.6, 0.7, 0)
 
+[node name="CentreArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CentreArea"]
+shape = SubResource("RectangleShape2D_guh5m")
+debug_color = Color(0.912, 0, 0.726, 0.641)
+
+[node name="RaySprite" type="Sprite2D" parent="."]
+position = Vector2(-129, -59)
+texture = ExtResource("2_kruw0")
+region_enabled = true
+region_rect = Rect2(0, 0, 180, 100)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_kruw0")
 region_enabled = true
-region_rect = Rect2(0, 0, 128, 128)
+region_rect = Rect2(128, 0, 128, 128)
 
-[connection signal="area_entered" from="CentreArea" to="." method="_on_centre_area_area_entered"]
-[connection signal="area_exited" from="CentreArea" to="." method="_on_centre_area_area_exited"]
+[node name="ScannerArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScannerArea"]
+position = Vector2(-178, -66)
+shape = SubResource("RectangleShape2D_kruw0")
+debug_color = Color(0.889864, 0.000257403, 0.794865, 0.795)
+
+[node name="ScanTimer" type="Timer" parent="ScannerArea"]
+one_shot = true
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="area_entered" from="CentreArea" to="." method="_on_centre_area_area_entered"]
+[connection signal="area_exited" from="CentreArea" to="." method="_on_centre_area_area_exited"]
+[connection signal="area_entered" from="ScannerArea" to="." method="_on_scanner_area_area_entered"]
+[connection signal="area_exited" from="ScannerArea" to="." method="_on_scanner_area_area_exited"]

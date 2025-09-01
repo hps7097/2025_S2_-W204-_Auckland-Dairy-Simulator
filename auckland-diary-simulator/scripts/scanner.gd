@@ -7,11 +7,14 @@ var initialPos: Vector2
 var scaleBy: float = 1
 @onready var centre_area: Area2D = $CentreArea
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var ray_sprite: Sprite2D = $RaySprite
+@onready var scan_timer: Timer = $ScannerArea/ScanTimer
 
 func _ready() -> void:
 	scale = Vector2(scaleBy, scaleBy)
 	initialPos = position
 	MouseManager.push(self)
+	sprite_2d.region_rect = Rect2(0, 0, 128, 128)  # (x, y, w, h)
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if Input.is_action_just_pressed("click"):
@@ -21,6 +24,8 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 			selected = true;
 			# Bring this object to the front
 			MouseManager.is_dragging = true
+			sprite_2d.region_rect = Rect2(128, 0, 128, 128)  # (x, y, w, h)
+			ray_sprite.visible = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	z_index = MouseManager.top_z_index + 1
@@ -37,11 +42,15 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
-		if selected and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
-			MouseManager.current_dragged = null
-			selected = false;
-			MouseManager.is_dragging = false
-			MouseManager.selectScanner = false
+		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+			MouseManager.push(self) # Always goes front
+			if selected:
+				MouseManager.current_dragged = null
+				selected = false;
+				MouseManager.is_dragging = false
+				MouseManager.selectScanner = false
+				sprite_2d.region_rect = Rect2(0, 0, 128, 128)  # (x, y, w, h)
+				ray_sprite.visible = false
 		
 			# Tween location depending if dropped in a snappable area, the table, or nothing
 			
@@ -79,3 +88,13 @@ func rescale():
 	var tweenScale2 = get_tree().create_tween()
 	tweenScale.tween_property(self, "scale", Vector2(scaleBy + 0.05, scaleBy + 0.05), 0.1).set_ease(Tween.EASE_OUT)
 	tweenScale2.tween_property(centre_area, "global_scale", Vector2(1, 1), 0.1).set_ease(Tween.EASE_IN)
+
+
+func _on_scanner_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group('scannable'):
+		scan_timer.start()
+
+
+func _on_scanner_area_area_exited(area: Area2D) -> void:
+	if area.is_in_group('scannable'):
+		pass

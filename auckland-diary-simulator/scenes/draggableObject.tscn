@@ -13,7 +13,7 @@ radius = 46.8402
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1xhob"]
 size = Vector2(0, 0)
 
-[node name="object" type="Node2D"]
+[node name="object" type="Node2D" groups=["draggable"]]
 script = ExtResource("1_l2ofb")
 
 [node name="CentreArea" type="Area2D" parent="."]
