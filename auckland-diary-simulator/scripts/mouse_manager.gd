@@ -8,6 +8,8 @@ var top_z_index : int = 0
 
 var z_index_order: Array = []
 
+var selectScanner = false
+
 func push(value: Node2D):
 	if z_index_order.has(value):
 		z_index_order.erase(value)
@@ -22,6 +24,8 @@ func pick_top_object(mouse_pos : Vector2, layer_mask = 1) -> Node2D:
 	var intersections  = space_state.intersect_point(params)
 	
 	if intersections.is_empty():
+		return null
+	if selectScanner == true || current_dragged != null:
 		return null
 	# Sort by z_index descending to get the topmost
 	var result
