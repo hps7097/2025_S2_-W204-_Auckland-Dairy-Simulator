@@ -2,25 +2,28 @@ extends Node2D
 
 var draggable = false
 var selected = false
-var body_ref
+var area_ref
 var initialPos: Vector2
 var scaleBy: float = 1
 @onready var centre_area: Area2D = $CentreArea
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var scanner_click_area: Area2D = $ScannerClickArea
 @onready var ray_sprite: Sprite2D = $RaySprite
+@onready var scanner_area: Area2D = $ScannerArea
 @onready var scan_timer: Timer = $ScannerArea/ScanTimer
+
 
 func _ready() -> void:
 	scale = Vector2(scaleBy, scaleBy)
 	initialPos = position
-	MouseManager.push(self)
+	MouseManager.push(scanner_click_area)
 	sprite_2d.region_rect = Rect2(0, 0, 128, 128)  # (x, y, w, h)
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if Input.is_action_just_pressed("click"):
 		if MouseManager.current_dragged == null:
 			MouseManager.selectScanner = true
-			MouseManager.current_dragged = self
+			MouseManager.current_dragged = scanner_click_area
 			selected = true;
 			# Bring this object to the front
 			MouseManager.is_dragging = true
@@ -32,10 +35,9 @@ func _physics_process(delta: float) -> void:
 	if selected:
 		global_position = lerp(global_position, get_global_mouse_position() + Vector2(1, 0), 25 * delta)
 		if get_global_mouse_position().x < global_position.x:
-			look_at(get_global_mouse_position())
-			rotation_degrees += 180
+			rotation = lerp_angle(rotation, -global_position.angle_to_point(get_global_mouse_position()) + PI, 10 * delta)
 		else:
-			look_at(get_global_mouse_position())
+			rotation = lerp_angle(rotation, global_position.angle_to_point(get_global_mouse_position()), 10 * delta)
 	else:
 		rotation = lerp_angle(rotation, 0, 10 * delta)
 		global_position = lerp(global_position, initialPos, 10 * delta)
@@ -43,7 +45,7 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
-			MouseManager.push(self) # Always goes front
+			MouseManager.push(scanner_click_area) # Always goes front
 			if selected:
 				MouseManager.current_dragged = null
 				selected = false;
@@ -59,7 +61,7 @@ func _on_area_2d_mouse_entered() -> void:
 	if !MouseManager.is_dragging:
 		if MouseManager.is_hovering:
 			var area = MouseManager.pick_top_object(get_global_mouse_position())
-			if area == self:
+			if area == scanner_click_area:
 				MouseManager.signalAllObjects()
 			else:
 				return;
@@ -69,7 +71,7 @@ func _on_area_2d_mouse_entered() -> void:
 
 func check_top() -> void:
 	var area = MouseManager.pick_top_object(get_global_mouse_position())
-	if area == self:
+	if area == scanner_click_area:
 		draggable = true
 		scale = Vector2(scaleBy + 0.05, scaleBy + 0.05)
 	else:
@@ -92,9 +94,19 @@ func rescale():
 
 func _on_scanner_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group('scannable'):
+		area_ref = area
 		scan_timer.start()
-
+		ray_sprite.region_rect = Rect2(0, 0, 180, 100)  # (x, y, w, h)
 
 func _on_scanner_area_area_exited(area: Area2D) -> void:
 	if area.is_in_group('scannable'):
-		pass
+		scan_timer.stop()
+		ray_sprite.region_rect = Rect2(180, 0, 180, 100)  # (x, y, w, h)
+
+func _on_scan_timer_timeout() -> void:
+	var area = MouseManager.pick_top_object(scanner_area.global_position)
+	print(str(area) + " " + str(area_ref))
+	if area == area_ref:
+		area_ref.get_parent().scanned = true;
+		print("SCANNED!")
+		ProductManager.add(area_ref.get_parent())

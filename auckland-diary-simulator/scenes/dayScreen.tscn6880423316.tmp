@@ -147,7 +147,7 @@ position = Vector2(1280, 295.1)
 shape = SubResource("RectangleShape2D_i333y")
 
 [node name="Monitor" type="Sprite2D" parent="UI"]
-z_index = 999
+z_index = 1
 position = Vector2(1697, 595)
 scale = Vector2(3, 3)
 texture = ExtResource("5_5rx4b")
@@ -193,7 +193,6 @@ tab_size = 21
 script = ExtResource("6_i333y")
 
 [node name="Timer" type="Timer" parent="UI/Monitor/MarginContainer/Panel/RichTextLabel"]
-wait_time = 2.0
 one_shot = true
 
 [node name="TextureRect" type="TextureRect" parent="UI/Monitor/MarginContainer"]
@@ -202,7 +201,7 @@ layout_mode = 2
 texture = SubResource("GradientTexture2D_72ia3")
 
 [node name="Base" type="Sprite2D" parent="UI/Monitor"]
-z_index = -999
+z_index = -1
 position = Vector2(0, 89)
 texture = ExtResource("6_wxbpj")
 
@@ -221,7 +220,5 @@ position = Vector2(230, 856)
 
 [node name="object" parent="." instance=ExtResource("10_72ia3")]
 position = Vector2(1354, 602)
-
-[connection signal="timeout" from="UI/Monitor/MarginContainer/Panel/RichTextLabel/Timer" to="UI/Monitor/MarginContainer/Panel/RichTextLabel" method="_on_timer_timeout"]
 
 [editable path="snappableArea2"]

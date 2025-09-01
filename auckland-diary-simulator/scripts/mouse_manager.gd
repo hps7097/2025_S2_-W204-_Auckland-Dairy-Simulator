@@ -15,26 +15,24 @@ func push(value: Node2D):
 		z_index_order.erase(value)
 	z_index_order.append(value)
 	
-
-func pick_top_object(mouse_pos : Vector2, layer_mask = 1) -> Node2D:
+var intersections
+func pick_top_object(position : Vector2, layer_mask = 1) -> Node2D:
 	var space_state = get_tree().current_scene.get_world_2d().direct_space_state
 	var params := PhysicsPointQueryParameters2D.new()  
-	params.position = mouse_pos  
+	params.position = position  
 	params.collide_with_areas = true  
-	var intersections  = space_state.intersect_point(params)
+	intersections  = space_state.intersect_point(params)
 	
 	if intersections.is_empty():
-		return null
-	if selectScanner == true || current_dragged != null:
 		return null
 	# Sort by z_index descending to get the topmost
 	var result
 	for obj in z_index_order:
 		for area in intersections:
-			if area.collider.get_parent() == obj:
+			if area.collider == obj:
 				result = obj
 	return result
 
 func signalAllObjects() -> void:
 	for obj in z_index_order:
-		obj.check_top()
+		obj.get_parent().check_top()

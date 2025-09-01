@@ -1,5 +1,6 @@
 extends RichTextLabel
 
+@onready var timer: Timer = $Timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -8,4 +9,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	text = str(MouseManager.z_index_order)
+	if ProductManager.message != "" && timer.is_stopped():
+		text = ProductManager.message
+		timer.start()
+	elif timer.is_stopped():
+		text = str(ProductManager.scanned)
+
+func _on_timer_timeout() -> void:
+	ProductManager.message = ""

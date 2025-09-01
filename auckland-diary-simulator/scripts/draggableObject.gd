@@ -2,11 +2,15 @@ extends Node2D
 
 var draggable = false
 var selected = false
+var scanned = false
+
 var is_inside_dropable = false
+
 var is_inside_till = true
 var is_inside_desk = false
 var is_hovering_till = true
 var is_hovering_desk = false
+
 var body_ref
 var dropPos
 var initialPos: Vector2
@@ -14,20 +18,21 @@ var scaleBy: float = 1
 @onready var drop_shadow: Sprite2D = $DropShadow
 @onready var centre_area: Area2D = $CentreArea
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var area_2d: Area2D = $Area2D
 
 func _ready() -> void:
 	sprite_2d.region_rect = Rect2(128 * randi_range(0, 3), 0, 128, 128)  # (x, y, w, h)
 	scale = Vector2(scaleBy, scaleBy)
 	dropPos = position
-	MouseManager.push(self)
+	MouseManager.push(area_2d)
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if Input.is_action_just_pressed("click"):
 		if MouseManager.current_dragged == null:
 			var area = MouseManager.pick_top_object(event.position)
-			if area == self:
-				MouseManager.current_dragged = self
-				MouseManager.push(self)
+			if area == area_2d:
+				MouseManager.current_dragged = area_2d
+				MouseManager.push(area_2d)
 				selected = true;
 				# Bring this object to the front
 				MouseManager.top_z_index += 1
@@ -44,12 +49,11 @@ func _physics_process(delta: float) -> void:
 	if selected:
 		global_position = lerp(global_position, get_global_mouse_position() + Vector2(-1, 0), 25 * delta)
 		if get_global_mouse_position().x < global_position.x:
+			sprite_2d.rotation = lerp_angle(sprite_2d.rotation, -global_position.angle_to_point(get_global_mouse_position()) + PI, 20 * delta)
 			sprite_2d.flip_h = true;
-			sprite_2d.look_at(get_global_mouse_position())
-			sprite_2d.rotation_degrees += 180
 		else:
-			sprite_2d.flip_h = false;
-			sprite_2d.look_at(get_global_mouse_position())
+			sprite_2d.rotation = lerp_angle(sprite_2d.rotation, global_position.angle_to_point(get_global_mouse_position()), 20 * delta)
+			sprite_2d.flip_h = false
 	else:
 		sprite_2d.rotation = lerp_angle(sprite_2d.rotation, 0, 10 * delta)
 		if is_inside_dropable:
@@ -79,7 +83,7 @@ func _on_area_2d_mouse_entered() -> void:
 	if !MouseManager.is_dragging:
 		if MouseManager.is_hovering:
 			var area = MouseManager.pick_top_object(get_global_mouse_position())
-			if area == self:
+			if area == area_2d:
 				MouseManager.signalAllObjects()
 			else:
 				return;
@@ -89,7 +93,7 @@ func _on_area_2d_mouse_entered() -> void:
 
 func check_top() -> void:
 	var area = MouseManager.pick_top_object(get_global_mouse_position())
-	if area == self:
+	if area == area_2d:
 		draggable = true
 		scale = Vector2(scaleBy + 0.1, scaleBy + 0.1)
 	else:
