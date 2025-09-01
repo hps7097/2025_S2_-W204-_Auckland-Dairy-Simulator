@@ -27,12 +27,12 @@ func _physics_process(delta: float) -> void:
 	if selected:
 		global_position = lerp(global_position, get_global_mouse_position() + Vector2(1, 0), 25 * delta)
 		if get_global_mouse_position().x < global_position.x:
-			sprite_2d.look_at(get_global_mouse_position())
-			sprite_2d.rotation_degrees += 180
+			look_at(get_global_mouse_position())
+			rotation_degrees += 180
 		else:
-			sprite_2d.look_at(get_global_mouse_position())
+			look_at(get_global_mouse_position())
 	else:
-		sprite_2d.rotation = lerp_angle(sprite_2d.rotation, 0, 10 * delta)
+		rotation = lerp_angle(rotation, 0, 10 * delta)
 		global_position = lerp(global_position, initialPos, 10 * delta)
 
 func _input(event: InputEvent) -> void:
@@ -41,6 +41,7 @@ func _input(event: InputEvent) -> void:
 			MouseManager.current_dragged = null
 			selected = false;
 			MouseManager.is_dragging = false
+			MouseManager.selectScanner = false
 		
 			# Tween location depending if dropped in a snappable area, the table, or nothing
 			
