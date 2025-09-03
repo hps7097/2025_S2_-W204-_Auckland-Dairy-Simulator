@@ -34,7 +34,13 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	# Always have scanner higher than objects
 	z_index = MouseManager.top_z_index + 1
+	# Always have size change depending on scaleBy
+	if draggable:
+		scale = lerp(scale, Vector2(scaleBy + 0.05, scaleBy + 0.05), 10 * delta)
+	else:
+		scale = lerp(scale, Vector2(scaleBy, scaleBy), 10 * delta)
 	if selected:
 		# Handle rotation
 		global_position = lerp(global_position, get_global_mouse_position() + Vector2(1, 0), 25 * delta)
@@ -77,29 +83,26 @@ func check_top() -> void:
 	var area = MouseManager.pick_top_object(get_global_mouse_position())
 	if area == scanner_click_area:
 		draggable = true
-		scale = Vector2(scaleBy + 0.1, scaleBy + 0.1)
 	else:
 		draggable = false
-		scale = Vector2(scaleBy, scaleBy)
-		
-			
-func rescale():
-	var tweenScale = get_tree().create_tween()
-	var tweenScale2 = get_tree().create_tween()
-	tweenScale.tween_property(self, "scale", Vector2(scaleBy + 0.05, scaleBy + 0.05), 0.1).set_ease(Tween.EASE_OUT)
-	tweenScale2.tween_property(centre_area, "global_scale", Vector2(1, 1), 0.1).set_ease(Tween.EASE_IN)
 
 func _on_scanner_area_area_entered(area: Area2D) -> void:
-	if area.is_in_group('scannable'):
-		if area.get_parent().is_inside_desk == true:
-			area_ref = area
-			scan_timer.start()
-			ray_sprite.region_rect = Rect2(0, 0, 180, 100)  # (x, y, w, h)
+	check_top_scanner()
 
 func _on_scanner_area_area_exited(area: Area2D) -> void:
-	if area.is_in_group('scannable'):
+	check_top_scanner()
+
+func check_top_scanner() -> void:
+	var area = MouseManager.pick_top_object(scanner_area.global_position)
+	if area == null:
+		area_ref = null;
 		scan_timer.stop()
 		ray_sprite.region_rect = Rect2(180, 0, 180, 100)  # (x, y, w, h)
+	elif area.get_parent().is_inside_desk == true:
+		if area != area_ref:
+			area_ref = area
+			scan_timer.start()
+			ray_sprite.region_rect = Rect2(0, 0, 180, 100)
 
 func _on_scan_timer_timeout() -> void:
 	var area = MouseManager.pick_top_object(scanner_area.global_position)

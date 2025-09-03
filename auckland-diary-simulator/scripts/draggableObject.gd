@@ -24,10 +24,7 @@ var bagPos: Vector2
 @onready var click_area: Area2D = $ClickArea
 
 func _ready() -> void:
-	sprite_2d.region_rect = Rect2(128 * randi_range(0, 3), 0, 128, 128)  # (x, y, w, h)
-	scale = Vector2(scaleBy, scaleBy)
-	dropPos = position
-	MouseManager.push(click_area)
+	resetItem()
 
 func _on_click_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if Input.is_action_just_pressed("click"):
@@ -51,7 +48,10 @@ func _physics_process(delta: float) -> void:
 	# Ensure centre point area never changes size
 	centre_area.global_scale = Vector2(1, 1)
 	# Always have size change depending on scaleBy
-	scale = lerp(scale, Vector2(scaleBy, scaleBy), 10 * delta)
+	if draggable:
+		scale = lerp(scale, Vector2(scaleBy + 0.1, scaleBy + 0.1), 10 * delta)
+	else:
+		scale = lerp(scale, Vector2(scaleBy, scaleBy), 10 * delta)
 	if selected:
 		# Follow Mouse
 		global_position = lerp(global_position, get_global_mouse_position() + Vector2(-1, 0), 25 * delta)
@@ -115,10 +115,8 @@ func check_top() -> void:
 	var area = MouseManager.pick_top_object(get_global_mouse_position())
 	if area == click_area:
 		draggable = true
-		scale = Vector2(scaleBy + 0.1, scaleBy + 0.1)
 	else:
 		draggable = false
-		scale = Vector2(scaleBy, scaleBy)
 
 func _on_click_area_body_entered(body: Node2D) -> void:
 	# When entering a snappable droppable area
@@ -172,3 +170,13 @@ func _on_centre_area_area_exited(area: Area2D) -> void:
 		is_inside_desk = false
 		if is_inside_till:
 			scaleBy = 1
+			
+func resetItem() -> void:
+	sprite_2d.region_rect = Rect2(128 * randi_range(0, 3), 0, 128, 128)  # (x, y, w, h)
+	position = Vector2(328, 650)
+	dropPos = Vector2(randi_range(230, 430), randi_range(730, 780))
+	scale = Vector2(scaleBy, scaleBy)
+	MouseManager.push(click_area)
+	scanned = false;
+	bagged = false
+	

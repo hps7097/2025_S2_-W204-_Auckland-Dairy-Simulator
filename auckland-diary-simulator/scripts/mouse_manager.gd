@@ -11,7 +11,7 @@ var selectScanner = false
 
 func push(value: Node2D):
 	if z_index_order.has(value):
-		z_index_order.erase(value)
+		return
 	z_index_order.append(value)
 	
 var intersections

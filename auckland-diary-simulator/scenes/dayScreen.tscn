@@ -1,11 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://bgugpbhxc07ng"]
+[gd_scene load_steps=18 format=3 uid="uid://bgugpbhxc07ng"]
 
 [ext_resource type="Texture2D" uid="uid://hlhhjhtsv10m" path="res://assets/_NPCBack.png" id="1_oar64"]
 [ext_resource type="Texture2D" uid="uid://cl8mys0nso8ll" path="res://assets/_NPC_Police.png" id="1_qeyhs"]
 [ext_resource type="Texture2D" uid="uid://dfosdkugb4dgb" path="res://assets/_TillDesk.png" id="2_oar64"]
 [ext_resource type="PackedScene" uid="uid://dl3q0g6ug6c3" path="res://scenes/shopOverview.tscn" id="3_5rx4b"]
 [ext_resource type="PackedScene" uid="uid://b6e1i7tte4ujh" path="res://scenes/snappableArea.tscn" id="3_7l8q0"]
-[ext_resource type="PackedScene" uid="uid://dy20m3mlng3a7" path="res://scenes/draggableObject.tscn" id="4_5rx4b"]
 [ext_resource type="Texture2D" uid="uid://bied52v5xw86t" path="res://assets/_Monitor.png" id="5_5rx4b"]
 [ext_resource type="Script" uid="uid://b80lpuqomceh2" path="res://scripts/rich_text_label.gd" id="6_i333y"]
 [ext_resource type="Texture2D" uid="uid://c4rb8x7jmtjin" path="res://assets/_MonitorBase.png" id="6_wxbpj"]
@@ -212,13 +211,7 @@ scale = Vector2(0.82, 1.65)
 [node name="ColorRect" parent="snappableArea2" index="1"]
 metadata/_edit_use_anchors_ = true
 
-[node name="draggableObject2" parent="." instance=ExtResource("4_5rx4b")]
-position = Vector2(443, 852)
-
-[node name="draggableObject" parent="." instance=ExtResource("4_5rx4b")]
-position = Vector2(230, 856)
-
-[node name="object" parent="." instance=ExtResource("10_72ia3")]
+[node name="Scanner" parent="." instance=ExtResource("10_72ia3")]
 position = Vector2(1354, 602)
 
 [connection signal="timeout" from="UI/Monitor/MarginContainer/Panel/RichTextLabel/Timer" to="UI/Monitor/MarginContainer/Panel/RichTextLabel" method="_on_timer_timeout"]
