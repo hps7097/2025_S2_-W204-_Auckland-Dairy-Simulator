@@ -13,7 +13,7 @@ func _process(delta: float) -> void:
 		text = ProductManager.message
 		timer.start()
 	elif timer.is_stopped():
-		text = str(ProductManager.bagged_objects)
+		text = "TOTAL: $" +  str(ProductManager.total_price).pad_decimals(2)
 
 func _on_timer_timeout() -> void:
 	ProductManager.message = ""

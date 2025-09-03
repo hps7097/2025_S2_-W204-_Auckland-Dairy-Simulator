@@ -1,5 +1,18 @@
 extends Node2D
 
+enum Type { PIE, XXLPIE, V, ICECREAM, CHOCOLATE, LOLLIES, CHIPS }
+var item_type: Type
+
+var type_values := {
+	Type.PIE: 3.50,
+	Type.XXLPIE: 4.30,
+	Type.V: 4.00,
+	Type.ICECREAM: 3.10,
+	Type.CHOCOLATE: 2.60,
+	Type.LOLLIES: 3.90,
+	Type.CHIPS: 4.10
+}	
+
 var draggable = false
 var selected = false
 var scanned = false
@@ -22,14 +35,15 @@ var bagPos: Vector2
 @onready var centre_area: Area2D = $CentreArea
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var click_area: Area2D = $ClickArea
+@onready var popup_text: Node2D = get_parent().get_node("PopupText")
 
 func _ready() -> void:
-	resetItem()
+	reset_item()
 
 func _on_click_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if Input.is_action_just_pressed("click"):
 		# Ensure nothing is being dragged right now
-		if MouseManager.current_dragged == null:
+		if MouseManager.current_dragged == null and !bagged:
 			# Check if object is top most at mouse location
 			var area = MouseManager.pick_top_object(event.position)
 			if area == click_area:
@@ -57,20 +71,18 @@ func _physics_process(delta: float) -> void:
 		global_position = lerp(global_position, get_global_mouse_position() + Vector2(-1, 0), 25 * delta)
 		# Animate Shadow:
 		drop_shadow.modulate = lerp(drop_shadow.modulate, Color(1, 1, 1, 0.3), 25 * delta)
-		drop_shadow.position = lerp(drop_shadow.position, Vector2(0,40 + 20 * scaleBy), 25 * delta)
+		drop_shadow.position = lerp(drop_shadow.position, Vector2(0,40 + 30 * scaleBy), 25 * delta)
 		# Handle rotation
 		if get_global_mouse_position().x < global_position.x:
-			sprite_2d.rotation = lerp_angle(sprite_2d.rotation, global_position.angle_to_point(get_global_mouse_position()) + PI, 20 * delta)
-			sprite_2d.flip_h = true;
+			sprite_2d.rotation = lerp_angle(sprite_2d.rotation, global_position.angle_to_point(get_global_mouse_position()) + PI, 10 * delta)
 		else:
-			sprite_2d.rotation = lerp_angle(sprite_2d.rotation, global_position.angle_to_point(get_global_mouse_position()), 20 * delta)
-			sprite_2d.flip_h = false
+			sprite_2d.rotation = lerp_angle(sprite_2d.rotation, global_position.angle_to_point(get_global_mouse_position()), 10 * delta)
 	else:
 		# Reset Rotation
 		sprite_2d.rotation = lerp_angle(sprite_2d.rotation, 0, 10 * delta)
 		# Animate Shadow:
 		drop_shadow.modulate = lerp(drop_shadow.modulate, Color(1, 1, 1, 0), 20 * delta)
-		drop_shadow.position = lerp(drop_shadow.position, Vector2(0, 0), 20 * delta)
+		drop_shadow.position = lerp(drop_shadow.position, Vector2(0,  10 * scaleBy), 20 * delta)
 		# Move Object
 		if is_inside_dropable and scanned: # Snap to droppable location (bagging area)
 			position = lerp(position, bagPos, 20 * delta)
@@ -89,16 +101,22 @@ func _input(event: InputEvent) -> void:
 			MouseManager.is_dragging = false
 			# Update Object
 			selected = false;
-			dropPos = drop_shadow.global_position
+			dropPos = drop_shadow.global_position + Vector2(0, -20 * scaleBy)
 			# Check if bagged:
 			if is_inside_dropable and scanned:
 				bagged = true
 				ProductManager.bag(self)
 				# Randomise position in the bagging area
-				bagPos = Vector2(0, randi_range(-50, 50)) + body_ref.position
+				bagPos = dropPos
+				if bagPos.x > 80:
+					bagPos.x = 80
+				if bagPos.y > 900:
+					bagPos.y = 900
 			else:
-					bagged = false;
-					ProductManager.unbag(self)
+				bagged = false;
+				ProductManager.unbag(self)
+				if is_inside_dropable:
+					popup_text.calling("Scan item first!")
 
 # When mouse enters an area, check again if current top object is the same
 func _on_click_area_mouse_entered() -> void:
@@ -171,10 +189,14 @@ func _on_centre_area_area_exited(area: Area2D) -> void:
 		if is_inside_till:
 			scaleBy = 1
 			
-func resetItem() -> void:
-	sprite_2d.region_rect = Rect2(128 * randi_range(0, 3), 0, 128, 128)  # (x, y, w, h)
+func reset_item() -> void:
+	# Randomising Item Type, remove if deliberately choosing type
+	var keys  = Type.keys()
+	var type = keys[randi_range(0, keys.size() - 1)]
+	item_type = Type[type]
+	sprite_2d.region_rect = Rect2(128 * randi_range(0, 3), 128 * item_type, 128, 128)  # (x, y, w, h)
 	position = Vector2(328, 650)
-	dropPos = Vector2(randi_range(230, 430), randi_range(730, 780))
+	dropPos = Vector2(randi_range(230, 430), randi_range(730, 900))
 	scale = Vector2(scaleBy, scaleBy)
 	MouseManager.push(click_area)
 	scanned = false;
