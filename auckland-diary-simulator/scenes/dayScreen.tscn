@@ -193,7 +193,6 @@ tab_size = 21
 script = ExtResource("6_i333y")
 
 [node name="Timer" type="Timer" parent="UI/Monitor/MarginContainer/Panel/RichTextLabel"]
-wait_time = 2.0
 one_shot = true
 
 [node name="TextureRect" type="TextureRect" parent="UI/Monitor/MarginContainer"]
@@ -207,8 +206,8 @@ position = Vector2(0, 89)
 texture = ExtResource("6_wxbpj")
 
 [node name="snappableArea2" parent="." instance=ExtResource("3_7l8q0")]
-position = Vector2(53, 841)
-scale = Vector2(0.8, 1.6)
+position = Vector2(53, 841.5)
+scale = Vector2(0.82, 1.65)
 
 [node name="ColorRect" parent="snappableArea2" index="1"]
 metadata/_edit_use_anchors_ = true

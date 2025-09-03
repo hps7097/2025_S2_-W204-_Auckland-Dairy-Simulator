@@ -30,7 +30,7 @@ debug_color = Color(0, 0.6, 0.7, 0)
 
 [node name="DropShadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(0, 90)
+position = Vector2(0, 60)
 texture = ExtResource("2_guh5m")
 
 [node name="HoverCheck" type="Area2D" parent="DropShadow"]

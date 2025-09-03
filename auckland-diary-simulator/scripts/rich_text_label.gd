@@ -13,7 +13,7 @@ func _process(delta: float) -> void:
 		text = ProductManager.message
 		timer.start()
 	elif timer.is_stopped():
-		text = str(ProductManager.scanned)
+		text = str(ProductManager.bagged_objects)
 
 func _on_timer_timeout() -> void:
 	ProductManager.message = ""

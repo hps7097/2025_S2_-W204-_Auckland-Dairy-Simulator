@@ -89,7 +89,6 @@ func rescale():
 	tweenScale.tween_property(self, "scale", Vector2(scaleBy + 0.05, scaleBy + 0.05), 0.1).set_ease(Tween.EASE_OUT)
 	tweenScale2.tween_property(centre_area, "global_scale", Vector2(1, 1), 0.1).set_ease(Tween.EASE_IN)
 
-
 func _on_scanner_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group('scannable'):
 		if area.get_parent().is_inside_desk == true:
@@ -106,4 +105,4 @@ func _on_scan_timer_timeout() -> void:
 	var area = MouseManager.pick_top_object(scanner_area.global_position)
 	if area == area_ref:
 		area_ref.get_parent().scanned = true;
-		ProductManager.add(area_ref.get_parent())
+		ProductManager.scan(area_ref.get_parent())
