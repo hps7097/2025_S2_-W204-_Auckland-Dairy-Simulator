@@ -210,9 +210,15 @@ func flash_white(area: Area2D) -> void:
 			sprite_2d.material.resource_local_to_scene = true
 		
 		# Set flash to 1.0 instantly
-		sprite_2d.material.set("shader_param/flash", 1.0)
+		sprite_2d.material.set("shader_param/flash", 0.5)
 		
 		# Tween back to 0.0
 		var tween = create_tween()
-		tween.tween_property(sprite_2d.material, "shader_param/flash", 0.0, 0.3)
+		tween.tween_method(
+			func(value): sprite_2d.material.set("shader_param/flash", value),
+			1.0, 0.0, 0.2
+		)
+		
+		# await get_tree().create_timer(0.1).timeout
+		# sprite_2d.material.set("shader_param/flash", 1.0)
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bldu8x0xar63m"]
+[gd_scene load_steps=3 format=3 uid="uid://bm5yjpvdgsgcp"]
 
 [ext_resource type="Texture2D" uid="uid://bo6ogleh0gknw" path="res://assets/_DropShadow.png" id="1_4m4vl"]
 [ext_resource type="Script" path="res://scenes/popup_text.gd" id="1_c3evc"]
