@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var path_follow: PathFollow2D = $".."
+@onready var path_follow: PathFollow2D = $"../Path2D/PathFollow2D"
 
 @export var move_speed: float = 50.0
 @export var loop_path: bool = true
