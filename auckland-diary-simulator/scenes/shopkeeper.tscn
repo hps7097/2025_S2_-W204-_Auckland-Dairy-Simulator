@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cybh6frvdqstq"]
+[gd_scene load_steps=4 format=3 uid="uid://cybh6frvdqstq"]
 
 [ext_resource type="PackedScene" uid="uid://csnj56b81gmma" path="res://scenes/npc.tscn" id="1_gbpxa"]
 [ext_resource type="Script" uid="uid://cjaha784lgkxa" path="res://scripts/shopkeeper.gd" id="2_y54bd"]
+
+[sub_resource type="Curve2D" id="Curve2D_7n8xq"]
+bake_interval = 0.01
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 450, -144, 0, 0, 0, 0, 447, -50, 0, 0, 0, 0, 409, -39, 0, 0, 0, 0, 373, -57, 0, 0, 0, 0, 260, -53, 0, 0, 0, 0, 226, -3, 0, 0, 0, 0, 184, 4, 0, 0, 0, 0, 184, -44, 0, 0, 0, 0, 203, -53, 0, 0, 0, 0, 247, -47, 0, 0, 0, 0, 284, -4, 0, 0, 0, 0, 364, -5, 0, 0, 0, 0, 394, -38, 0, 0, 0, 0, 473, -49, 0, 0, 0, 0, 460, -148)
+}
+point_count = 15
 
 [node name="NPC" instance=ExtResource("1_gbpxa")]
 
@@ -11,5 +18,10 @@ script = ExtResource("2_y54bd")
 [node name="AnimatedSprite2D" parent="CharacterBody2D" index="1"]
 animation = &"idleBack"
 
-[node name="Path2D" parent="." index="1"]
-curve = null
+[node name="Path2D" type="Path2D" parent="CharacterBody2D" index="3"]
+position = Vector2(-457, 134)
+curve = SubResource("Curve2D_7n8xq")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="CharacterBody2D/Path2D" index="0"]
+position = Vector2(450, -144)
+rotation = 1.6027
