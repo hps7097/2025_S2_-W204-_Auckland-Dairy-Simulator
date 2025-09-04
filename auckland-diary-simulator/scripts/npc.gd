@@ -1,89 +1,110 @@
 extends CharacterBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var path_follow: PathFollow2D = $Path2D/PathFollow2D
-
-# Reference your counter stops
-@onready var shelf_stop_1: Marker2D = $ShelfStop1
-@onready var shelf_stop_2: Marker2D = $ShelfStop2
-@onready var counter_stop: Marker2D = $CounterStop
 
 @export var move_speed: float = 50.0
+@export var stop_time: float = 2.0
 @export var loop_path: bool = true
-@export var stop_time: float = 2.0 # seconds to wait at each stop
 
-var current_stop_index: int = 0
+var path_follow: PathFollow2D
 var waiting: bool = false
 var wait_timer: float = 0.0
-var last_position: Vector2
-var last_direction: Vector2 = Vector2.DOWN
+var last_direction: Vector2 = Vector2.RIGHT
 
 func _ready() -> void:
-	if path_follow == null:
-		push_error("PathFollow2D is null! Check the node path.")
-		return 
-	path_follow.loop = loop_path
-	last_position = path_follow.global_position
-	global_position = path_follow.global_position
+	# Try to find PathFollow2D in different possible locations
+	find_path_follow()
+	
+	if path_follow:
+		print("PathFollow2D found: ", path_follow.get_path())
+		path_follow.loop = loop_path
+	else:
+		print("PathFollow2D not found. Using simple movement.")
+		push_warning("Path system not found - NPC will move right instead")
 
-func _physics_process(delta: float) -> void:
-	z_index = int(global_position.y)
+func find_path_follow() -> void:
+	# Try different possible locations for PathFollow2D
+	var possible_paths = [
+		"Path2D/PathFollow2D",           # Direct child
+		"../Path2D/PathFollow2D",        # Sibling
+		"../../Path2D/PathFollow2D",     # Parent's sibling
+		"PathFollow2D",                  # Direct child with different name
+		"Path/PathFollow2D"              # Alternative naming
+	]
 	
-	if path_follow == null:
-		return
-	
-	# Handle waiting at stop points
-	if waiting:
-		wait_timer -= delta
-		# Use the correct idle animation based on which stop we're at
-		if current_stop_index == 2:  # Counter stop (third position)
-			animated_sprite_2d.play("idleFront")
-		else:
-			animated_sprite_2d.play(_get_idle_animation())
-		
-		if wait_timer <= 0.0:
-			waiting = false
-			current_stop_index += 1
-			if current_stop_index >= 3:  # We have 3 stops
-				if loop_path:
-					current_stop_index = 0
-		else:
+	for path in possible_paths:
+		path_follow = get_node_or_null(path)
+		if path_follow:
+			print("Found PathFollow2D at: ", path)
 			return
 	
-	# Move along the path
-	path_follow.progress += move_speed * delta
+	# If not found, search recursively in the scene tree
+	path_follow = find_node_recursive(get_parent(), "PathFollow2D")
+	if path_follow:
+		print("Found PathFollow2D recursively")
+
+func find_node_recursive(node: Node, node_name: String) -> Node:
+	if node == null:
+		return null
 	
-	# UPDATE GLOBAL POSITION FIRST, THEN ROUND IT
-	global_position = path_follow.global_position
+	if node.name == node_name:
+		return node
+	
+	for child in node.get_children():
+		var found = find_node_recursive(child, node_name)
+		if found:
+			return found
+	
+	return null
+
+func _physics_process(delta: float) -> void:
+	# PROPER Z-INDEX: Use Y-based sorting for correct depth
+	# Add a small offset if needed to adjust sorting
+	z_index = int(global_position.y) + 10  # +10 to keep NPC slightly in front
+	
+	if path_follow:
+		# Handle waiting
+		if waiting:
+			wait_timer -= delta
+			animated_sprite_2d.play(_get_idle_animation())
+			if wait_timer <= 0.0:
+				waiting = false
+			return
+		
+		# Move along the path
+		path_follow.progress += move_speed * delta
+		global_position = path_follow.global_position
+		
+		# Calculate movement direction for animation
+		var movement = _get_movement_direction()
+		_update_animation(movement)
+		
+		# REMOVED THE AUTOMATIC STOP - Let the path control movement
+		# The stopping was happening because of this condition:
+		# if path_follow.progress_ratio > 0.3 and path_follow.progress_ratio < 0.32:
+		
+	else:
+		# Fallback: simple movement to the right
+		velocity.x = move_speed
+		animated_sprite_2d.play("walkSide")
+		animated_sprite_2d.flip_h = false
+		move_and_slide()
+	
+	# Pixel-perfect positioning
 	global_position.x = round(global_position.x)
 	global_position.y = round(global_position.y)
-	
-	# Calculate movement delta for animation
-	var movement := global_position - last_position
-	if movement.length() > 0.1:
-		_update_animation(movement)
-		last_direction = movement.normalized()
-	last_position = global_position
-	
-	# Check if we reached the next stop point based on marker positions
-	if not waiting:
-		var target_position: Vector2
-		match current_stop_index:
-			0: target_position = shelf_stop_1.global_position
-			1: target_position = shelf_stop_2.global_position
-			2: target_position = counter_stop.global_position
-		
-		var distance = global_position.distance_to(target_position)
-		if distance < 25.0:  # Close enough to the stop
-			waiting = true
-			wait_timer = stop_time
-			# Special handling for counter stop
-			if current_stop_index == 2:
-				last_direction = Vector2.DOWN
-	
-	move_and_slide()
 
-# Animation handling
+func _get_movement_direction() -> Vector2:
+	# Estimate direction based on path tangent
+	if path_follow.progress > 1.0:
+		var current_pos = path_follow.global_position
+		var test_progress = path_follow.progress + 1.0
+		path_follow.progress = test_progress
+		var next_pos = path_follow.global_position
+		path_follow.progress = test_progress - 1.0
+		return (next_pos - current_pos).normalized()
+	return Vector2.RIGHT
+
 func _update_animation(movement: Vector2) -> void:
 	if abs(movement.x) > abs(movement.y):
 		animated_sprite_2d.play("walkSide")
