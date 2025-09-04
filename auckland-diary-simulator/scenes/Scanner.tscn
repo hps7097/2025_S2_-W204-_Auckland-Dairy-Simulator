@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://w7lxbbqtlcuh"]
+[gd_scene load_steps=7 format=3 uid="uid://ogygcfewrnfj"]
 
 [ext_resource type="Script" path="res://scripts/scanner.gd" id="1_5n3fm"]
 [ext_resource type="Texture2D" uid="uid://b5n3nroj1e2uc" path="res://assets/_ScannerRay.png" id="2_kruw0"]
@@ -48,6 +48,7 @@ shape = SubResource("RectangleShape2D_kruw0")
 debug_color = Color(0.889864, 0.000257403, 0.794865, 0.795)
 
 [node name="ScanTimer" type="Timer" parent="ScannerArea"]
+wait_time = 0.8
 one_shot = true
 
 [connection signal="body_entered" from="ScannerClickArea" to="." method="_on_area_2d_body_entered"]

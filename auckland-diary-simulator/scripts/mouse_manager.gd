@@ -1,4 +1,3 @@
-# MouseManager.gd (autoload this as a singleton)
 extends Node
 
 var is_dragging = false
@@ -11,7 +10,7 @@ var selectScanner = false
 
 func push(value: Node2D):
 	if z_index_order.has(value):
-		return
+		z_index_order.erase(value)
 	z_index_order.append(value)
 	
 var intersections

@@ -1,16 +1,17 @@
 extends Node2D
 
-enum Type { PIE, XXLPIE, V, ICECREAM, CHOCOLATE, LOLLIES, CHIPS }
+enum Type { PIE, XXLPIE, V, ICECREAM, CHOCOLATE, LOLLIES, CHIPS, BREADMILK }
 var item_type: Type
 
 var type_values := {
 	Type.PIE: 3.50,
-	Type.XXLPIE: 4.30,
-	Type.V: 4.00,
+	Type.XXLPIE: 4.40,
+	Type.V: 4.10,
 	Type.ICECREAM: 3.10,
 	Type.CHOCOLATE: 2.60,
 	Type.LOLLIES: 3.90,
-	Type.CHIPS: 4.10
+	Type.CHIPS: 4.00,
+	Type.BREADMILK: 3.40
 }	
 
 var draggable = false

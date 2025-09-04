@@ -8,10 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://bied52v5xw86t" path="res://assets/_Monitor.png" id="5_5rx4b"]
 [ext_resource type="Script" uid="uid://b80lpuqomceh2" path="res://scripts/rich_text_label.gd" id="6_i333y"]
 [ext_resource type="Texture2D" uid="uid://c4rb8x7jmtjin" path="res://assets/_MonitorBase.png" id="6_wxbpj"]
-[ext_resource type="PackedScene" uid="uid://w7lxbbqtlcuh" path="res://scenes/Scanner.tscn" id="10_72ia3"]
+[ext_resource type="PackedScene" uid="uid://ogygcfewrnfj" path="res://scenes/Scanner.tscn" id="10_72ia3"]
 [ext_resource type="Texture2D" uid="uid://cukr3k50tp5ot" path="res://assets/_Coins.png" id="10_yufcq"]
 [ext_resource type="Script" path="res://scenes/money_count.gd" id="11_yufcq"]
-[ext_resource type="PackedScene" uid="uid://bm5yjpvdgsgcp" path="res://scenes/popup_text.tscn" id="12_d28we"]
+[ext_resource type="PackedScene" path="res://scenes/popup_text.tscn" id="12_d28we"]
 
 [sub_resource type="Gradient" id="Gradient_7l8q0"]
 colors = PackedColorArray(0.054902, 0.0235294, 0.0352941, 0.588235, 0.18845, 0.119973, 0.189886, 0)
@@ -27,7 +27,7 @@ metadata/_snap_count = 44
 size = Vector2(655, 304)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_72ia3"]
-size = Vector2(472, 339)
+size = Vector2(472, 223)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i333y"]
 size = Vector2(812, 584)
@@ -148,7 +148,7 @@ shape = SubResource("RectangleShape2D_wxbpj")
 position = Vector2(0, 495.9)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="UI/DeskArea"]
-position = Vector2(1688, 417.6)
+position = Vector2(1688, 475.6)
 shape = SubResource("RectangleShape2D_72ia3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UI/DeskArea"]
@@ -225,16 +225,17 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(1372, 602)
 
 [node name="CoinSprite" type="Sprite2D" parent="."]
-position = Vector2(1777, 32)
+position = Vector2(1759, 39)
 texture = ExtResource("10_yufcq")
 region_enabled = true
 region_rect = Rect2(0, 48, 64, 64)
 
 [node name="MoneyCount" type="Label" parent="."]
 layout_mode = 2
-offset_left = 1815.0
-offset_right = 1920.0
-offset_bottom = 57.0
+offset_left = 1806.0
+offset_top = 9.0
+offset_right = 1911.0
+offset_bottom = 66.0
 grow_horizontal = 0
 theme_override_colors/font_color = Color(0.920995, 0.920995, 0.920995, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
