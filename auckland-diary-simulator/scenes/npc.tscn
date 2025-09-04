@@ -209,7 +209,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_abqhh"]
 size = Vector2(10, 10)
 
-[node name="NPC" type="CharacterBody2D"]
+[node name="NPC2" type="CharacterBody2D"]
 script = ExtResource("1_7n8xq")
 
 [node name="DropShadow" type="TextureRect" parent="."]
