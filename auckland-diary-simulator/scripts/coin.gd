@@ -10,6 +10,7 @@ func _ready() -> void:
 	scale = Vector2(0,0)
 	position = Vector2(randi_range(17, 105), randi_range(757, 947))
 	init_pos = position + Vector2(0, -50)
+	coin_sprite.region_rect = Rect2(randi_range(0, 1) * 48, 0, 48, 48)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

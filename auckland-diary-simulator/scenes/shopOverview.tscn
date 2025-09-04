@@ -115,6 +115,7 @@ script = ExtResource("7_5r3pi")
 
 [node name="NPC" parent="." instance=ExtResource("5_20r31")]
 position = Vector2(-331, 0)
+script = null
 
 [node name="ViewportForeground" type="Sprite2D" parent="."]
 z_index = 4096
