@@ -4,5 +4,8 @@
 
 [node name="NPC" instance=ExtResource("1_gbpxa")]
 
+[node name="AnimatedSprite2D" parent="CharacterBody2D" index="1"]
+animation = &"idleBack"
+
 [node name="Path2D" parent="." index="1"]
 curve = null

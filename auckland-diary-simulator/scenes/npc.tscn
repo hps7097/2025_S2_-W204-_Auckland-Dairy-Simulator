@@ -210,6 +210,7 @@ animations = [{
 size = Vector2(10, 10)
 
 [sub_resource type="Curve2D" id="Curve2D_7n8xq"]
+bake_interval = 0.01
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 450, -144, 0, 0, 0, 0, 447, -50, 0, 0, 0, 0, 409, -39, 0, 0, 0, 0, 373, -57, 0, 0, 0, 0, 260, -53, 0, 0, 0, 0, 226, -3, 0, 0, 0, 0, 184, 4, 0, 0, 0, 0, 184, -44, 0, 0, 0, 0, 203, -53, 0, 0, 0, 0, 247, -47, 0, 0, 0, 0, 284, -4, 0, 0, 0, 0, 364, -5, 0, 0, 0, 0, 394, -38, 0, 0, 0, 0, 473, -49, 0, 0, 0, 0, 460, -148)
 }
@@ -245,5 +246,5 @@ position = Vector2(-457, 134)
 curve = SubResource("Curve2D_7n8xq")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(453, -148)
-rotation = 1.58006
+position = Vector2(450, -144)
+rotation = 1.6027
