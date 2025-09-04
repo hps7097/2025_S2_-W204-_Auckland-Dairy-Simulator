@@ -57,7 +57,7 @@ func resetScene():
 		spawnNew()
 
 func spawnNew():
-	for i in range(randi_range(2, 4)):
+	for i in range(randi_range(1, 3)):
 		total_objects.append(object.instantiate())
 		# For choosing item type. Delete code in draggableObject.gd reset_item() if using
 		# total_objects[i].item_type = total_objects[i].Type.PIE
