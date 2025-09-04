@@ -1,12 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://lh3e203wlfs4"]
+[gd_scene load_steps=2 format=3 uid="uid://cybh6frvdqstq"]
 
 [ext_resource type="PackedScene" uid="uid://csnj56b81gmma" path="res://scenes/npc.tscn" id="1_gbpxa"]
-[ext_resource type="Script" uid="uid://cjaha784lgkxa" path="res://scripts/shopkeeper.gd" id="2_y54bd"]
 
 [node name="NPC" instance=ExtResource("1_gbpxa")]
-
-[node name="CharacterBody2D" parent="." index="0"]
-script = ExtResource("2_y54bd")
 
 [node name="AnimatedSprite2D" parent="CharacterBody2D" index="1"]
 animation = &"idleBack"

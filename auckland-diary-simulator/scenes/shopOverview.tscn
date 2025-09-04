@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dxjaogtvlkemo" path="res://assets/_ViewportShelves.png" id="4_5r3pi"]
 [ext_resource type="PackedScene" uid="uid://csnj56b81gmma" path="res://scenes/npc.tscn" id="5_20r31"]
 [ext_resource type="Texture2D" uid="uid://b4bg05wfxlevr" path="res://assets/_ViewportTill.png" id="5_e27pt"]
-[ext_resource type="PackedScene" uid="uid://lh3e203wlfs4" path="res://scenes/shopkeeper.tscn" id="6_5r3pi"]
+[ext_resource type="PackedScene" uid="uid://cybh6frvdqstq" path="res://scenes/shopkeeper.tscn" id="6_5r3pi"]
 [ext_resource type="Texture2D" uid="uid://bjqum1my6lns0" path="res://assets/_ViewportForeground.png" id="6_wb5qm"]
 [ext_resource type="Texture2D" uid="uid://db70coti0jb4j" path="res://assets/_ViewportDivider.png" id="7_tk8sh"]
 
@@ -113,6 +113,12 @@ position = Vector2(-457, 161)
 
 [node name="NPC" parent="." instance=ExtResource("5_20r31")]
 position = Vector2(-330, 25)
+
+[node name="CollisionShape2D" parent="NPC/CharacterBody2D" index="2"]
+position = Vector2(0, -12)
+
+[node name="Path2D" parent="NPC" index="1"]
+position = Vector2(-456, 111)
 
 [node name="ShelfStop1" type="Marker2D" parent="NPC"]
 position = Vector2(-198, 60)
