@@ -202,3 +202,17 @@ func reset_item() -> void:
 	scanned = false;
 	bagged = false
 	
+func flash_white(area: Area2D) -> void:
+	if (area.get_parent() == self):
+		# Ensure unique material instance
+		if not sprite_2d.material or sprite_2d.material.resource_local_to_scene == false:
+			sprite_2d.material = sprite_2d.material.duplicate()
+			sprite_2d.material.resource_local_to_scene = true
+		
+		# Set flash to 1.0 instantly
+		sprite_2d.material.set("shader_param/flash", 1.0)
+		
+		# Tween back to 0.0
+		var tween = create_tween()
+		tween.tween_property(sprite_2d.material, "shader_param/flash", 0.0, 0.3)
+	

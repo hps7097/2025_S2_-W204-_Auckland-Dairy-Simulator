@@ -108,4 +108,5 @@ func _on_scan_timer_timeout() -> void:
 	var area = MouseManager.pick_top_object(scanner_area.global_position)
 	if area == area_ref:
 		area_ref.get_parent().scanned = true;
+		area_ref.get_parent().flash_white(area);
 		ProductManager.scan(area_ref.get_parent())
