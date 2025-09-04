@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://bldu8x0xar63m"]
+
+[ext_resource type="Texture2D" uid="uid://bo6ogleh0gknw" path="res://assets/_DropShadow.png" id="1_4m4vl"]
+[ext_resource type="Script" path="res://scenes/popup_text.gd" id="1_c3evc"]
+
+[node name="PopupText" type="Node2D"]
+script = ExtResource("1_c3evc")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.1)
+scale = Vector2(4.45, 0.266667)
+texture = ExtResource("1_4m4vl")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.1)
+scale = Vector2(3.275, 0.466667)
+texture = ExtResource("1_4m4vl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.1)
+scale = Vector2(3.65, 0.466667)
+texture = ExtResource("1_4m4vl")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -338.0
+offset_top = -27.0
+offset_right = 338.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(1, 0.243137, 0.215686, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0.2418, 0.217251, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 13
+theme_override_font_sizes/font_size = 20
+text = "Scan item first"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://gx60ypf180vu"]
+
+[ext_resource type="Script" path="res://scripts/scanner.gd" id="1_5n3fm"]
+[ext_resource type="Texture2D" path="res://assets/_ScannerRay.png" id="2_kruw0"]
+[ext_resource type="Texture2D" path="res://assets/_Scanners.png" id="3_kruw0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_guh5m"]
+radius = 46.8402
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_guh5m"]
+size = Vector2(4, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kruw0"]
+size = Vector2(0, 0)
+
+[node name="object" type="Node2D"]
+script = ExtResource("1_5n3fm")
+
+[node name="ScannerClickArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScannerClickArea"]
+shape = SubResource("CircleShape2D_guh5m")
+debug_color = Color(0, 0.6, 0.7, 0)
+
+[node name="CentreArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CentreArea"]
+shape = SubResource("RectangleShape2D_guh5m")
+debug_color = Color(0.912, 0, 0.726, 0.641)
+
+[node name="RaySprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-129, -59)
+texture = ExtResource("2_kruw0")
+region_enabled = true
+region_rect = Rect2(180, 0, 180, 100)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_kruw0")
+region_enabled = true
+region_rect = Rect2(128, 0, 128, 128)
+
+[node name="ScannerArea" type="Area2D" parent="."]
+position = Vector2(-130, -54)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScannerArea"]
+shape = SubResource("RectangleShape2D_kruw0")
+debug_color = Color(0.889864, 0.000257403, 0.794865, 0.795)
+
+[node name="ScanTimer" type="Timer" parent="ScannerArea"]
+one_shot = true
+
+[connection signal="body_entered" from="ScannerClickArea" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="ScannerClickArea" to="." method="_on_area_2d_body_exited"]
+[connection signal="input_event" from="ScannerClickArea" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="ScannerClickArea" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="ScannerClickArea" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="area_entered" from="CentreArea" to="." method="_on_centre_area_area_entered"]
+[connection signal="area_exited" from="CentreArea" to="." method="_on_centre_area_area_exited"]
+[connection signal="area_entered" from="ScannerArea" to="." method="_on_scanner_area_area_entered"]
+[connection signal="area_exited" from="ScannerArea" to="." method="_on_scanner_area_area_exited"]
+[connection signal="timeout" from="ScannerArea/ScanTimer" to="." method="_on_scan_timer_timeout"]
