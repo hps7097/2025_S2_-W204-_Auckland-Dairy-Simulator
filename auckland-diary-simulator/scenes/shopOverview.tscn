@@ -114,20 +114,20 @@ position = Vector2(-457, 161)
 [node name="NPC" parent="." instance=ExtResource("5_20r31")]
 position = Vector2(-330, 25)
 
-[node name="CharacterBody2D" parent="NPC" index="0"]
-stop_tolerance = 50.0
-
 [node name="ShelfStop1" type="Marker2D" parent="NPC/CharacterBody2D" index="3"]
-position = Vector2(-198, 60)
+position = Vector2(-154.74, 49)
 
 [node name="ShelfStop2" type="Marker2D" parent="NPC/CharacterBody2D" index="4"]
-position = Vector2(-272, 85)
+position = Vector2(-284, 83)
 
 [node name="CounterStop" type="Marker2D" parent="NPC/CharacterBody2D" index="5"]
-position = Vector2(-136, 105)
+position = Vector2(-133, 105)
 
 [node name="Path2D" parent="NPC" index="1"]
 position = Vector2(-456, 111)
+
+[node name="PathFollow2D" parent="NPC/Path2D" index="0"]
+visible = false
 
 [node name="OutsideWall" type="StaticBody2D" parent="."]
 position = Vector2(-359.5, 85)
