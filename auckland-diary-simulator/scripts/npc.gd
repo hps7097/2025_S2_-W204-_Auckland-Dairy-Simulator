@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 @export var move_speed: float = 50.0
-@export var stop_time: float = 2.0  # 10 seconds stop time
+@export var stop_time: float = 3.0  # 10 seconds stop time
 @export var stop_tolerance: float = 15.0
 @export var loop_path: bool = true
 
@@ -34,7 +34,7 @@ func _ready() -> void:
 		saved_progress = path_follow.progress
 		
 		# Manually set progress values for your positions (you may need to adjust these)
-		target_progress_values = [280.0,450.0, 690.0 ]  # Adjust these values!
+		target_progress_values = [280.0,480.0, 720.0 ]  # Adjust these values!
 		is_moving = true
 
 func find_path_follow() -> void:
