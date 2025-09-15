@@ -128,6 +128,7 @@ position = Vector2(-456, 111)
 
 [node name="PathFollow2D" parent="NPC/Path2D" index="0"]
 visible = false
+rotation = 1.5708
 
 [node name="OutsideWall" type="StaticBody2D" parent="."]
 position = Vector2(-359.5, 85)
