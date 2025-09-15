@@ -5,7 +5,7 @@ var scanned_objects: Array = []
 var bagged_objects: Array = []
 var total_price: float
 
-var money: float = 67.69
+var money: float = 67.70
 
 var message: String
 
@@ -15,22 +15,26 @@ var coin = preload("res://scenes/coin.tscn")
 
 """
 DISABLE PRODUCT MANAGER FOR NOW WHILE WORKING ON NIGHT SCREEN
-
+"""
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	spawnNew()
+	var current_scene = get_tree().current_scene
+	if current_scene:
+		if current_scene.scene_file_path == ("res://scenes/dayScreen.tscn"):
+			spawnNew()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if total_objects.size() == bagged_objects.size():
-		message = "BAGGING DONE!"
-		
-		resetScene()
+	var current_scene = get_tree().current_scene
+	if current_scene:
+		if total_objects.size() == bagged_objects.size() && get_tree().current_scene.scene_file_path == ("res://scenes/dayScreen.tscn"):
+			message = "BAGGING DONE!"
+			resetScene()
 
-"""
+# """
 
 func resetScene():
-	# Reset Arrays
+		# Reset Arrays
 		scanned_objects.clear()
 		bagged_objects.clear()
 		MouseManager.z_index_order.clear()
@@ -57,6 +61,9 @@ func resetScene():
 			obj.queue_free()
 		total_objects.clear()
 		
+		# Change Scene from day to night
+		var nightScene = preload("res://scenes/nightScreen.tscn")
+		# get_tree().change_scene_to_packed(nightScene)
 		
 		# Spawn more items
 		spawnNew()
