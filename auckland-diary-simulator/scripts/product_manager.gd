@@ -5,13 +5,16 @@ var scanned_objects: Array = []
 var bagged_objects: Array = []
 var total_price: float
 
-var money: float
+var money: float = 67.69
 
 var message: String
 
 var object = preload("res://scenes/draggableObject.tscn")
 var coin = preload("res://scenes/coin.tscn")
 @onready var timer: Timer = Timer.new()
+
+"""
+DISABLE PRODUCT MANAGER FOR NOW WHILE WORKING ON NIGHT SCREEN
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,6 +26,8 @@ func _process(delta: float) -> void:
 		message = "BAGGING DONE!"
 		
 		resetScene()
+
+"""
 
 func resetScene():
 	# Reset Arrays

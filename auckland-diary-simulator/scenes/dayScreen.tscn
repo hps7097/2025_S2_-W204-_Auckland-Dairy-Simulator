@@ -10,15 +10,15 @@
 [ext_resource type="Texture2D" uid="uid://c4rb8x7jmtjin" path="res://assets/_MonitorBase.png" id="6_wxbpj"]
 [ext_resource type="PackedScene" uid="uid://ogygcfewrnfj" path="res://scenes/Scanner.tscn" id="10_72ia3"]
 [ext_resource type="Texture2D" uid="uid://cukr3k50tp5ot" path="res://assets/_Coins.png" id="10_yufcq"]
-[ext_resource type="Script" path="res://scenes/money_count.gd" id="11_yufcq"]
-[ext_resource type="PackedScene" path="res://scenes/popup_text.tscn" id="12_d28we"]
+[ext_resource type="Script" uid="uid://caxqytfaken75" path="res://scenes/money_count.gd" id="11_yufcq"]
+[ext_resource type="PackedScene" uid="uid://bm5yjpvdgsgcp" path="res://scenes/popup_text.tscn" id="12_d28we"]
 
-[sub_resource type="Gradient" id="Gradient_7l8q0"]
+[sub_resource type="Gradient" id="Gradient_d28we"]
 colors = PackedColorArray(0.054902, 0.0235294, 0.0352941, 0.588235, 0.18845, 0.119973, 0.189886, 0)
 metadata/_snap_count = 100
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_kfl73"]
-gradient = SubResource("Gradient_7l8q0")
+gradient = SubResource("Gradient_d28we")
 fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0.834862)
 metadata/_snap_count = 44
