@@ -1,0 +1,206 @@
+[gd_scene load_steps=11 format=3 uid="uid://cxgiw6kk6uxb0"]
+
+[ext_resource type="Texture2D" uid="uid://dnb1pw2b5g7s5" path="res://assets/_Products.png" id="1_lwpm2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lwpm2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lwpm2"]
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.319785, 0.358271, 0.384456, 1)
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+shadow_color = Color(0, 0, 0, 0.1)
+shadow_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_trd0v"]
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.231967, 0.256464, 0.305571, 1)
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+shadow_color = Color(0, 0, 0, 0.2)
+shadow_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqno8"]
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+shadow_color = Color(0, 0, 0, 0.1)
+shadow_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_004ny"]
+border_width_left = 64
+border_width_top = 64
+border_width_right = 64
+border_width_bottom = 64
+border_color = Color(0.533333, 0.533333, 0.533333, 1)
+border_blend = true
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+
+[sub_resource type="Gradient" id="Gradient_trd0v"]
+colors = PackedColorArray(0, 0, 0, 0.2, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s40cu"]
+gradient = SubResource("Gradient_trd0v")
+width = 128
+height = 128
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2aeo3"]
+atlas = ExtResource("1_lwpm2")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uaal8"]
+bg_color = Color(0.8, 0.8, 0.8, 1)
+border_width_left = 64
+border_width_top = 64
+border_width_right = 64
+border_width_bottom = 64
+border_color = Color(0.733333, 0.733333, 0.733333, 1)
+border_blend = true
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[node name="Button" type="Button"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lwpm2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lwpm2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_trd0v")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rqno8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 552.0
+offset_bottom = 710.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_004ny")
+
+[node name="ColorRect1" type="ColorRect" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+color = Color(0.6, 0.6, 0.6, 1)
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/ColorRect1"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -207.0
+offset_right = 207.0
+offset_bottom = 67.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 48
+text = "NEW V FLAVOURS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gradient" type="TextureRect" parent="VBoxContainer/PanelContainer/ColorRect1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -271.0
+offset_right = 271.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+texture = SubResource("GradientTexture2D_s40cu")
+
+[node name="Image" type="TextureRect" parent="VBoxContainer/PanelContainer/ColorRect1"]
+custom_minimum_size = Vector2(364, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -182.0
+offset_top = -364.0
+offset_right = 182.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("AtlasTexture_2aeo3")
+expand_mode = 5
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_uaal8")
+
+[node name="ColorRect1" type="ColorRect" parent="VBoxContainer/PanelContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+color = Color(0.8, 0.8, 0.8, 1)
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer2/ColorRect1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -207.0
+offset_top = -33.5
+offset_right = 207.0
+offset_bottom = 33.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 48
+text = "$67.00"
+horizontal_alignment = 1
+vertical_alignment = 1

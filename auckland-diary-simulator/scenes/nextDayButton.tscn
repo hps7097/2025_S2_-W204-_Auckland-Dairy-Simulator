@@ -1,0 +1,83 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuubb0xq2gbq5"]
+
+[ext_resource type="Script" uid="uid://dwhtfe2ce1vgd" path="res://scenes/next_day_button.gd" id="1_5wvyo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lwpm2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lwpm2"]
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.319785, 0.358271, 0.384456, 1)
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+shadow_color = Color(0, 0, 0, 0.1)
+shadow_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_trd0v"]
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.231967, 0.256464, 0.305571, 1)
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+shadow_color = Color(0, 0, 0, 0.2)
+shadow_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqno8"]
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+shadow_color = Color(0, 0, 0, 0.1)
+shadow_size = 20
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(300, 100)
+offset_right = 30.0
+offset_bottom = 30.0
+size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lwpm2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lwpm2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_trd0v")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rqno8")
+script = ExtResource("1_5wvyo")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -33.5
+offset_right = 14.0
+offset_bottom = 33.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 32
+text = "NEXT DAY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

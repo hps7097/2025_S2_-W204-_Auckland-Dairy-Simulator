@@ -13,9 +13,6 @@ var object = preload("res://scenes/draggableObject.tscn")
 var coin = preload("res://scenes/coin.tscn")
 @onready var timer: Timer = Timer.new()
 
-"""
-DISABLE PRODUCT MANAGER FOR NOW WHILE WORKING ON NIGHT SCREEN
-"""
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var current_scene = get_tree().current_scene
@@ -27,7 +24,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var current_scene = get_tree().current_scene
 	if current_scene:
-		if total_objects.size() == bagged_objects.size() && get_tree().current_scene.scene_file_path == ("res://scenes/dayScreen.tscn"):
+		if total_objects.size() != 0 && total_objects.size() == bagged_objects.size() && get_tree().current_scene.scene_file_path == ("res://scenes/dayScreen.tscn"):
 			message = "BAGGING DONE!"
 			resetScene()
 
@@ -69,6 +66,8 @@ func resetScene():
 		spawnNew()
 
 func spawnNew():
+	var t = get_tree().create_timer(0.1) # 1 second
+	await t.timeout
 	for i in range(randi_range(1, 3)):
 		total_objects.append(object.instantiate())
 		# For choosing item type. Delete code in draggableObject.gd reset_item() if using

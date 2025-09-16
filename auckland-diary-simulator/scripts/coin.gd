@@ -1,6 +1,7 @@
 extends Node2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var coin_sprite: Sprite2D = $"../CoinSprite"
+@onready var coin_sprite: HBoxContainer = $"../MoneyCounter"
+
 var init_pos: Vector2
 var move = false
 
@@ -18,7 +19,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if move:
 		scale = lerp(scale, Vector2(0, 0), 0.8 * delta)
-		position = lerp(position, coin_sprite.position, 4 * delta)
+		position = lerp(position, coin_sprite.position + Vector2(24, 24), 4 * delta)
 		if position == init_pos:
 			queue_free()
 	else:
