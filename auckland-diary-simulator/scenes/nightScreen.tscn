@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://dvp45h7yyscpj"]
 
-[ext_resource type="Script" uid="uid://c0wmwf5jfvnbe" path="res://scripts/shopBackground.gd" id="1_s327g"]
+[ext_resource type="Script" path="res://scripts/shopBackground.gd" id="1_s327g"]
 [ext_resource type="Texture2D" uid="uid://bt8p643lf6lps" path="res://assets/_ShopBackground.png" id="2_c78ci"]
-[ext_resource type="PackedScene" uid="uid://cf2u5ankdps4i" path="res://scenes/moneyCounter.tscn" id="3_at8um"]
-[ext_resource type="PackedScene" uid="uid://cxgiw6kk6uxb0" path="res://scenes/shopButton.tscn" id="5_fw4in"]
-[ext_resource type="PackedScene" uid="uid://cuubb0xq2gbq5" path="res://scenes/nextDayButton.tscn" id="6_at8um"]
+[ext_resource type="PackedScene" uid="uid://do0o2eleyo6w3" path="res://scenes/moneyCounter.tscn" id="3_at8um"]
+[ext_resource type="PackedScene" uid="uid://b7rdvxehw1per" path="res://scenes/shopButton.tscn" id="5_fw4in"]
+[ext_resource type="PackedScene" uid="uid://dtxj5ao4ie2x6" path="res://scenes/nextDayButton.tscn" id="6_at8um"]
 
 [sub_resource type="Gradient" id="Gradient_s327g"]
 offsets = PackedFloat32Array(0.0519481, 0.253247, 1)
@@ -123,14 +123,16 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 20
 
-[node name="ShopButton3" parent="HBoxContainer" instance=ExtResource("5_fw4in")]
+[node name="ShopButton1" parent="HBoxContainer" instance=ExtResource("5_fw4in")]
 layout_mode = 2
 
 [node name="ShopButton2" parent="HBoxContainer" instance=ExtResource("5_fw4in")]
 layout_mode = 2
+upgradeType = 1
 
-[node name="ShopButton" parent="HBoxContainer" instance=ExtResource("5_fw4in")]
+[node name="ShopButton3" parent="HBoxContainer" instance=ExtResource("5_fw4in")]
 layout_mode = 2
+upgradeType = 2
 
 [node name="Button" parent="." instance=ExtResource("6_at8um")]
 layout_mode = 1
