@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 @export var move_speed: float = 50.0
-@export var stop_time: float = 3.0  # 10 seconds stop time
+@export var stop_time: float = 3.0
 @export var stop_tolerance: float = 15.0
 @export var loop_path: bool = true
 
@@ -21,8 +21,15 @@ var target_positions: Array[Vector2] = [
 	Vector2(-133.0, 105.0)     # CounterStop
 ]
 
+# Specific directions for each stop position
+var stop_directions: Array[Vector2] = [
+	Vector2.RIGHT,    # ShelfStop1 - face right
+	Vector2.LEFT,     # ShelfStop2 - face left  
+	Vector2.DOWN       # CounterStop - face up (toward counter)
+]
+
 var current_target_index: int = 0
-var target_progress_values: Array[float] = []
+var target_progress_values: Array[float] = [280.0, 480.0, 720.0]
 
 func _ready() -> void:
 	# Find PathFollow2D
@@ -32,9 +39,6 @@ func _ready() -> void:
 		print("PathFollow2D found")
 		path_follow.loop = loop_path
 		saved_progress = path_follow.progress
-		
-		# Manually set progress values for your positions (you may need to adjust these)
-		target_progress_values = [280.0,480.0, 720.0 ]  # Adjust these values!
 		is_moving = true
 
 func find_path_follow() -> void:
@@ -60,6 +64,9 @@ func _physics_process(delta: float) -> void:
 	if waiting:
 		wait_timer -= delta
 		if animated_sprite_2d:
+			# Use the specific stop direction for this position
+			var stop_direction = stop_directions[current_target_index]
+			last_direction = stop_direction
 			animated_sprite_2d.play(_get_idle_animation())
 		if wait_timer <= 0.0:
 			waiting = false
@@ -87,10 +94,11 @@ func _physics_process(delta: float) -> void:
 		var current_progress = path_follow.progress
 		
 		if abs(current_progress - target_progress) < stop_tolerance:
-			print("STOPPING at position ", current_target_index, " for 10 seconds")
+			print("STOPPING at position ", current_target_index, " for 3 seconds")
 			waiting = true
-			wait_timer = stop_time  # 10 seconds
-			last_direction = movement
+			wait_timer = stop_time
+			# Set the specific direction for this stop
+			last_direction = stop_directions[current_target_index]
 			saved_progress = target_progress
 
 	global_position = path_follow.global_position.round()
@@ -121,8 +129,7 @@ func _update_animation(movement: Vector2) -> void:
 
 func _get_idle_animation() -> String:
 	if abs(last_direction.x) > abs(last_direction.y):
-		if animated_sprite_2d:
-			animated_sprite_2d.flip_h = last_direction.x > 0
+		animated_sprite_2d.flip_h = last_direction.x > 0
 		return "idleSide"
 	elif last_direction.y > 0:
 		return "idleFront"
