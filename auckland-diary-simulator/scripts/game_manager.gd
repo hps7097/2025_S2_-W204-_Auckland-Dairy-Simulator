@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 
 func newDay() -> void:
 	dayCount += 1
-	dayCustomerCount = 3 + UpgradeManager.upgrades[1]
+	dayCustomerCount = 3 + UpgradeManager.getUpgrade(1)
 	customerAppear()
 
 func customerAppear() -> void:

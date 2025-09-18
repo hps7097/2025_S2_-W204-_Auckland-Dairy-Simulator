@@ -9,7 +9,7 @@ var coin = preload("res://scenes/coin.tscn")
 
 var upgadeLabels = [
 ["New flooring", "Better Lighting", "Shutter Grates", "Reinforced Glass", "Bollards / Steel Posts"], 
-["XXL Pies", "More V Flavours", "More Chip Flavours"], 
+["XXL Pies", "V Refresh Series", "More Chip Flavours"], 
 ["Vapes", "Fake IDs", "Zaza", "White Stuff"]]
 
 var upgradePrices = [
