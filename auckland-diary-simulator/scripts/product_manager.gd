@@ -5,7 +5,7 @@ var scanned_objects: Array = []
 var bagged_objects: Array = []
 var total_price: float
 
-var money: float = 0
+var money: float = 999
 
 var message: String
 
@@ -41,13 +41,10 @@ func resetScene():
 			var coin1 = coin.instantiate()
 			coin1.type = 0
 			get_tree().current_scene.add_child(coin1)
-		while money < moneyTotal:
-			var t = get_tree().create_timer(0.01) # 1 second
-			await t.timeout
-			money += 0.1
+		var tween = get_tree().create_tween()
+		tween.tween_property(self, "money", moneyTotal, 1.0)
 			
 		total_price = 0
-		money = moneyTotal
 		
 		var t = get_tree().create_timer(1.0) # 1 second
 		await t.timeout

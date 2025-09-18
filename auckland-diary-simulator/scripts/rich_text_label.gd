@@ -15,7 +15,8 @@ func _process(delta: float) -> void:
 	elif timer.is_stopped():
 		text = "TOTAL: $" + str(ProductManager.total_price).pad_decimals(2) + \
 		"\n\n Day: " + str(GameManager.dayCount) + \
-		"\n Customers Left: " + str(GameManager.dayCustomerCount)
+		"\n Customers Left: " + str(GameManager.dayCustomerCount) + \
+		"\n Upgrades: " + str(UpgradeManager.upgrades)
 
 func _on_timer_timeout() -> void:
 	ProductManager.message = ""
