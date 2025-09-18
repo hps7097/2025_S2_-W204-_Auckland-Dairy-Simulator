@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Auckland Diary Simulator"
-run/main_scene="uid://bgugpbhxc07ng"
+run/main_scene="uid://dvp45h7yyscpj"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -20,6 +20,8 @@ config/icon="res://icon.svg"
 global="*res://scripts/global.gd"
 MouseManager="*res://scripts/mouse_manager.gd"
 ProductManager="*res://scripts/product_manager.gd"
+UpgradeManager="*res://scripts/upgrade_manager.gd"
+GameManager="*res://scripts/game_manager.gd"
 
 [display]
 

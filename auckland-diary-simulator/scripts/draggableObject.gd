@@ -1,17 +1,20 @@
 extends Node2D
 
-enum Type { PIE, XXLPIE, V, ICECREAM, CHOCOLATE, LOLLIES, CHIPS, BREADMILK }
+enum Type { PIE, XXLPIE, V, VREFRESH, ICECREAM, CHOCOLATE, LOLLIES, CHIPS, MORECHIPS, BREADMILK, ILLEGALS }
 var item_type: Type
 
 var type_values := {
 	Type.PIE: 3.50,
 	Type.XXLPIE: 4.40,
 	Type.V: 4.10,
+	Type.VREFRESH: 4.30,
 	Type.ICECREAM: 3.10,
 	Type.CHOCOLATE: 2.60,
 	Type.LOLLIES: 3.90,
 	Type.CHIPS: 4.00,
-	Type.BREADMILK: 3.40
+	Type.MORECHIPS: 4.50,
+	Type.BREADMILK: 3.40,
+	Type.ILLEGALS: 10.00
 }	
 
 var draggable = false
@@ -193,8 +196,16 @@ func _on_centre_area_area_exited(area: Area2D) -> void:
 func reset_item() -> void:
 	# Randomising Item Type, remove if deliberately choosing type
 	var keys  = Type.keys()
-	var type = keys[randi_range(0, keys.size() - 1)]
+	var type = keys[randi_range(0, keys.size() - 2)]
 	item_type = Type[type]
+	# If upgrade unavailable, downgrade type
+	if item_type == Type[keys[1]] && UpgradeManager.getUpgrade(1) < 1:
+		item_type = Type[keys[0]]
+	if item_type == Type[keys[3]] && UpgradeManager.getUpgrade(1) < 2:
+		item_type = Type[keys[2]]
+	if item_type == Type[keys[8]] && UpgradeManager.getUpgrade(1) < 3:
+		item_type = Type[keys[7]]
+		
 	sprite_2d.region_rect = Rect2(128 * randi_range(0, 3), 128 * item_type, 128, 128)  # (x, y, w, h)
 	position = Vector2(328, 650)
 	dropPos = Vector2(randi_range(230, 430), randi_range(730, 900))
