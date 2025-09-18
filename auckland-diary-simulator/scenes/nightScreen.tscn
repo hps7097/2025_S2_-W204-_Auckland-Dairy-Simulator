@@ -43,7 +43,7 @@ color = Color(0.2, 0.2, 0.2, 1)
 [node name="MovingCircles" type="Node2D" parent="Background"]
 
 [node name="Background2" type="Node2D" parent="Background/MovingCircles"]
-position = Vector2(2160, 0)
+position = Vector2(2020, 0)
 script = ExtResource("1_s327g")
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/MovingCircles/Background2"]
@@ -60,7 +60,7 @@ texture = ExtResource("2_c78ci")
 centered = false
 
 [node name="Background3" type="Node2D" parent="Background/MovingCircles"]
-position = Vector2(2160, 1200)
+position = Vector2(2020, 1200)
 script = ExtResource("1_s327g")
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/MovingCircles/Background3"]
