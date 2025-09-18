@@ -1,6 +1,6 @@
 extends Node2D
 
-enum Type { PIE, XXLPIE, V, VREFRESH, ICECREAM, CHOCOLATE, LOLLIES, CHIPS, MORECHIPS, BREADMILK }
+enum Type { PIE, XXLPIE, V, VREFRESH, ICECREAM, CHOCOLATE, LOLLIES, CHIPS, MORECHIPS, BREADMILK, ILLEGALS }
 var item_type: Type
 
 var type_values := {
@@ -13,7 +13,8 @@ var type_values := {
 	Type.LOLLIES: 3.90,
 	Type.CHIPS: 4.00,
 	Type.MORECHIPS: 4.50,
-	Type.BREADMILK: 3.40
+	Type.BREADMILK: 3.40,
+	Type.ILLEGALS: 10.00
 }	
 
 var draggable = false
@@ -195,7 +196,7 @@ func _on_centre_area_area_exited(area: Area2D) -> void:
 func reset_item() -> void:
 	# Randomising Item Type, remove if deliberately choosing type
 	var keys  = Type.keys()
-	var type = keys[randi_range(0, keys.size() - 1)]
+	var type = keys[randi_range(0, keys.size() - 2)]
 	item_type = Type[type]
 	# If upgrade unavailable, downgrade type
 	if item_type == Type[keys[1]] && UpgradeManager.getUpgrade(1) < 1:
