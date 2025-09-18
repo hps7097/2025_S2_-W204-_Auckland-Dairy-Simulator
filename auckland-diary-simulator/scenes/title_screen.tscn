@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwcywim2pg4vg"]
+
+[ext_resource type="Script" uid="uid://ocr4cwfvetr7" path="res://scripts/TitleScreen.gd" id="1_fgkus"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fgkus")
+
+[node name="BtnContinue" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "CONTINUE"
+
+[node name="BtnNewGame" type="Button" parent="."]
+layout_mode = 0
+offset_left = 197.15125
+offset_top = 88.17428
+offset_right = 292.15125
+offset_bottom = 119.17428
+text = "NEW GAME"
+
+[node name="BtnOptions" type="Button" parent="."]
+layout_mode = 0
+offset_left = 360.5985
+offset_top = 161.11905
+offset_right = 439.5985
+offset_bottom = 192.11905
+rotation = -0.0010302436
+text = "OPTIONS"

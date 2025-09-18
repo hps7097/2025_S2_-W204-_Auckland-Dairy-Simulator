@@ -5,7 +5,7 @@ var scanned_objects: Array = []
 var bagged_objects: Array = []
 var total_price: float
 
-var money: float
+var money: float = 0
 
 var message: String
 
@@ -15,17 +15,20 @@ var coin = preload("res://scenes/coin.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	spawnNew()
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if total_objects.size() == bagged_objects.size():
-		message = "BAGGING DONE!"
-		
-		resetScene()
+	var current_scene = get_tree().current_scene
+	if current_scene:
+		if total_objects.size() != 0 && total_objects.size() == bagged_objects.size() && get_tree().current_scene.scene_file_path == ("res://scenes/dayScreen.tscn"):
+			message = "BAGGING DONE!"
+			resetScene()
+
+# """
 
 func resetScene():
-	# Reset Arrays
+		# Reset Arrays
 		scanned_objects.clear()
 		bagged_objects.clear()
 		MouseManager.z_index_order.clear()
@@ -35,7 +38,9 @@ func resetScene():
 		for i in range(floor(total_price)):
 			var t = get_tree().create_timer(0.1) # 1 second
 			await t.timeout
-			get_tree().current_scene.add_child(coin.instantiate())
+			var coin1 = coin.instantiate()
+			coin1.type = 0
+			get_tree().current_scene.add_child(coin1)
 		while money < moneyTotal:
 			var t = get_tree().create_timer(0.01) # 1 second
 			await t.timeout
@@ -52,11 +57,16 @@ func resetScene():
 			obj.queue_free()
 		total_objects.clear()
 		
+		# Change Scene from day to night
+		var nightScene = preload("res://scenes/nightScreen.tscn")
+		# get_tree().change_scene_to_packed(nightScene)
 		
-		# Spawn more items
-		spawnNew()
+		# Next Customer
+		GameManager.customerServed()
 
 func spawnNew():
+	var t = get_tree().create_timer(0.1) # 1 second
+	await t.timeout
 	for i in range(randi_range(1, 3)):
 		total_objects.append(object.instantiate())
 		# For choosing item type. Delete code in draggableObject.gd reset_item() if using
