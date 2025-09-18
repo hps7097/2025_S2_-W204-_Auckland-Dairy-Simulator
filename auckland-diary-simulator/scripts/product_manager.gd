@@ -5,7 +5,7 @@ var scanned_objects: Array = []
 var bagged_objects: Array = []
 var total_price: float
 
-var money: float = 67.70
+var money: float = 0
 
 var message: String
 
@@ -15,10 +15,7 @@ var coin = preload("res://scenes/coin.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var current_scene = get_tree().current_scene
-	if current_scene:
-		if current_scene.scene_file_path == ("res://scenes/dayScreen.tscn"):
-			spawnNew()
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -41,7 +38,9 @@ func resetScene():
 		for i in range(floor(total_price)):
 			var t = get_tree().create_timer(0.1) # 1 second
 			await t.timeout
-			get_tree().current_scene.add_child(coin.instantiate())
+			var coin1 = coin.instantiate()
+			coin1.type = 0
+			get_tree().current_scene.add_child(coin1)
 		while money < moneyTotal:
 			var t = get_tree().create_timer(0.01) # 1 second
 			await t.timeout
@@ -62,8 +61,8 @@ func resetScene():
 		var nightScene = preload("res://scenes/nightScreen.tscn")
 		# get_tree().change_scene_to_packed(nightScene)
 		
-		# Spawn more items
-		spawnNew()
+		# Next Customer
+		GameManager.customerServed()
 
 func spawnNew():
 	var t = get_tree().create_timer(0.1) # 1 second

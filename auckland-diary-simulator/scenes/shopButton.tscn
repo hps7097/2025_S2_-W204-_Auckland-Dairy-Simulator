@@ -5,6 +5,19 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lwpm2"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqno8"]
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+shadow_color = Color(0, 0, 0, 0.1)
+shadow_size = 20
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lwpm2"]
 border_width_left = 15
 border_width_top = 15
@@ -29,19 +42,6 @@ corner_radius_top_right = 75
 corner_radius_bottom_right = 75
 corner_radius_bottom_left = 75
 shadow_color = Color(0, 0, 0, 0.2)
-shadow_size = 20
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqno8"]
-border_width_left = 15
-border_width_top = 15
-border_width_right = 15
-border_width_bottom = 15
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 75
-corner_radius_top_right = 75
-corner_radius_bottom_right = 75
-corner_radius_bottom_left = 75
-shadow_color = Color(0, 0, 0, 0.1)
 shadow_size = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_004ny"]
@@ -87,6 +87,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 theme_override_styles/focus = SubResource("StyleBoxEmpty_lwpm2")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_rqno8")
 theme_override_styles/hover = SubResource("StyleBoxFlat_lwpm2")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_trd0v")
 theme_override_styles/normal = SubResource("StyleBoxFlat_rqno8")

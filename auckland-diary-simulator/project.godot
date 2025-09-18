@@ -21,6 +21,7 @@ global="*res://scripts/global.gd"
 MouseManager="*res://scripts/mouse_manager.gd"
 ProductManager="*res://scripts/product_manager.gd"
 UpgradeManager="*res://scripts/upgrade_manager.gd"
+GameManager="*res://scripts/game_manager.gd"
 
 [display]
 
