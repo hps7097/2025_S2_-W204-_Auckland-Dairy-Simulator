@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://dy20m3mlng3a7"]
+
+[ext_resource type="Script" uid="uid://dgk84mngsgb8c" path="res://scripts/draggableObject.gd" id="1_l2ofb"]
+[ext_resource type="Texture2D" uid="uid://bo6ogleh0gknw" path="res://assets/_DropShadow.png" id="2_guh5m"]
+[ext_resource type="Texture2D" uid="uid://dnb1pw2b5g7s5" path="res://assets/_BigPie.png" id="3_guh5m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_guh5m"]
+size = Vector2(4, 4)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_guh5m"]
+radius = 46.8402
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1xhob"]
+size = Vector2(0, 0)
+
+[node name="object" type="Node2D"]
+script = ExtResource("1_l2ofb")
+
+[node name="CentreArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CentreArea"]
+shape = SubResource("RectangleShape2D_guh5m")
+debug_color = Color(0.912, 0, 0.726, 0.641)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_guh5m")
+debug_color = Color(0, 0.6, 0.7, 0)
+
+[node name="DropShadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, 90)
+texture = ExtResource("2_guh5m")
+
+[node name="HoverCheck" type="Area2D" parent="DropShadow"]
+position = Vector2(0, -90)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DropShadow/HoverCheck"]
+position = Vector2(0, 90)
+shape = SubResource("RectangleShape2D_1xhob")
+debug_color = Color(0.97, 0, 0.189, 0.613)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_guh5m")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[connection signal="checkTop" from="." to="." method="_on_check_top"]
+[connection signal="area_entered" from="CentreArea" to="." method="_on_centre_area_area_entered"]
+[connection signal="area_exited" from="CentreArea" to="." method="_on_centre_area_area_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="area_entered" from="DropShadow/HoverCheck" to="." method="_on_hover_check_area_entered"]
+[connection signal="area_exited" from="DropShadow/HoverCheck" to="." method="_on_hover_check_area_exited"]

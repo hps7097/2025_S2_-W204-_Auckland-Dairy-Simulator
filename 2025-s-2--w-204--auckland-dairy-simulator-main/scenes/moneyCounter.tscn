@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://do0o2eleyo6w3"]
+
+[ext_resource type="Texture2D" uid="uid://cukr3k50tp5ot" path="res://assets/_Coins.png" id="1_dyohy"]
+[ext_resource type="Script" uid="uid://caxqytfaken75" path="res://scripts/money_count.gd" id="2_e7ykm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_at8um"]
+atlas = ExtResource("1_dyohy")
+region = Rect2(0, 48, 64, 64)
+
+[node name="MoneyCounter" type="HBoxContainer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -192.0
+offset_top = 8.0
+offset_bottom = 64.0
+grow_horizontal = 0
+theme_override_constants/separation = 15
+
+[node name="CoinTexture" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("AtlasTexture_at8um")
+
+[node name="MoneyCount" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.920995, 0.920995, 0.920995, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.921569, 0.921569, 0.921569, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 32
+text = "99.99"
+vertical_alignment = 1
+script = ExtResource("2_e7ykm")

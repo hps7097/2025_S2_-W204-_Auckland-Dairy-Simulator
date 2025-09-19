@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgckyykut0iad"]
+
+[ext_resource type="Script" uid="uid://6jqttqxx732b" path="res://scenes/DialogueUI.gd" id="1_0qyo7"]
+
+[node name="DialogueUI" type="CanvasLayer"]
+script = ExtResource("1_0qyo7")
+
+[node name="Panel" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NPCName" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="DialogueText" type="RichTextLabel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ChoicesContainer" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PathIndicatorIcon" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
