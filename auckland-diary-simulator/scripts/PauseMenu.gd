@@ -1,44 +1,43 @@
 #MADE WITH CHATGPT
+# PauseMenu.gd
 extends Control
 
-@onready var btn_resume := $BtnResume 
-@onready var btn_options := $BtnOptions 
-@onready var btn_save := $BtnSave 
-@onready var btn_load := $BtnLoad 
-@onready var saved_label := $SavedLabel
+@onready var btn_resume: Button = $BtnResume
+@onready var btn_save: Button = $BtnSave
+@onready var btn_options: Button = $BtnOptions
+@onready var btn_quit: Button = $BtnQuit
+@onready var btn_title: Button = $BtnTitle   
+@onready var options_popup: Control = $OptionsMenu
 
-func _ready(): 
-	btn_resume.pressed.connect(_on_resume)
-	btn_options.pressed.connect(_on_options)
-	btn_save.pressed.connect(_on_save)
-	btn_load.pressed.connect(_on_load)
 
-func _on_resume(): 
-	get_tree().paused = false 
-	queue_free() 
+func _ready() -> void:
+	visible = false
+	btn_resume.pressed.connect(Callable(self, "_on_resume_pressed"))
+	btn_save.pressed.connect(Callable(self, "_on_save_pressed"))
+	btn_options.pressed.connect(Callable(self, "_on_options_pressed"))
+	btn_quit.pressed.connect(Callable(self, "_on_quit_pressed"))
+	btn_title.pressed.connect(Callable(self, "_on_title_pressed")) 
 
-func _on_options(): 
-	var opts = preload("res://scenes/options_menu.tscn").instantiate()
-	get_tree().get_root().add_child(opts)
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		toggle_pause()
 
-func _on_save(): 
-	# Dummy save data since GameState is undefined
-	var data = {
-		"scene": get_tree().current_scene.scene_file_path
-	}
-	SaveManager.save_game(data)
+func toggle_pause() -> void:
+	visible = not visible
+	get_tree().paused = visible
 
-	saved_label.show()
-	var timer := get_tree().create_timer(1.2)
-	await timer.timeout
-	saved_label.hide()
+func _on_resume_pressed() -> void:
+	toggle_pause()
 
-func _on_load(): 
-	var data = SaveManager.load_game()
-	if data.empty():
-		return
+func _on_save_pressed() -> void:
+	SaveManager.save_game(GameState.to_dict())
 
-	# Skip GameState.import_state since it's undefined
+func _on_options_pressed() -> void:
+	options_popup.show()
 
-	if "scene" in data:
-		get_tree().change_scene_to_file(data["scene"])
+func _on_quit_pressed() -> void:
+	get_tree().quit()
+
+func _on_title_pressed() -> void:
+	get_tree().paused = false   
+	get_tree().change_scene_to_file("res://scenes/TitleScreen.tscn")

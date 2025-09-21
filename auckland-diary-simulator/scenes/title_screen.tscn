@@ -13,9 +13,14 @@ script = ExtResource("1_fgkus")
 
 [node name="BtnContinue" type="Button" parent="."]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 90.0
+offset_right = 181.0
+offset_bottom = 54.0
 text = "CONTINUE"
+icon_alignment = 2
+vertical_icon_alignment = 2
+expand_icon = true
+script = ExtResource("1_fgkus")
 
 [node name="BtnNewGame" type="Button" parent="."]
 layout_mode = 0
@@ -24,6 +29,7 @@ offset_top = 88.17428
 offset_right = 292.15125
 offset_bottom = 119.17428
 text = "NEW GAME"
+script = ExtResource("1_fgkus")
 
 [node name="BtnOptions" type="Button" parent="."]
 layout_mode = 0
@@ -33,3 +39,7 @@ offset_right = 439.5985
 offset_bottom = 192.11905
 rotation = -0.0010302436
 text = "OPTIONS"
+script = ExtResource("1_fgkus")
+
+[connection signal="pressed" from="BtnContinue" to="." method="_on_btn_continue_pressed"]
+[connection signal="pressed" from="BtnContinue" to="BtnContinue" method="_on_pressed"]

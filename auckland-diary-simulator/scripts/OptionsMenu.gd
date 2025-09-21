@@ -1,50 +1,53 @@
 #MADE WITH CHATGPT
+# OptionsMenu.gd
 extends Control
 
-@onready var music_slider := $Music 
-@onready var sfx_slider := $Sfx 
-@onready var dialogue_slider := $DialogueSpeed 
-@onready var graphics_dd := $Graphics 
-@onready var close_btn := $BtnClose 
+@onready var music_slider: HSlider = $Music
+@onready var sfx_slider: HSlider = $Sfx
+@onready var dialogue_speed_slider: HSlider = $DialogueSpeed
+@onready var graphics_option: OptionButton = $Graphics
+@onready var btn_close: Button = $BtnClose
 
-func _ready(): 
-	music_slider.value = Settings.music_volume 
-	sfx_slider.value = Settings.sfx_volume 
-	dialogue_slider.value = Settings.dialogue_speed 
-	
-	graphics_dd.get_popup().clear()
-	graphics_dd.add_item("Low")
-	graphics_dd.add_item("Medium")
-	graphics_dd.add_item("High")
+func _ready() -> void:
+	_load_current()
+	music_slider.value_changed.connect(Callable(self, "_on_music_changed"))
+	sfx_slider.value_changed.connect(Callable(self, "_on_sfx_changed"))
+	dialogue_speed_slider.value_changed.connect(Callable(self, "_on_dialogue_speed_changed"))
+	graphics_option.item_selected.connect(Callable(self, "_on_graphics_selected"))
+	btn_close.pressed.connect(Callable(self, "_on_close_pressed"))
 
-	var idx := GraphicsIndex(Settings.graphics_quality)
-	graphics_dd.select(idx)
+func _load_current() -> void:
+	music_slider.value = Settings.music_vol * 100
+	sfx_slider.value = Settings.sfx_vol * 100
+	dialogue_speed_slider.value = Settings.dialogue_speed * 100
 
-	music_slider.value_changed.connect(_on_music_changed)
-	sfx_slider.value_changed.connect(_on_sfx_changed)
-	dialogue_slider.value_changed.connect(_on_dialogue_changed)
-	graphics_dd.item_selected.connect(_on_graphics_selected)
-	close_btn.pressed.connect(_on_close)
+	# Fill graphics dropdown if needed
+	graphics_option.clear()
+	graphics_option.add_item("Low")
+	graphics_option.add_item("Medium")
+	graphics_option.add_item("High")
 
-func GraphicsIndex(str_g: String) -> int:
-	match str_g.to_lower():
-		"low": return 0
-		"medium": return 1
-		"high": return 2
-	return 1
+	for i in range(graphics_option.item_count):
+		if graphics_option.get_item_text(i) == Settings.graphics_quality:
+			graphics_option.select(i)
+			break
 
-func _on_music_changed(v: float) -> void:
-	Settings.music_volume = v
 
-func _on_sfx_changed(v: float) -> void:
-	Settings.sfx_volume = v
+func _on_music_changed(value: float) -> void:
+	Settings.music_vol = value / 100.0
+	Settings.save()
 
-func _on_dialogue_changed(v: float) -> void:
-	Settings.dialogue_speed = v
+func _on_sfx_changed(value: float) -> void:
+	Settings.sfx_vol = value / 100.0
+	Settings.save()
 
-func _on_graphics_selected(idx: int) -> void:
-	Settings.graphics_quality = ["low", "medium", "high"][idx]
+func _on_dialogue_speed_changed(value: float) -> void:
+	Settings.dialogue_speed = value / 100.0
+	Settings.save()
 
-func _on_close() -> void:
-	Settings.persist_all()
-	queue_free()
+func _on_graphics_selected(index: int) -> void:
+	Settings.graphics_quality = graphics_option.get_item_text(index)
+	Settings.save()
+
+func _on_close_pressed() -> void:
+	hide()

@@ -1,26 +1,25 @@
 #MADE WITH CHATGPT
-extends Node 
+extends Node
 
-var music_volume := 0.8 
-var sfx_volume := 0.8 
-var dialogue_speed := 1.0 
-var graphics_quality := "medium" 
+const FILE := "user://options.cfg"
 
-func _ready(): 
-	# load persisted settings if present 
-	var mv = SaveManager.load_setting("music_volume", music_volume) 
-	var sv = SaveManager.load_setting("sfx_volume", sfx_volume) 
-	var ds = SaveManager.load_setting("dialogue_speed", dialogue_speed) 
-	var gq = SaveManager.load_setting("graphics_quality", graphics_quality) 
-	music_volume = float(mv) 
-	sfx_volume = float(sv) 
-	dialogue_speed = float(ds) 
-	graphics_quality = str(gq) 
+var music_vol: float = 0.8
+var sfx_vol: float = 0.8
+var dialogue_speed: float = 1.0
+var graphics_quality: String = "Medium"
 
-func persist_all(): 
-	SaveManager.save_setting("music_volume", music_volume) 
-	SaveManager.save_setting("sfx_volume", sfx_volume) 
-	SaveManager.save_setting("dialogue_speed", dialogue_speed) 
-	SaveManager.save_setting("graphics_quality", graphics_quality) 
+func save() -> void:
+	var cfg = ConfigFile.new()
+	cfg.set_value("audio", "music", music_vol)
+	cfg.set_value("audio", "sfx", sfx_vol)
+	cfg.set_value("ui", "dialogue_speed", dialogue_speed)
+	cfg.set_value("graphics", "quality", graphics_quality)
+	cfg.save(FILE)
 
- 
+func load() -> void:
+	var cfg = ConfigFile.new()
+	if cfg.load(FILE) == OK:
+		music_vol = cfg.get_value("audio", "music", 0.8)
+		sfx_vol = cfg.get_value("audio", "sfx", 0.8)
+		dialogue_speed = cfg.get_value("ui", "dialogue_speed", 1.0)
+		graphics_quality = cfg.get_value("graphics", "quality", "Medium")

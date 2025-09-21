@@ -19,6 +19,7 @@ offset_top = 29.0
 offset_right = 194.0
 offset_bottom = 74.0
 text = "RESUME"
+script = ExtResource("1_n87rw")
 
 [node name="BtnOptions" type="Button" parent="."]
 layout_mode = 1
@@ -30,6 +31,7 @@ offset_top = 89.0
 offset_right = 83.64
 offset_bottom = 84.03999
 text = "OPTIONS"
+script = ExtResource("1_n87rw")
 
 [node name="BtnSave" type="Button" parent="."]
 layout_mode = 1
@@ -41,6 +43,7 @@ offset_top = 93.0
 offset_right = 714.96
 offset_bottom = 143.04001
 text = "SAVE"
+script = ExtResource("1_n87rw")
 
 [node name="BtnLoad" type="Button" parent="."]
 layout_mode = 0
@@ -49,3 +52,11 @@ offset_top = 120.0
 offset_right = 570.0
 offset_bottom = 254.0
 text = "LOAD"
+script = ExtResource("1_n87rw")
+
+[node name="BtnTitle" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "TITLE
+"
