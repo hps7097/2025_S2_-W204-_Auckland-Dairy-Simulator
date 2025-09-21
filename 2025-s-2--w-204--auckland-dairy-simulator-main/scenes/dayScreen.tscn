@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bgugpbhxc07ng"]
+[gd_scene load_steps=22 format=3 uid="uid://bgugpbhxc07ng"]
 
 [ext_resource type="Texture2D" uid="uid://hlhhjhtsv10m" path="res://assets/_NPCBack.png" id="1_oar64"]
 [ext_resource type="Texture2D" uid="uid://cl8mys0nso8ll" path="res://assets/_NPC_Police.png" id="1_qeyhs"]
@@ -56,6 +56,10 @@ colors = PackedColorArray(0.819608, 0.870588, 0.8, 0.266667, 1, 1, 1, 0)
 gradient = SubResource("Gradient_i333y")
 fill_to = Vector2(1, 0.059633)
 
+[sub_resource type="GDScript" id="GDScript_yufcq"]
+script/source = "extends \"res://scenes/DialogueUI.gd\"
+"
+
 [node name="main" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -88,7 +92,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="UI" type="Control" parent="."]
-layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
@@ -229,6 +232,32 @@ offset_top = 0.0
 
 [node name="PopupText" parent="." instance=ExtResource("12_d28we")]
 position = Vector2(105, 757)
+
+[node name="DialogueUI" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = SubResource("GDScript_yufcq")
+
+[node name="Panel" type="Panel" parent="DialogueUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NPCName" type="Label" parent="DialogueUI/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="DialogueText" type="RichTextLabel" parent="DialogueUI/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ChoicesContainer" type="VBoxContainer" parent="DialogueUI/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="timeout" from="UI/Monitor/MarginContainer/Panel/RichTextLabel/Timer" to="UI/Monitor/MarginContainer/Panel/RichTextLabel" method="_on_timer_timeout"]
 

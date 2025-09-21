@@ -1,0 +1,24 @@
+{
+  "intro": {
+	"lines": [
+	  {
+		"npc": "Police Officer",
+		"text": "We’ve had reports of suspicious activity. Do you want to help us?",
+		"choices": [
+		  {
+			"text": "Yes, I’ll help the police.",
+			"effects": { "police_rep": 5, "money": 20 }
+		  },
+		  {
+			"text": "No, I don’t trust you.",
+			"effects": { "gang_rep": 2 }
+		  }
+		]
+	  },
+	  {
+		"npc": "Police Officer",
+		"text": "Thanks for your answer. Be careful out there."
+	  }
+	]
+  }
+}
