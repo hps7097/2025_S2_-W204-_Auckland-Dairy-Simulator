@@ -107,8 +107,14 @@ shape = SubResource("RectangleShape2D_wb5qm")
 position = Vector2(-62, 12)
 shape = SubResource("RectangleShape2D_tk8sh")
 
+
 [node name="Shopkeeper" parent="." instance=ExtResource("6_5r3pi")]
 position = Vector2(-457, 161)
+
+[node name="ViewportForeground" type="Sprite2D" parent="."]
+z_index = 4096
+position = Vector2(-575, 161)
+texture = ExtResource("6_wb5qm")
 
 [node name="OutsideWall" type="StaticBody2D" parent="."]
 position = Vector2(-359.5, 85)
@@ -169,7 +175,7 @@ offset_right = -358.0
 offset_bottom = 170.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.822292, 0.826012, 0.740056, 0.298039)
+color = Color(0.822, 0.826, 0.74, 0)
 metadata/_edit_use_anchors_ = true
 
 [node name="DoorShine" type="Control" parent="Control"]
