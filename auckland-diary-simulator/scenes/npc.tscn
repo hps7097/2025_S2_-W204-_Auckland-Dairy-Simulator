@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://csnj56b81gmma"]
+[gd_scene load_steps=34 format=3 uid="uid://csnj56b81gmma"]
 
 [ext_resource type="Script" uid="uid://bkhqghjx1c4iy" path="res://scripts/npc.gd" id="1_7n8xq"]
 [ext_resource type="Texture2D" uid="uid://bo6ogleh0gknw" path="res://assets/_DropShadow.png" id="2_7n8xq"]
@@ -212,9 +212,21 @@ size = Vector2(10, 10)
 [sub_resource type="Curve2D" id="Curve2D_7n8xq"]
 bake_interval = 0.01
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 450, -144, 0, 0, 0, 0, 450, -42, 0, 0, 0, 0, 409, -49, 0, 0, 0, 0, 375, -60, 0, 0, 0, 0, 258, -65, 0, 0, 0, 0, 250, 5, 0, 0, 0, 0, 248, 16, 0, 0, 0, 0, 174, 4, 0, 0, 0, 0, 171, -42, 0, 0, 0, 0, 193, -67, 0, 0, 0, 0, 247, -66, 0, 0, 0, 0, 246, -23, 0, 0, 0, 0, 295, -6, 0, 0, 0, 0, 373, -6, 0, 0, 0, 0, 399, -25, 0, 0, 0, 0, 473, -48, 0, 0, 0, 0, 460, -148, 0, 0, 0, 0, 450, -144)
+"points": PackedVector2Array(0, 0, 0, 0, 450, -144, 0, 0, 0, 0, 450, -42, 0, 0, 0, 0, 409, -49, 0, 0, 0, 0, 375, -60, 0, 0, 0, 0, 258, -65, 0, 0, 0, 0, 248, 16, 0, 0, 0, 0, 174, 4, 0, 0, 0, 0, 171, -42, 0, 0, 0, 0, 193, -67, 0, 0, 0, 0, 247, -66, 0, 0, 0, 0, 246, -23, 0, 0, 0, 0, 295, -6, 0, 0, 0, 0, 373, -6, 0, 0, 0, 0, 399, -25, 0, 0, 0, 0, 473, -48, 0, 0, 0, 0, 466, -86, 0, 0, 0, 0, 466, -114, 0, 0, 0, 0, 450, -144)
 }
 point_count = 18
+
+[sub_resource type="Curve2D" id="Curve2D_4wlns"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 454, -145, 0, 0, 0, 0, 458, -121, 0, 0, 0, 0, 460, -98, 0, 0, 0, 0, 460, -69, 0, 0, 0, 0, 459, -40, 0, 0, 0, 0, 414, -40, 0, 0, 0, 0, 391, -32, 0, 0, 0, 0, 379, -30, 0, 0, 0, 0, 349, -29, 0, 0, 0, 0, 333, -29, 0, 0, 0, 0, 301, -31, 0, 0, 0, 0, 271, -33, 0, 0, 0, 0, 257, -42, 0, 0, 0, 0, 253, -66, 0, 0, 0, 0, 241, -68, 0, 0, 0, 0, 171, -66, 0, 0, 0, 0, 176, -17, 0, 0, 0, 0, 175, 15, 0, 0, 0, 0, 193, 22, 0, 0, 0, 0, 219, 22, 0, 0, 0, 0, 252, 16, 0, 0, 0, 0, 258, -4, 0, 0, 0, 0, 266, -5, 0, 0, 0, 0, 278, -7, 0, 0, 0, 0, 292, -7, 0, 0, 0, 0, 310, -6, 0, 0, 0, 0, 323, -6, 0, 0, 0, 0, 412, -28, 0, 0, 0, 0, 435, -30, 0, 0, 0, 0, 454, -34, 0, 0, 0, 0, 460, -61, 0, 0, 0, 0, 456, -90, 0, 0, 0, 0, 454, -116, 0, 0, 0, 0, 451, -141, 0, 0, 0, 0, 451, -167, 0, 0, 0, 0, 450, -154, 0, 0, 0, 0, 450, -163, 0, 0, 0, 0, 448, -148)
+}
+point_count = 38
+
+[sub_resource type="Curve2D" id="Curve2D_tl2vt"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 461, 33, 0, 0, 0, 0, 459, 10, 0, 0, 0, 0, 457, -13, 0, 0, 0, 0, 457, -30, 0, 0, 0, 0, 400, -34, 0, 0, 0, 0, 349, -27, 0, 0, 0, 0, 302, -28, 0, 0, 0, 0, 261, -29, 0, 0, 0, 0, 246, 18, 0, 0, 0, 0, 188, 13, 0, 0, 0, 0, 187, -22, 0, 0, 0, 0, 188, -29, 0, 0, 0, 0, 189, -64, 0, 0, 0, 0, 207, -65, 0, 0, 0, 0, 230, -65, 0, 0, 0, 0, 396, -65, 0, 0, 0, 0, 391, -25, 0, 0, 0, 0, 330, -7, 0, 0, 0, 0, 402, -18, 0, 0, 0, 0, 417, -29, 0, 0, 0, 0, 434, -30, 0, 0, 0, 0, 457, -31, 0, 0, 0, 0, 471, -33, 0, 0, 0, 0, 471, -14, 0, 0, 0, 0, 470, 12, 0, 0, 0, 0, 470, 34, 0, 0, 0, 0, 472, 48)
+}
+point_count = 27
 
 [node name="NPC" type="Node2D"]
 
@@ -242,9 +254,27 @@ position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_4wlns")
 
 [node name="Path2D" type="Path2D" parent="."]
+visible = false
 position = Vector2(-457, 134)
 curve = SubResource("Curve2D_7n8xq")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 position = Vector2(450, -144)
-rotation = 1.6027
+rotation = 1.5708
+
+[node name="Path2D2" type="Path2D" parent="."]
+visible = false
+position = Vector2(-457, 134)
+curve = SubResource("Curve2D_4wlns")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D2"]
+position = Vector2(454, -145)
+rotation = 1.40565
+
+[node name="Path2D3" type="Path2D" parent="."]
+position = Vector2(-457, 134)
+curve = SubResource("Curve2D_tl2vt")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D3"]
+position = Vector2(461, 33)
+rotation = -1.65753
