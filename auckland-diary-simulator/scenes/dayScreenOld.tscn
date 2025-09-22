@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctaplnp6urvrl"]
+[gd_scene load_steps=6 format=3 uid="uid://ctaplnp6urvrl"]
 
 [ext_resource type="Texture2D" uid="uid://cl8mys0nso8ll" path="res://assets/_NPC_Police.png" id="1_p4ulj"]
 [ext_resource type="Texture2D" uid="uid://dfosdkugb4dgb" path="res://assets/_TillDesk.png" id="2_pienu"]
 [ext_resource type="PackedScene" uid="uid://b6e1i7tte4ujh" path="res://scenes/snappableArea.tscn" id="3_wmq1h"]
 [ext_resource type="PackedScene" uid="uid://dy20m3mlng3a7" path="res://scenes/draggableObject.tscn" id="4_r0ttt"]
+
+[sub_resource type="Curve2D" id="Curve2D_p4ulj"]
 
 [node name="DayScreen" type="Node2D"]
 
@@ -109,3 +111,6 @@ position = Vector2(80, 832)
 
 [node name="draggableObject" parent="." instance=ExtResource("4_r0ttt")]
 position = Vector2(819, 304)
+
+[node name="CustomerPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_p4ulj")
