@@ -107,7 +107,6 @@ shape = SubResource("RectangleShape2D_wb5qm")
 position = Vector2(-62, 12)
 shape = SubResource("RectangleShape2D_tk8sh")
 
-
 [node name="Shopkeeper" parent="." instance=ExtResource("6_5r3pi")]
 position = Vector2(-457, 161)
 

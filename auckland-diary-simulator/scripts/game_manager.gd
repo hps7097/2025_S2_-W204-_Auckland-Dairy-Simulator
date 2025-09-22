@@ -20,6 +20,7 @@ func newDay() -> void:
 
 func customerAppear() -> void:
 	ProductManager.spawnNew()
+	NpcManager.run()
 
 func customerServed() -> void:
 	dayCustomerCount -= 1
