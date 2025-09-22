@@ -26,6 +26,10 @@ func run() -> void:
 
 func spawn_loop() -> void:
 	while true:
+		shop_overview_main = $"../main/UI/SubViewportContainer/SubViewport/shopOverviewMain"
+		if shop_overview_main == null:
+			print("shop_overview_main is NULL — check the node path!")
+			return
 		print("Spawning")
 		var npc = npcScene.instantiate()
 		npc.position = Vector2(-330, 0)

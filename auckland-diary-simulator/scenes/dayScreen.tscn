@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://bied52v5xw86t" path="res://assets/_Monitor.png" id="5_5rx4b"]
 [ext_resource type="Script" uid="uid://b80lpuqomceh2" path="res://scripts/rich_text_label.gd" id="6_i333y"]
 [ext_resource type="Texture2D" uid="uid://c4rb8x7jmtjin" path="res://assets/_MonitorBase.png" id="6_wxbpj"]
-[ext_resource type="PackedScene" uid="uid://cupywur4rfsw6" path="res://scenes/Scanner.tscn" id="10_72ia3"]
+[ext_resource type="PackedScene" path="res://scenes/Scanner.tscn" id="10_72ia3"]
 [ext_resource type="PackedScene" uid="uid://do0o2eleyo6w3" path="res://scenes/moneyCounter.tscn" id="10_yufcq"]
-[ext_resource type="PackedScene" uid="uid://bm5yjpvdgsgcp" path="res://scenes/popup_text.tscn" id="12_d28we"]
+[ext_resource type="PackedScene" path="res://scenes/popup_text.tscn" id="12_d28we"]
 
 [sub_resource type="Gradient" id="Gradient_d28we"]
 colors = PackedColorArray(0.054902, 0.0235294, 0.0352941, 0.588235, 0.18845, 0.119973, 0.189886, 0)
