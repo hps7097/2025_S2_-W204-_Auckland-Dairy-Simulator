@@ -1,0 +1,86 @@
+{ 
+  "id": "gumboot_story", 
+  "start": "day1_meet_police", 
+  "nodes": { 
+	"day1_meet_police": { 
+	  "text": "Afternoon. I just saw that kid hanging around and I have to say...", 
+	  "choices": [ 
+		{ 
+		  "text": "Sure Officer", 
+		  "next": "police_offer_help", 
+		  "effects": [{"type": "set_flag", "key": "police_help_offered", "value": true}] 
+}, 
+		{ 
+		  "text": "Ask if the police can help", 
+		  "next": "police_explain", 
+		  "effects": [{"type": "set_flag", "key": "asked_police_help", "value": true}] 
+		} 
+	  ] 
+	}, 
+	"police_offer_help": { 
+	  "text": "Alright... Just remember to be careful", 
+	  "next": null 
+	}, 
+	"police_explain": { 
+	  "text": "We can patrol the area more, but we can’t protect your shop 24/7.", 
+	  "next": null 
+	}, 
+	"day2_gang_intro": { 
+	  "text": "You reckon you could sell some of these hoons? Boss is tryna find suppliers", 
+	  "choices": [ 
+		{ "text": "Who's Boss?", "next": "who_is_boss" }, 
+		{ "text": "Not right now", "next": "gang_leave" } 
+	  ] 
+	}, 
+	"who_is_boss": { 
+	  "text": "Don’t worry ‘bout names… we’re part of the Gumboot Gang.", 
+	  "effects": [ 
+		{"type": "set_flag", "key": "met_gang_kid", "value": true} 
+	  ], 
+	  "next": null 
+	}, 
+	"gang_leave": { 
+	  "text": "Fair enough. Offers still on the table. I’ll swing by tomorrow and see what you decide.", 
+	  "next": null 
+	}, 
+	"sell_hoons": { 
+	  "text": "I see you’ve got Hoons now?", 
+	  "choices": [ 
+		{ 
+		  "text": "Sell to him", 
+"next": "after_sell_hoons", 
+		  "effects": [ 
+			{"type": "set_flag", "key": "sold_hoons_to_gang", "value": true}, 
+			{"type": "change_rep", "target": "gang", "amount": 1} 
+		  ] 
+		}, 
+		{"text": "Refuse", "next": "refuse_sell"} 
+	  ] 
+	}, 
+	"after_sell_hoons": { 
+	  "text": "I got to get into the club tomorrow but I’m underage. You reckon you could start selling Fake IDs?", 
+	  "choices": [ 
+		{"text": "I'll look into it", "next": "agree_fake_ids", "effects": [{"type":"set_flag","key":"offered_fake_ids","value":true}]}, 
+		{"text": "Maybe, kid", "next": "maybe_fake_ids"} 
+	  ] 
+	}, 
+	"refuse_sell": { 
+	  "text": "Boss ain’t gonna like this… You’re all good man, stay safe", 
+	  "effects": [{"type":"change_rep","target":"police","amount":1}], 
+	  "next": null 
+   }, 
+	"agree_fake_ids": { 
+	  "text": "Sweettt, thanks m’bro, I appreciate it.", 
+	  "next": null 
+	}, 
+	"ending_ram_raid": { 
+	  "text": "The shop was ram raided. Neutral Ending.", 
+	  "ending": "ram_raided" 
+	}, 
+	"ending_backup_police": { 
+	  "text": "Backup arrived. Police-Aligned Ending.", 
+	  "effects": [{"type":"set_flag","key":"ending_police_backup","value":true}], 
+	  "ending": "police_backup" 
+	} 
+  } 
+}

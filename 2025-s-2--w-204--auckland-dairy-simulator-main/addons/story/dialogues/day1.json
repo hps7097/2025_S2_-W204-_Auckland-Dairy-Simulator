@@ -1,0 +1,34 @@
+{
+  "intro": {
+	"lines": [
+	  {
+		"npc": "Police Officer",
+		"text": "We’ve had reports of suspicious activity. Do you want to help us?",
+		"choices": [
+		  {
+			"text": "Yes, I’ll help the police.",
+			"effects": { "police_rep": 5 }
+		  },
+		  {
+			"text": "No, I don’t trust you.",
+			"effects": { "gang_rep": 2 }
+		  }
+		]
+	  },
+	  {
+		"npc": "Gang Member",
+		"text": "Heard you’ve been talking to the cops. That’s dangerous.",
+		"choices": [
+		  {
+			"text": "I’m loyal to the gang.",
+			"effects": { "gang_rep": 5 }
+		  },
+		  {
+			"text": "I don’t want trouble.",
+			"effects": { "police_rep": 2 }
+		  }
+		]
+	  }
+	]
+  }
+}

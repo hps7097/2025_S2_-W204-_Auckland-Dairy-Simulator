@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://xjd3yj42srpq"]
+
+[ext_resource type="Script" uid="uid://dy7222d6xbg0" path="res://scenes/NPC.gd" id="1_3fmcf"]
+[ext_resource type="Texture2D" uid="uid://cl8mys0nso8ll" path="res://assets/_NPC_Police.png" id="2_r0awi"]
+
+[sub_resource type="GDScript" id="GDScript_iabqg"]
+script/source = "extends \"res://scenes/DialogueUI.gd\"
+"
+
+[node name="TestDialogueScene" type="Node2D"]
+
+[node name="DialogueUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = SubResource("GDScript_iabqg")
+
+[node name="Panel" type="Panel" parent="DialogueUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NPCName" type="Label" parent="DialogueUI/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="DialogueText" type="RichTextLabel" parent="DialogueUI/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ChoicesContainer" type="VBoxContainer" parent="DialogueUI/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NPC" type="Node2D" parent="."]
+position = Vector2(300, 450)
+script = ExtResource("1_3fmcf")
+npc_id = "police"
+dialogue_id = "intro"
+
+[node name="Sprite2D" type="Sprite2D" parent="NPC"]
+position = Vector2(40, -40)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_r0awi")
+
+[node name="Control" type="Control" parent="NPC"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

@@ -15,6 +15,10 @@ func _process(delta: float) -> void:
 func newDay() -> void:
 	dayCount += 1
 	dayCustomerCount = 3 + UpgradeManager.getUpgrade(1)
+<<<<<<< HEAD:auckland-diary-simulator/scripts/game_manager.gd
+=======
+	
+>>>>>>> NPC:2025-s-2--w-204--auckland-dairy-simulator-main/scripts/game_manager.gd
 	customerAppear()
 
 func customerAppear() -> void:

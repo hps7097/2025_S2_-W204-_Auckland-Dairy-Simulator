@@ -167,7 +167,7 @@ offset_right = -358.0
 offset_bottom = 170.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.822292, 0.826012, 0.740056, 0.298039)
+color = Color(0.822, 0.826, 0.74, 0)
 metadata/_edit_use_anchors_ = true
 
 [node name="DoorShine" type="Control" parent="."]
