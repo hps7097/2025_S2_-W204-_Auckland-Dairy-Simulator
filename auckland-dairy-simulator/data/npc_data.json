@@ -1,0 +1,35 @@
+{
+  "npcs": [
+	{
+	  "npc_id": "police_1",
+	  "scene": "res://scenes/npc.tscn",
+	  "dialogue_id": "police_1",
+	  "is_special": true,
+	  "appears_on_days": [3,4],
+	  "show_conditions": ["flag:sold_illegal"]
+	},
+	{
+	  "npc_id": "gang_member",
+	  "scene": "res://scenes/npc.tscn",
+	  "dialogue_id": "gang_member",
+	  "is_special": true,
+	  "appears_on_days": [2,5],
+	  "show_conditions": []
+	},
+	{
+	  "npc_id": "regular_customer",
+	  "scene": "res://scenes/npc.tscn",
+	  "dialogue_id": "regular_customer",
+	  "appears_on_days": [1,2,3,4,5],
+	  "show_conditions": []
+	},
+	{
+	  "npc_id": "inspector",
+	  "scene": "res://scenes/npc.tscn",
+	  "dialogue_id": "inspector",
+	  "is_special": true,
+	  "appears_on_days": [5],
+	  "show_conditions": ["flag:bribed_police"]
+	}
+  ]
+}

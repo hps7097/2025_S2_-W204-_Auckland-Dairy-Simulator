@@ -1,0 +1,16 @@
+{
+  "npc_id": "gang_member",
+  "start": "intro",
+  "nodes": {
+	"intro": {
+	  "speaker": "Gang Member",
+	  "text": "Heard you’ve got stock that moves fast. We could use someone like you.",
+	  "choices": [
+		{"text": "I’m not interested.", "next": "leave", "flags_set": ["gang_reject"], "effects": {}},
+		{"text": "I’ll help out if the money’s good.", "next": "ally", "flags_set": ["gang_ally"], "effects": {"money": 20}}
+	  ]
+	},
+	"leave": {"speaker": "Gang Member","text":"Your loss. Don’t cross us.","choices":[]},
+	"ally": {"speaker":"Gang Member","text":"Smart choice. We’ll be in touch.","choices":[]}
+  }
+}

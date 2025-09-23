@@ -1,0 +1,166 @@
+[gd_scene load_steps=12 format=3 uid="uid://dvp45h7yyscpj"]
+
+[ext_resource type="Script" uid="uid://c0wmwf5jfvnbe" path="res://scripts/shopBackground.gd" id="1_s327g"]
+[ext_resource type="Texture2D" uid="uid://bt8p643lf6lps" path="res://assets/_ShopBackground.png" id="2_c78ci"]
+[ext_resource type="PackedScene" uid="uid://do0o2eleyo6w3" path="res://scenes/moneyCounter.tscn" id="3_at8um"]
+[ext_resource type="PackedScene" uid="uid://b7rdvxehw1per" path="res://scenes/shopButton.tscn" id="5_fw4in"]
+[ext_resource type="PackedScene" uid="uid://dtxj5ao4ie2x6" path="res://scenes/nextDayButton.tscn" id="6_at8um"]
+[ext_resource type="AudioStream" uid="uid://k4ixiqoq5seu" path="res://assets/audio/simplebackground.wav" id="6_h4g86"]
+[ext_resource type="AudioStream" uid="uid://dnd1eaxp6bv5o" path="res://assets/audio/startaction.wav" id="7_aescc"]
+[ext_resource type="PackedScene" uid="uid://cgckyykut0iad" path="res://scenes/DialogueUI.tscn" id="8_ug04i"]
+[ext_resource type="PackedScene" uid="uid://3luktonxgr8i" path="res://scenes/TutorialOverlay.tscn" id="9_drial"]
+
+[sub_resource type="Gradient" id="Gradient_s327g"]
+offsets = PackedFloat32Array(0.0519481, 0.253247, 1)
+colors = PackedColorArray(0.2, 0.2, 0.2, 1, 0.2, 0.2, 0.2, 0.925974, 0.2, 0.2, 0.2, 0.4)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c78ci"]
+gradient = SubResource("Gradient_s327g")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[node name="nightScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="MovingCircles" type="Node2D" parent="Background"]
+
+[node name="Background2" type="Node2D" parent="Background/MovingCircles"]
+position = Vector2(2020, 0)
+script = ExtResource("1_s327g")
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/MovingCircles/Background2"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_c78ci")
+centered = false
+
+[node name="Background" type="Node2D" parent="Background/MovingCircles"]
+script = ExtResource("1_s327g")
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/MovingCircles/Background"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_c78ci")
+centered = false
+
+[node name="Background3" type="Node2D" parent="Background/MovingCircles"]
+position = Vector2(2020, 1200)
+script = ExtResource("1_s327g")
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/MovingCircles/Background3"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_c78ci")
+centered = false
+
+[node name="Background4" type="Node2D" parent="Background/MovingCircles"]
+position = Vector2(0, 1200)
+script = ExtResource("1_s327g")
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/MovingCircles/Background4"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_c78ci")
+centered = false
+
+[node name="ShadowGradient" type="TextureRect" parent="Background"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_c78ci")
+
+[node name="MoneyCounter" parent="." instance=ExtResource("3_at8um")]
+layout_mode = 1
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -154.5
+offset_top = 30.0
+offset_right = 154.5
+offset_bottom = 57.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.920995, 0.920995, 0.920995, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.921569, 0.921569, 0.921569, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 60
+theme_override_font_sizes/font_size = 128
+text = "AFTER HOURS SHOP"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.2
+anchor_right = 0.95
+anchor_bottom = 0.9
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="ShopButton1" parent="HBoxContainer" instance=ExtResource("5_fw4in")]
+layout_mode = 2
+
+[node name="ShopButton2" parent="HBoxContainer" instance=ExtResource("5_fw4in")]
+layout_mode = 2
+upgradeType = 1
+
+[node name="ShopButton3" parent="HBoxContainer" instance=ExtResource("5_fw4in")]
+layout_mode = 2
+upgradeType = 2
+
+[node name="Button" parent="." instance=ExtResource("6_at8um")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_h4g86")
+autoplay = true
+
+[node name="SfxPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_aescc")
+
+[node name="DialogueUI" parent="." instance=ExtResource("8_ug04i")]
+layout_mode = 1
+
+[node name="TutorialOverlay" parent="." instance=ExtResource("9_drial")]
+layout_mode = 1

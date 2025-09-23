@@ -1,0 +1,16 @@
+{
+  "npc_id": "inspector",
+  "start": "intro",
+  "nodes": {
+	"intro": {
+	  "speaker": "Inspector",
+	  "text": "We’ve been reviewing your shop’s record. Things look… suspicious.",
+	  "choices": [
+		{"text": "I run an honest business.", "next": "honest", "flags_set": ["claimed_honest"], "effects": {}},
+		{"text": "Everyone bends the rules a little.", "next": "corrupt", "flags_set": ["corrupt_answer"], "effects": {}}
+	  ]
+	},
+	"honest": {"speaker":"Inspector","text":"We’ll see if that’s true.","choices":[]},
+	"corrupt": {"speaker":"Inspector","text":"Thanks for your honesty… this will be noted.","choices":[]}
+  }
+}

@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgckyykut0iad"]
+
+[ext_resource type="Script" uid="uid://b60x450puenxh" path="res://scenes/dialogue_text.gd" id="1_0qyo7"]
+
+[node name="DialogueUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DialogPanel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NPCName" type="Label" parent="DialogPanel"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 12.0
+offset_right = 97.0
+offset_bottom = 35.0
+
+[node name="DialogueText" type="RichTextLabel" parent="DialogPanel"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 34.0
+offset_right = 97.0
+offset_bottom = 74.0
+script = ExtResource("1_0qyo7")
+
+[node name="ChoicesContainer" type="VBoxContainer" parent="DialogPanel"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 79.0
+offset_right = 142.0
+offset_bottom = 142.0
+
+[node name="CloseButton" type="Button" parent="DialogPanel"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Skip" type="Button" parent="DialogPanel"]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 80.0
+offset_right = 125.0
+offset_bottom = 111.0
+text = "Skip"
+
+[node name="Auto" type="Button" parent="DialogPanel"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 80.0
+offset_right = 80.0
+offset_bottom = 111.0
+text = "Auto"

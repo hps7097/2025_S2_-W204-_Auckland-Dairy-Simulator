@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://3luktonxgr8i"]
+
+[ext_resource type="Script" uid="uid://c1epnv2anw1du" path="res://scenes/TutorialOverlay.gd" id="1_c84ul"]
+
+[node name="TutorialOverlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c84ul")
+
+[node name="TutorialOverlay" type="CanvasLayer" parent="."]
+
+[node name="step_label" type="Label" parent="TutorialOverlay"]
+offset_right = 135.0
+offset_bottom = 23.0
+text = "Tutorial text here"
+
+[node name="next_button" type="Button" parent="TutorialOverlay"]
+offset_right = 45.0
+offset_bottom = 31.0
+text = "Next"

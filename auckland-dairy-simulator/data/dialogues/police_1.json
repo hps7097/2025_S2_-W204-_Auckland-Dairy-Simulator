@@ -1,0 +1,30 @@
+{
+  "npc_id": "police_1",
+  "start": "greet",
+  "nodes": {
+	"greet": {
+	  "speaker": "Officer",
+	  "text": "Evening. We’ve heard reports of illegal items moving through this shop. Care to explain?",
+	  "choices": [
+		{"text": "I don’t know anything, officer.", "next": "dismiss", "flags_set": [], "effects": {}},
+		{"text": "(Bribe) Slip him some cash.", "next": "bribe", "flags_set": ["bribed_police"], "effects": {"money": -50}},
+		{"text": "Yeah, I’ve sold some. So what?", "next": "confess", "flags_set": ["sold_illegal"], "effects": {}}
+	  ]
+	},
+	"dismiss": {
+	  "speaker": "Officer",
+	  "text": "Alright… but I’ll be watching.",
+	  "choices": []
+	},
+	"bribe": {
+	  "speaker": "Officer",
+	  "text": "Hmm… maybe I didn’t see anything today.",
+	  "choices": []
+	},
+	"confess": {
+	  "speaker": "Officer",
+	  "text": "That’s a serious admission. This will not go unnoticed.",
+	  "choices": []
+	}
+  }
+}
