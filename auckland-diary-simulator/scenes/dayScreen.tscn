@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dfosdkugb4dgb" path="res://assets/_TillDesk.png" id="2_oar64"]
 [ext_resource type="PackedScene" uid="uid://dl3q0g6ug6c3" path="res://scenes/shopOverview.tscn" id="3_5rx4b"]
 [ext_resource type="PackedScene" uid="uid://b6e1i7tte4ujh" path="res://scenes/snappableArea.tscn" id="3_7l8q0"]
+[ext_resource type="Script" uid="uid://b3mbsfyaldnfj" path="res://scripts/charAnimScript.gd" id="3_d28we"]
 [ext_resource type="Texture2D" uid="uid://bied52v5xw86t" path="res://assets/_Monitor.png" id="5_5rx4b"]
 [ext_resource type="Script" uid="uid://b80lpuqomceh2" path="res://scripts/monitor_text.gd" id="6_e0esb"]
 [ext_resource type="Texture2D" uid="uid://c4rb8x7jmtjin" path="res://assets/_MonitorBase.png" id="6_wxbpj"]
@@ -82,6 +83,7 @@ position = Vector2(300, 450)
 position = Vector2(40, -40)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_qeyhs")
+script = ExtResource("3_d28we")
 
 [node name="Control" type="Control" parent="NPC"]
 layout_mode = 3
