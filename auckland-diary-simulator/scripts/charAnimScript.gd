@@ -3,7 +3,9 @@ extends Sprite2D
 @export var move_speed: float = 200.0
 
 # Counter position (lowered so chest + head are visible above counter)
-@export var entry_position: Vector2 = Vector2(200, -50)
+@export var entry_position: Vector2 = Vector2(40, -50)
+
+@export var leave_position: Vector2 = Vector2(280, -50)
 
 # Starting position (offscreen left, same Y for smooth slide-in)
 @export var start_position: Vector2 = Vector2(-200, -50)
@@ -14,11 +16,16 @@ var fade_tween: Tween
 func _ready() -> void:
 	position = start_position
 	modulate.a = 0.0
-	enter_scene()
 
 func enter_scene() -> void:
+	position = start_position
+	modulate.a = 0.0
 	fade_in(1.0)
 	move_to(entry_position)
+	
+func leave_scene() -> void:
+	fade_out(1.0)
+	move_to(leave_position)
 
 func move_to(pos: Vector2) -> void:
 	if move_tween and move_tween.is_running():
