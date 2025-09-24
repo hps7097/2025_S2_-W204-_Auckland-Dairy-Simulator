@@ -22,20 +22,20 @@ func _process(delta: float) -> void:
 func newDay() -> void:
 	dayCount += 1
 	await get_tree().create_timer(0.1).timeout
-  characterSprite = $"../main/NPC/Sprite2D"
+	characterSprite = $"../main/NPC/Sprite2D"
 	shop_overview_main = $"../main/UI/SubViewportContainer/SubViewport/shopOverviewMain"
 	NpcManager.spawn_for_day(GameManager.dayCount, shop_overview_main)
 
 func customerAppear(dialogue_id: String, purchases: Array) -> void:
-  customerAtDesk = true
-  characterSprite.enter_scene()
+	customerAtDesk = true
+	characterSprite.enter_scene()
 	await get_tree().create_timer(1.0).timeout
 	DialogueManager.start_dialogue(dialogue_id, purchases)
 
 func customerServed() -> void:
 	dayCustomerCount -= 1
 	customerAtDesk = false
-  characterSprite.leave_scene()
+	characterSprite.leave_scene()
 	if dayCustomerCount <= 0:
 		await get_tree().create_timer(1).timeout
 		get_tree().change_scene_to_file("res://scenes/nightScreen.tscn")

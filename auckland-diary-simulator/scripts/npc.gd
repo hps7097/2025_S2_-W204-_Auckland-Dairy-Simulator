@@ -3,8 +3,8 @@ extends CharacterBody2D
 # === Movement / Animation ===
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-@export var move_speed: float = 700.0
-@export var stop_time: float = 1.0
+@export var move_speed: float = 70.0
+@export var stop_time: float = 3.0
 @export var stop_tolerance: float = 15.0
 @export var loop_path: bool = false
 
