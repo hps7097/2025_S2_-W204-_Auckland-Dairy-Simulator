@@ -1,0 +1,30 @@
+{
+  "npc_id": "police_1",
+  "start": "greet",
+  "nodes": {
+	"greet": {
+	  "speaker": "Officer",
+	  "text": "Evening. How Ya doin?",
+	  "choices": [
+		{"text": "Great thanks! How are you?", "next": "casual", "flags_set": ["Police Return"]},
+		{"text": "Good. Thanks Sir.", "next": "formal", "flags_set": ["Police Return"]},
+		{"text": "* Stay Silent *", "next": "silence", "flags_set": []}
+	  ]
+	},
+	"casual": {
+	  "speaker": "Officer",
+	  "text": "Just the same old. Thanks for asking! Here, I'll be buying these today.",
+	  "choices": []
+	},
+	"formal": {
+	  "speaker": "Officer",
+	  "text": "Relax! No need to be so formal, I'm off shift right now so It's all good. Here, I'll be buying these today.",
+	  "choices": []
+	},
+	"silence": {
+	  "speaker": "Officer",
+	  "text": "Alright... Here, I'll be buying these today.",
+	  "choices": []
+	}
+  }
+}

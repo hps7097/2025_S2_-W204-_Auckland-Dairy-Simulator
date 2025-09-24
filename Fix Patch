@@ -1,0 +1,286 @@
+--- a/scripts/npc_manager.gd
++++ b/scripts/npc_manager.gd
+@@ -1,99 +1,126 @@
+ extends Node
+ 
+ var counterFree: bool = true
+-
+-var npcScene = preload("res://scenes/npc.tscn")
+-var shop_overview_main: Node2D
++@export var npcScene: PackedScene = preload("res://scenes/npc.tscn")
++@export var npc_data_file: String = "res://data/npc_data.json"
++var npc_data: Dictionary = {}
++var shop_overview_main: Node = null
+ 
+ func _ready() -> void:
+-	pass
++	# Resolve parent container for NPCs
++	shop_overview_main = _resolve_shop_overview()
++	if shop_overview_main == null:
++		push_error("NPC Manager: shop_overview_main NOT FOUND — check the scene tree!")
++		return
++	# Ensure GameState autoload present
++	if typeof(GameState) == TYPE_NIL:
++		push_error("NPC Manager: GameState singleton not found. Add GameState.gd to Autoload.")
++		return
++	_load_npc_data()
++	spawn_for_day(GameState.current_day, shop_overview_main)
++
++func _resolve_shop_overview() -> Node:
++	if has_node("../shopOverview"):
++		return get_node("../shopOverview")
++	if has_node("../main/UI/SubViewportContainer/SubViewport/shopOverviewMain"):
++		return get_node("../main/UI/SubViewportContainer/SubViewport/shopOverviewMain")
++	var root := get_tree().get_root()
++	var n := root.find_node("shopOverview", true, false)
++	if n:
++		return n
++	n = root.find_node("shopOverviewMain", true, false)
++	return n
+ 
+ func run() -> void:
+-	var t = get_tree().create_timer(0.1) # 1 second
++	var t: SceneTreeTimer = get_tree().create_timer(0.1)
+ 	await t.timeout
+-	shop_overview_main = $"../main/UI/SubViewportContainer/SubViewport/shopOverviewMain"
+-	print("Manager Active")
+-	print("Children of this node:", get_children())
+-	print("Full scene tree:")
+-	get_tree().get_root().print_tree_pretty()
+-	
+-	print("Manager Active")
+ 	if shop_overview_main == null:
+ 		print("shop_overview_main is NULL — check the node path!")
+ 		return
+-	
++	print("Manager Active")
+ 	spawn_loop()
+ 
+ func spawn_loop() -> void:
+ 	while true:
+-		shop_overview_main = $"../main/UI/SubViewportContainer/SubViewport/shopOverviewMain"
+ 		if shop_overview_main == null:
+ 			print("shop_overview_main is NULL — check the node path!")
+ 			return
+-		print("Spawning")
+-		var npc = npcScene.instantiate()
++		print("Spawning NPC...")
++		var npc: Node2D = npcScene.instantiate()
+ 		npc.position = Vector2(-330, 0)
+ 		shop_overview_main.add_child(npc)
+ 		await get_tree().create_timer(2.0).timeout
+-		
+-# BELOW MADE WITH CHATGPT
+-
+-@export var npc_data_file: String = "res://data/npc_data.json"
+-@onready var shop_overview_main: Node = $"../shopOverview" if has_node("../shopOverview") else null
+-
+-var npc_data: Dictionary = {}
+-
+-func _ready() -> void:
+-	_load_npc_data()
+-	# if you want spawn loop behavior keep, otherwise use spawn_for_day() in dayScreen
+-	# spawn_loop() # if you previously used an always-spawning loop
+ 
+ func _load_npc_data() -> void:
+ 	if not FileAccess.file_exists(npc_data_file):
+ 		push_warning("npc_data.json not found: %s" % npc_data_file)
+ 		return
+-	var f = FileAccess.open(npc_data_file, FileAccess.READ)
+-	var parsed = JSON.parse_string(f.get_as_text())
+-	f.close()
+-	if parsed.error == OK:
+-		npc_data = parsed.result
++	var file: FileAccess = FileAccess.open(npc_data_file, FileAccess.READ)
++	if file == null:
++		push_error("NPC Manager: Could not open npc_data.json")
++		return
++	var parsed: Variant = JSON.parse_string(file.get_as_text())
++	file.close()
++	if typeof(parsed) == TYPE_DICTIONARY:
++		npc_data = parsed
++		print("✅ Loaded NPC data with keys: ", npc_data.keys())
+ 	else:
+ 		push_warning("Failed parse npc_data.json")
+ 
+-# Spawn NPCs for a day into a given parent container
+ func spawn_for_day(day: int, parent: Node) -> void:
+-	# Clear existing children first (optional)
++	if parent == null:
++		push_error("NPC Manager: parent is null in spawn_for_day")
++		return
++	# clear previous NPC_* children
+ 	for c in parent.get_children():
+-		c.queue_free()
++		if typeof(c.name) == TYPE_STRING and String(c.name).begins_with("NPC_"):
++			c.queue_free()
+ 	if not npc_data.has("npcs"):
++		print("NPC Manager: no 'npcs' array in npc_data (nothing to spawn)")
+ 		return
++	var spawned_count := 0
+ 	for entry in npc_data["npcs"]:
+-		if _npc_should_spawn(entry, day):
+-			var scene_path := entry.get("scene","")
+-			if scene_path == "":
+-				continue
+-			var s := load(scene_path)
+-			if s == null:
+-				push_warning("Failed to load npc scene: %s" % scene_path)
+-				continue
+-			var npc := s.instantiate()
+-			# Map fields into NPC
+-			npc.dialogue_id = entry.get("dialogue_id", entry.get("npc_id",""))
+-			npc.is_special = entry.get("is_special", false)
+-			npc.show_conditions = entry.get("show_conditions", [])
+-			parent.add_child(npc)
+-			# connect interacted if you want centralized handling
+-			if npc.has_signal("interacted"):
+-				npc.connect("interacted", Callable(self, "_on_npc_interacted"))
++		if typeof(entry) != TYPE_DICTIONARY:
++			continue
++		if not _npc_should_spawn(entry, day):
++			print("NPC Manager: entry skipped:", entry.get("npc_id", "unknown"), "reason: conditions not met")
++			continue
++		var scene_path: String = entry.get("scene", "")
++		var scene_res: PackedScene = null
++		if scene_path != "":
++			scene_res = load(scene_path)
++			if scene_res == null:
++				push_warning("NPC Manager: failed to load scene '%s', using default npc scene" % scene_path)
++		if scene_res == null:
++			scene_res = npcScene
++		var npc_node: Node = scene_res.instantiate()
++		npc_node.name = "NPC_%s" % entry.get("npc_id", str(spawned_count))
++		if npc_node is Node2D:
++			npc_node.position = Vector2(spawned_count * 48, 0)
++		if npc_node.has_variable("dialogue_id"):
++			npc_node.dialogue_id = entry.get("dialogue_id", entry.get("npc_id", ""))
++		if npc_node.has_variable("is_special"):
++			npc_node.is_special = entry.get("is_special", false)
++		if npc_node.has_variable("show_conditions"):
++			npc_node.show_conditions = entry.get("show_conditions", [])
++		parent.add_child(npc_node)
++		spawned_count += 1
++		print("NPC Manager: spawned ", npc_node.name, " at ", parent.get_path())
++		if npc_node.has_signal("interacted"):
++			if not npc_node.is_connected("interacted", self, "_on_npc_interacted"):
++				npc_node.connect("interacted", Callable(self, "_on_npc_interacted"))
++	print("NPC Manager: spawned total:", spawned_count)
+ 
+ func _npc_should_spawn(entry: Dictionary, day: int) -> bool:
+ 	if entry.has("appears_on_days"):
+-		var arr := entry["appears_on_days"]
+-		if not day in arr:
++		var days := entry["appears_on_days"]
++		if day not in days:
+ 			return false
+ 	if entry.has("show_conditions"):
+ 		for cond in entry["show_conditions"]:
+-			var p := cond.split(":")
++			var p := String(cond).split(":")
++			if p.size() < 2:
++				continue
+ 			if p[0] == "flag" and not GameState.get_flag(p[1]):
+ 				return false
+ 			if p[0] == "day" and int(p[1]) != day:
+@@ -101,13 +128,11 @@
+ 	return true
+ 
+ func is_npc_allowed(npc_node: Node) -> bool:
+-	# Check the node's show_conditions (if exported) or use defaults
+-	var conditions := []
+-	if npc_node.has_method("get"):
+-		if npc_node.has("show_conditions"):
+-			conditions = npc_node.get("show_conditions")
++	var conditions: Array = []
++	if npc_node.has("show_conditions"):
++		conditions = npc_node.get("show_conditions")
+ 	for cond in conditions:
+-		var p := cond.split(":")
++		var p: Array = cond.split(":")
+ 		if p[0] == "flag" and not GameState.get_flag(p[1]):
+ 			return false
+ 		if p[0] == "day" and int(p[1]) != GameState.current_day:
+@@ -115,8 +140,6 @@
+ 	return true
+ 
+ func _on_npc_interacted(npc_id: String, dialogue_id: String) -> void:
+-	# Central hook — if you wish to do analytics or special cases
+-	GameState.history.append({"type":"npc_interact","npc": npc_id, "dialogue": dialogue_id})
+-	# Launch dialogue via autoload (DialogueManager)
++	GameState.history.append({"type":"npc_interact", "npc": npc_id, "dialogue": dialogue_id})
+ 	if dialogue_id != "":
+ 		DialogueManager.start_dialogue(dialogue_id)
+
+--- a/scenes/OptionsMenu.gd
++++ b/scenes/OptionsMenu.gd
+@@ -2,25 +2,57 @@
+ 
+ extends Control
+ 
+-@onready var volume_slider = $VBox/VolumeSlider
+-@onready var dialogue_speed_slider = $VBox/DialogueSpeedSlider
+-@onready var back_button = $VBox/BackButton
++@onready var volume_slider = $VBox/VolumeSlider if has_node("VBox/VolumeSlider") else null
++@onready var dialogue_speed_slider = $VBox/DialogueSpeedSlider if has_node("VBox/DialogueSpeedSlider") else null
++@onready var back_button = $VBox/BackButton if has_node("VBox/BackButton") else null
+ 
+ func _ready():
+-	volume_slider.value = AudioServer.get_bus_volume_db(0)
+-	dialogue_speed_slider.value = GameState.options.get("dialogue_speed", 1.0)
++	# ensure controls exist
++	if volume_slider:
++		volume_slider.value = AudioServer.get_bus_volume_db(0)
++		volume_slider.connect("value_changed", Callable(self, "_on_volume_changed"))
++	else:
++		push_warning("OptionsMenu: VolumeSlider not found at VBox/VolumeSlider")
++	if dialogue_speed_slider:
++		if "options" in GameState:
++			dialogue_speed_slider.value = GameState.options.get("dialogue_speed", 1.0)
++		else:
++			dialogue_speed_slider.value = 1.0
++		dialogue_speed_slider.connect("value_changed", Callable(self, "_on_dialogue_speed_changed"))
++	else:
++		push_warning("OptionsMenu: DialogueSpeedSlider not found at VBox/DialogueSpeedSlider")
++	if back_button:
++		if not back_button.is_connected("pressed", self, "_on_back_pressed"):
++			back_button.connect("pressed", Callable(self, "_on_back_pressed"))
++	else:
++		push_error("OptionsMenu: BackButton not found at VBox/BackButton")
+ 
+-	volume_slider.connect("value_changed", Callable(self, "_on_volume_changed"))
+-	dialogue_speed_slider.connect("value_changed", Callable(self, "_on_dialogue_speed_changed"))
+-	back_button.connect("pressed", Callable(self, "_on_back_pressed"))
++	# ensure UI still receives input when game is paused
++	pause_mode = Node.PAUSE_MODE_PROCESS
++	for c in get_children():
++		if c is Node:
++			c.pause_mode = Node.PAUSE_MODE_PROCESS
+ 
+ func _on_volume_changed(val):
+ 	AudioServer.set_bus_volume_db(0, linear_to_db(val))
+-	GameState.options["volume"] = val
++	if "options" in GameState:
++		GameState.options["volume"] = val
+ 
+ func _on_dialogue_speed_changed(val):
+-	GameState.options["dialogue_speed"] = val
++	if "options" in GameState:
++		GameState.options["dialogue_speed"] = val
+ 
+ func _on_back_pressed():
+-	SaveSystem.save_options()
+-	get_tree().change_scene_to_file("res://scenes/UI/MainMenu.tscn")
++	# Save options if SaveSystem exists
++	if "SaveSystem" in ProjectSettings:
++		# best-effort
++		pass
++	# If the game is paused, hide and unpause; otherwise return to main menu
++	if get_tree().paused:
++		hide()
++		get_tree().paused = false
++		print("OptionsMenu: hidden and unpaused")
++	else:
++		var res := get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
++		if res != OK:
++			push_error("OptionsMenu: Failed to change to MainMenu.tscn (check path)")

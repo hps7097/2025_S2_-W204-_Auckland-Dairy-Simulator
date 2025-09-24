@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxl30x1l7yj3l"]
+
+[ext_resource type="Script" uid="uid://cyy52vea86gnm" path="res://scripts/MainMenu.gd" id="1_yqorp"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yqorp")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.5
+offset_top = -77.0
+offset_right = 98.5
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="VBox"]
+layout_mode = 2
+text = "Auckland Diary Simulator
+"
+
+[node name="PlayButton" type="Button" parent="VBox"]
+layout_mode = 2
+text = "Play"
+
+[node name="OptionsButton" type="Button" parent="VBox"]
+layout_mode = 2
+text = "Options
+"
+
+[node name="LoadButton" type="Button" parent="VBox"]
+visible = false
+layout_mode = 2
+text = "Load"
+
+[node name="QuitButton" type="Button" parent="VBox"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="VBox/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBox/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="VBox/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="VBox/QuitButton" to="." method="_on_quit_button_pressed"]

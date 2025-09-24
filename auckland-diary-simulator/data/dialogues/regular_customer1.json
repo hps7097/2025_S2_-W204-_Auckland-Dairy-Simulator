@@ -1,0 +1,13 @@
+{
+  "npc_id": "regular_customer",
+  "start": "hello",
+  "nodes": {
+	"hello": {
+	  "speaker": "Customer",
+	  "text": "Just grabbing some milk and bread, thanks!",
+	  "choices": [
+		{"text": "Alright!", "next": "", "flags_set": []}
+	  ]
+	}
+  }
+}
