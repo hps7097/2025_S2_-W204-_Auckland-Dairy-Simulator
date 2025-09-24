@@ -4,26 +4,26 @@
   "nodes": {
 	"greet": {
 	  "speaker": "Officer",
-	  "text": "Evening. We’ve heard reports of illegal items moving through this shop. Care to explain?",
+	  "text": "Evening. How Ya doin?",
 	  "choices": [
-		{"text": "I don’t know anything, officer.", "next": "dismiss", "flags_set": [], "effects": {}},
-		{"text": "(Bribe) Slip him some cash.", "next": "bribe", "flags_set": ["bribed_police"], "effects": {"money": -50}},
-		{"text": "Yeah, I’ve sold some. So what?", "next": "confess", "flags_set": ["sold_illegal"], "effects": {}}
+		{"text": "Great thanks! How are you?", "next": "casual", "flags_set": ["Police Return"]},
+		{"text": "Good. Thanks Sir.", "next": "formal", "flags_set": ["Police Return"]},
+		{"text": "* Stay Silent *", "next": "silence", "flags_set": []}
 	  ]
 	},
-	"dismiss": {
+	"casual": {
 	  "speaker": "Officer",
-	  "text": "Alright… but I’ll be watching.",
+	  "text": "Just the same old. Thanks for asking! Here, I'll be buying these today.",
 	  "choices": []
 	},
-	"bribe": {
+	"formal": {
 	  "speaker": "Officer",
-	  "text": "Hmm… maybe I didn’t see anything today.",
+	  "text": "Relax! No need to be so formal, I'm off shift right now so It's all good. Here, I'll be buying these today.",
 	  "choices": []
 	},
-	"confess": {
+	"silence": {
 	  "speaker": "Officer",
-	  "text": "That’s a serious admission. This will not go unnoticed.",
+	  "text": "Alright... Here, I'll be buying these today.",
 	  "choices": []
 	}
   }

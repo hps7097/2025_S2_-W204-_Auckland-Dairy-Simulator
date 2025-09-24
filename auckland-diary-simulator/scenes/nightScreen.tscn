@@ -1,13 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dvp45h7yyscpj"]
+[gd_scene load_steps=9 format=3 uid="uid://dvp45h7yyscpj"]
 
 [ext_resource type="Script" uid="uid://c0wmwf5jfvnbe" path="res://scripts/shopBackground.gd" id="1_s327g"]
 [ext_resource type="Texture2D" uid="uid://bt8p643lf6lps" path="res://assets/_ShopBackground.png" id="2_c78ci"]
 [ext_resource type="PackedScene" uid="uid://do0o2eleyo6w3" path="res://scenes/moneyCounter.tscn" id="3_at8um"]
 [ext_resource type="PackedScene" uid="uid://b7rdvxehw1per" path="res://scenes/shopButton.tscn" id="5_fw4in"]
 [ext_resource type="PackedScene" uid="uid://dtxj5ao4ie2x6" path="res://scenes/nextDayButton.tscn" id="6_at8um"]
-[ext_resource type="AudioStream" uid="uid://k4ixiqoq5seu" path="res://assets/audio/simplebackground.wav" id="6_h4g86"]
-[ext_resource type="AudioStream" uid="uid://dnd1eaxp6bv5o" path="res://assets/audio/startaction.wav" id="7_aescc"]
-[ext_resource type="PackedScene" uid="uid://cgckyykut0iad" path="res://scenes/DialogueUI.tscn" id="8_ug04i"]
 [ext_resource type="PackedScene" uid="uid://3luktonxgr8i" path="res://scenes/TutorialOverlay.tscn" id="9_drial"]
 
 [sub_resource type="Gradient" id="Gradient_s327g"]
@@ -151,16 +148,6 @@ offset_right = 150.0
 offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 0
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_h4g86")
-autoplay = true
-
-[node name="SfxPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_aescc")
-
-[node name="DialogueUI" parent="." instance=ExtResource("8_ug04i")]
-layout_mode = 1
 
 [node name="TutorialOverlay" parent="." instance=ExtResource("9_drial")]
 layout_mode = 1

@@ -1,35 +1,44 @@
 {
   "npcs": [
 	{
+	  "npc_id": "regular_customer1",
+	  "scene": "res://scenes/npc.tscn",
+	  "dialogue_id": "regular_customer1",
+	  "appears_on_days": [1,2,3,4,5],
+	  "purchases": ["9:1", "9:3"]
+	},
+	{
+	  "npc_id": "extra_customer",
+	  "scene": "res://scenes/npc.tscn",
+	  "appears_on_days": [1,2,3,4,5],
+	  "show_conditions": ["upgrade2: 1"]
+	},
+	{
+	  "npc_id": "extra_customer2",
+	  "scene": "res://scenes/npc.tscn",
+	  "appears_on_days": [1,2,3,4,5],
+	  "show_conditions": ["upgrade2: 2"]
+	},
+	{
+	  "npc_id": "extra_customer3",
+	  "scene": "res://scenes/npc.tscn",
+	  "appears_on_days": [1,2,3,4,5],
+	  "show_conditions": ["upgrade2: 3"]
+	},
+	{
 	  "npc_id": "police_1",
 	  "scene": "res://scenes/npc.tscn",
 	  "dialogue_id": "police_1",
-	  "is_special": true,
-	  "appears_on_days": [3,4],
-	  "show_conditions": ["flag:sold_illegal"]
+	  "appears_on_days": [1],
+	  "purchases": ["1:1", "3:1", "4:2"]
 	},
 	{
-	  "npc_id": "gang_member",
+	  "npc_id": "police_2",
 	  "scene": "res://scenes/npc.tscn",
-	  "dialogue_id": "gang_member",
-	  "is_special": true,
-	  "appears_on_days": [2,5],
-	  "show_conditions": []
+	  "dialogue_id": "police_1",
+	  "appears_on_days": [2],
+	  "show_conditions": ["flag:Police Return"],
+	  "purchases": ["1:1", "3:1", "4:2"]
 	},
-	{
-	  "npc_id": "regular_customer",
-	  "scene": "res://scenes/npc.tscn",
-	  "dialogue_id": "regular_customer",
-	  "appears_on_days": [1,2,3,4,5],
-	  "show_conditions": []
-	},
-	{
-	  "npc_id": "inspector",
-	  "scene": "res://scenes/npc.tscn",
-	  "dialogue_id": "inspector",
-	  "is_special": true,
-	  "appears_on_days": [5],
-	  "show_conditions": ["flag:bribed_police"]
-	}
   ]
 }

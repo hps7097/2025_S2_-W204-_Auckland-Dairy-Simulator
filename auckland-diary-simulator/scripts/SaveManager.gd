@@ -6,12 +6,10 @@ const SAVE_FMT := "user://save_slot_%d.json"
 
 func save_game(slot: int = 1) -> bool:
 	var data := {
-		"day": GameState.current_day,
-		"money": GameState.money,
-		"flags": GameState.flags,
-		"upgrades": GameState.store_upgrades,
-		"history": GameState.history,
-		"options": GameState.options
+		"day": GameManager.dayCount,
+		"money": ProductManager.money,
+		"flags": GameManager.flags,
+		"upgrades": UpgradeManager.upgrades,
 	}
 	var path := SAVE_FMT % slot
 	var f = FileAccess.open(path, FileAccess.WRITE)
@@ -35,10 +33,8 @@ func load_game(slot: int = 1) -> bool:
 		push_error("Save JSON parse error")
 		return false
 	var d = parsed.result
-	GameState.current_day = int(d.get("day", 1))
-	GameState.money = int(d.get("money", 0))
-	GameState.flags = d.get("flags", {})
-	GameState.store_upgrades = d.get("upgrades", {})
-	GameState.history = d.get("history", [])
-	GameState.options = d.get("options", GameState.options)
+	GameManager.dayCount = int(d.get("day", 1))
+	ProductManager.money = int(d.get("money", 0))
+	GameManager.flags = d.get("flags", {})
+	UpgradeManager.upgrades = d.get("upgrades", {})
 	return true

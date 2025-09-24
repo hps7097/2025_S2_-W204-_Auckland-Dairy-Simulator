@@ -46,29 +46,28 @@ func resetScene():
 			
 		total_price = 0
 		
-		var t = get_tree().create_timer(1.0) # 1 second
-		await t.timeout
-		
 		# Reset Objects
 		for obj in total_objects:
 			obj.queue_free()
 		total_objects.clear()
 		
-		# Change Scene from day to night
-		var nightScene = preload("res://scenes/nightScreen.tscn")
-		# get_tree().change_scene_to_packed(nightScene)
-		
 		# Next Customer
 		GameManager.customerServed()
 
-func spawnNew():
+func spawnNew(purchaseArray: Array):
 	var t = get_tree().create_timer(0.1) # 1 second
 	await t.timeout
-	for i in range(randi_range(1, 3)):
+	if purchaseArray.is_empty():
+		# Next Customer
+		resetScene()
+	for item in purchaseArray.size():
 		total_objects.append(object.instantiate())
-		# For choosing item type. Delete code in draggableObject.gd reset_item() if using
-		# total_objects[i].item_type = total_objects[i].Type.PIE
-		get_tree().current_scene.add_child(total_objects[i])
+		var i: Array = purchaseArray[item].split(":")
+		var keys = total_objects[item].Type.keys()
+		var type = keys[int(i[0])]
+		total_objects[item].item_type = total_objects[item].Type[type]
+		total_objects[item].item_flavour = int(i[1])
+		get_tree().current_scene.add_child(total_objects[item])
 
 func scan(value: Node2D):
 	if scanned_objects.has(value):

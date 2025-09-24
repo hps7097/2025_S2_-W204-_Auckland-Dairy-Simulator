@@ -1,9 +1,12 @@
-#MADE WITH CHATGPT
-
 extends Node
 
 var dayCustomerCount: int
 var dayCount: int = 0
+var flags: Array = []
+
+var customerAtDesk: bool = false
+
+@onready var shop_overview_main: Node = $"../main/UI/SubViewportContainer/SubViewport/shopOverviewMain"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,21 +19,30 @@ func _process(delta: float) -> void:
 
 func newDay() -> void:
 	dayCount += 1
-	dayCustomerCount = 3 + UpgradeManager.getUpgrade(1)
 	
-	customerAppear()
+	await get_tree().create_timer(0.1).timeout
+	shop_overview_main = $"../main/UI/SubViewportContainer/SubViewport/shopOverviewMain"
+	NpcManager.spawn_for_day(GameManager.dayCount, shop_overview_main)
 
-func customerAppear() -> void:
-	ProductManager.spawnNew()
-	NpcManager.run()
+func customerAppear(dialogue_id: String, purchases: Array) -> void:
+	DialogueManager.start_dialogue(dialogue_id, purchases)
+	customerAtDesk = true
 
 func customerServed() -> void:
 	dayCustomerCount -= 1
-	if dayCustomerCount > 0:
-		customerAppear()
-	else:
+	customerAtDesk = false
+	if dayCustomerCount <= 0:
+		await get_tree().create_timer(1).timeout
 		get_tree().change_scene_to_file("res://scenes/nightScreen.tscn")
 		
 func _process2(_delta):
 	if Input.is_action_just_pressed("ui_pause"):
 		$PauseMenu.toggle()
+
+func add_flag(flag: String):
+	if flag not in flags:
+		flags.append(flag)
+	print(str(flags))
+
+func check_flag(flag: String):
+	return flag in flags

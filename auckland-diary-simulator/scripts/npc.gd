@@ -1,11 +1,10 @@
-#SOMEWHAT MADE WITH CHATGPT (DEPENDS ON FUNCTION), IF IT'S MORE SCAN AND SELL AND BASE = CHATGPT, DIALOGUE AND OTHER + CHATGPT
 extends CharacterBody2D
 
 # === Movement / Animation ===
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-@export var move_speed: float = 70.0
-@export var stop_time: float = 3.0
+@export var move_speed: float = 700.0
+@export var stop_time: float = 1.0
 @export var stop_tolerance: float = 15.0
 @export var loop_path: bool = false
 
@@ -17,6 +16,7 @@ var last_direction: Vector2 = Vector2.RIGHT
 var is_moving: bool = true
 var current_target_index: int = 0
 var waitingForCounter: bool = false
+var waitingForPlayer: bool = false
 var pathType: int
 
 # Stop configurations per path
@@ -38,12 +38,8 @@ var target_progress_value
 # === Dialogue Integration ===
 @export var npc_id: String = ""        # NPC name or ID
 @export var dialogue_id: String = ""   # e.g. "police_1"
-@export var is_special: bool = false
 @export var show_conditions: Array = [] # optional ["flag:sold_illegal","day:3"]
-
-@onready var dialogue_manager: Node = get_tree().root.get_node("Main/DialogueManager")
-
-signal interacted(npc_id: String, dialogue_id: String)
+@export var purchases: Array = []
 
 # === Ready ===
 func _ready() -> void:
@@ -56,10 +52,6 @@ func _ready() -> void:
 		is_moving = true
 	else:
 		push_error("No PathFollow2D found in scene!")
-
-	# Connect Area2D for clicks if exists
-	if has_node("Area2D"):
-		$Area2D.input_event.connect(_on_input_event)
 
 # === Movement / Physics ===
 func find_path_follow() -> void:
@@ -90,8 +82,12 @@ func _physics_process(delta: float) -> void:
 		if wait_timer <= 0.0:
 			if waitingForCounter and not NpcManager.counterFree:
 				return
+			if waitingForPlayer and GameManager.customerAtDesk:
+				return
 			if current_target_index == target_progress_values.size() - 1:
 				NpcManager.counterFree = true
+			if current_target_index == target_progress_values.size() - 2:
+				NpcManager.counterFree = false
 			waiting = false
 			current_target_index += 1
 			if current_target_index >= target_progress_values.size():
@@ -114,6 +110,9 @@ func _physics_process(delta: float) -> void:
 			print("STOPPING at point ", current_target_index)
 			if current_target_index == target_progress_values.size() - 2:
 				waitingForCounter = true
+			if current_target_index == target_progress_values.size() - 1:
+				GameManager.customerAppear(dialogue_id, purchases)
+				waitingForPlayer = true
 			waiting = true
 			wait_timer = stop_time
 			last_direction = stop_direction[current_target_index]
@@ -151,17 +150,3 @@ func _get_idle_animation() -> String:
 	elif last_direction.y < 0:
 		return "idleBack"
 	return "idleFront"
-
-# === Dialogue Handling ===
-func _on_input_event(viewport, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if GlobalNPCManager_is_allowed(self):
-			emit_signal("interacted", npc_id, dialogue_id)
-			if dialogue_id != "":
-				dialogue_manager.start_dialogue(dialogue_id)
-
-func GlobalNPCManager_is_allowed(npc_node: Node) -> bool:
-	var manager = get_tree().root.get_node_or_null("DayScreen/NPCManager")
-	if manager and manager.has_method("is_npc_allowed"):
-		return manager.is_npc_allowed(self)
-	return true

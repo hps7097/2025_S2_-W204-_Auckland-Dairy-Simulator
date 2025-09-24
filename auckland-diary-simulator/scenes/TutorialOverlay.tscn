@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://3luktonxgr8i"]
 
-[ext_resource type="Script" uid="uid://c1epnv2anw1du" path="res://scenes/TutorialOverlay.gd" id="1_c84ul"]
+[ext_resource type="Script" uid="uid://c1epnv2anw1du" path="res://scripts/TutorialOverlay.gd" id="1_c84ul"]
 
 [node name="TutorialOverlay" type="Control"]
 layout_mode = 3
@@ -9,16 +9,41 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_c84ul")
 
-[node name="TutorialOverlay" type="CanvasLayer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.5
+offset_top = -41.5
+offset_right = 114.5
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="step_label" type="Label" parent="TutorialOverlay"]
-offset_right = 135.0
-offset_bottom = 23.0
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 10
+
+[node name="step_label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "Tutorial text here"
+horizontal_alignment = 1
 
-[node name="next_button" type="Button" parent="TutorialOverlay"]
-offset_right = 45.0
-offset_bottom = 31.0
+[node name="next_button" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
 text = "Next"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/next_button" to="." method="_on_next_button_pressed"]

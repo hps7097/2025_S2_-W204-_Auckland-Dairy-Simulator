@@ -6,7 +6,7 @@
 	  "speaker": "Customer",
 	  "text": "Just grabbing some milk and bread, thanks!",
 	  "choices": [
-		{"text": "Have a nice day!", "next": "", "flags_set": [], "effects": {"money": 5}}
+		{"text": "Alright!", "next": "", "flags_set": []}
 	  ]
 	}
   }

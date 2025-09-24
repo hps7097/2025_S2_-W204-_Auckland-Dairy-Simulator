@@ -1,7 +1,7 @@
-# MADE WITH CHATGPT
 extends RichTextLabel
 
 @onready var timer: Timer = $Timer
+var displayMessage: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,11 +10,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-
-	if ProductManager.message != "" && timer.is_stopped():
+	if ProductManager.message != "" && not displayMessage:
 		text = ProductManager.message
 		timer.start()
-	elif timer.is_stopped():
+		displayMessage = true
+	elif not displayMessage:
 		text = "TOTAL: $" + str(ProductManager.total_price).pad_decimals(2) + \
 		"\n\n Day: " + str(GameManager.dayCount) + \
 		"\n Customers Left: " + str(GameManager.dayCustomerCount) + \
@@ -22,3 +22,5 @@ func _process(delta: float) -> void:
 
 func _on_timer_timeout() -> void:
 	ProductManager.message = ""
+	displayMessage = false;
+	

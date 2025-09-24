@@ -1,29 +1,33 @@
 # MADE WITH CHATGPT
 extends Control
 
-signal choice_made(choice: Dictionary)
-
-@onready var npc_name_label: Label = $DialogPanel/NPCName
-@onready var dialogue_text: RichTextLabel = $DialogPanel/DialogueText
-@onready var choices_container: VBoxContainer = $DialogPanel/ChoicesContainer
-@onready var close_button: Button = $DialogPanel/CloseButton
+@onready var npc_name_label: Label = $DialogPanel/VBoxContainer/NPCName
+@onready var dialogue_text: RichTextLabel = $DialogPanel/VBoxContainer/VBoxContainer/MarginContainer/DialogueText
+@onready var choices_container: VBoxContainer = $DialogPanel/VBoxContainer/VBoxContainer/ChoicesContainer
+@onready var close_button: Button = $DialogPanel/VBoxContainer/HBoxContainer/CloseButton
 
 var current_dialogue: Dictionary = {}
 var current_node: String = ""
-var auto_mode: bool = false
+
+var purchaseArray: Array = []
 
 func _ready() -> void:
-	close_button.visible = false
-	close_button.pressed.connect(_on_close_pressed)
+	z_index = 4096
+	close_button.hide()
 
-func start(dialogue: Dictionary) -> void:
+func start(dialogue: Dictionary, purchases: Array) -> void:
 	current_dialogue = dialogue
+	purchaseArray = purchases
+	print(str(current_dialogue))
 	current_node = dialogue.get("start", "")
 	if current_node == "":
+		print("NO START NODE")
+		ProductManager.spawnNew(purchaseArray)
 		hide()
 		return
-	show_node(current_node)
 	show()
+	show_node(current_node)
+	
 
 func show_node(node_id: String) -> void:
 	# clear old choices
@@ -50,31 +54,19 @@ func show_node(node_id: String) -> void:
 			btn.pressed.connect(_on_choice_pressed.bind(choice))
 			choices_container.add_child(btn)
 
-	if auto_mode and not choices.is_empty():
-		await get_tree().create_timer(2.0).timeout
-		_on_choice_pressed(choices[0])
-
 func _on_choice_pressed(choice: Dictionary) -> void:
-	emit_signal("choice_made", choice)
-
 	# Apply flags
 	for flag in choice.get("flags_set", []):
-		GameState.set_flag(flag, true)
-
-	# Apply effects
-	var effs: Dictionary = choice.get("effects", {})
-	if effs.has("money"):
-		GameState.money += effs["money"]
+		GameManager.add_flag(str(flag))
 
 	# Advance
 	var next: String = choice.get("next", "")
 	if next == "":
 		hide()
+		ProductManager.spawnNew(purchaseArray)
 	else:
 		show_node(next)
 
-func _on_close_pressed() -> void:
+func _on_close_button_pressed() -> void:
+	ProductManager.spawnNew(purchaseArray)
 	hide()
-
-func set_auto_mode(enabled: bool) -> void:
-	auto_mode = enabled
