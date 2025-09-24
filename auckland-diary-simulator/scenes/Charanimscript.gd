@@ -1,30 +1,25 @@
-extends Node2D
+extends Sprite2D
 
 @export var move_speed: float = 200.0
 
-# Position at the counter (lowered on Y so character is closer to counter edge)
-@export var entry_position: Vector2 = Vector2(400, 480)
+# Counter position (lowered so chest + head are visible above counter)
+@export var entry_position: Vector2 = Vector2(200, -50)
 
-# Starting position (offscreen left, same Y for straight horizontal entry)
-@export var start_position: Vector2 = Vector2(-200, 480)
+# Starting position (offscreen left, same Y for smooth slide-in)
+@export var start_position: Vector2 = Vector2(-200, -50)
 
 var move_tween: Tween
 var fade_tween: Tween
 
 func _ready() -> void:
-	# Start offscreen and invisible
 	position = start_position
 	modulate.a = 0.0
-	
-	# Automatically run entry sequence
 	enter_scene()
 
-# === Entry sequence ===
 func enter_scene() -> void:
 	fade_in(1.0)
 	move_to(entry_position)
 
-# === Movement ===
 func move_to(pos: Vector2) -> void:
 	if move_tween and move_tween.is_running():
 		move_tween.kill()
@@ -36,7 +31,6 @@ func move_to(pos: Vector2) -> void:
 		.set_trans(Tween.TRANS_SINE) \
 		.set_ease(Tween.EASE_IN_OUT)
 
-# === Fading ===
 func fade_in(duration: float = 1.0) -> void:
 	if fade_tween and fade_tween.is_running():
 		fade_tween.kill()
