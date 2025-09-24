@@ -8,6 +8,8 @@ var customerAtDesk: bool = false
 
 @onready var shop_overview_main: Node = $"../main/UI/SubViewportContainer/SubViewport/shopOverviewMain"
 
+@onready var characterSprite: Sprite2D = $"../main/NPC/Sprite2D"
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -19,7 +21,7 @@ func _process(delta: float) -> void:
 
 func newDay() -> void:
 	dayCount += 1
-	
+
 	await get_tree().create_timer(0.1).timeout
 	shop_overview_main = $"../main/UI/SubViewportContainer/SubViewport/shopOverviewMain"
 	NpcManager.spawn_for_day(GameManager.dayCount, shop_overview_main)
@@ -33,6 +35,7 @@ func customerServed() -> void:
 	customerAtDesk = false
 	if dayCustomerCount <= 0:
 		await get_tree().create_timer(1).timeout
+
 		get_tree().change_scene_to_file("res://scenes/nightScreen.tscn")
 		
 func _process2(_delta):
