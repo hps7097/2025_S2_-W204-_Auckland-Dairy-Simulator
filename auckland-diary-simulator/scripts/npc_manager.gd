@@ -56,7 +56,7 @@ func spawn_for_day(day: int, parent: Node) -> void:
 			if npc.has_signal("interacted"):
 				npc.connect("interacted", Callable(self, "_on_npc_interacted"))
 			print("spawned in " + entry.get("npc_id", ""))
-			await get_tree().create_timer(1.0).timeout
+			await get_tree().create_timer(10.0).timeout
 
 func _npc_should_spawn(entry: Dictionary, day: float) -> bool:
 	print("checking")

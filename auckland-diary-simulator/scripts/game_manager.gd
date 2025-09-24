@@ -37,12 +37,8 @@ func customerServed() -> void:
 	customerAtDesk = false
 	characterSprite.leave_scene()
 	if dayCustomerCount <= 0:
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(5).timeout
 		get_tree().change_scene_to_file("res://scenes/nightScreen.tscn")
-		
-func _process2(_delta):
-	if Input.is_action_just_pressed("ui_pause"):
-		$PauseMenu.toggle()
 
 func add_flag(flag: String):
 	if flag not in flags:

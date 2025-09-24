@@ -42,6 +42,14 @@ func _ready() -> void:
 		priceLabel.text = "$--.--"
 		nextDayButton.disabled = false
 		return
+		
+	if (upgradeType == 2 and GameManager.dayCount == 1):
+		image.texture.region = Rect2(240, 480, 120, 120)
+		label.text = "Locked"
+		price = 999999999
+		priceLabel.text = "$--.--"
+		nextDayButton.disabled = false
+		return
 	
 	image.texture.region = Rect2(upgradeType * 120, upgrade_value * 120, 120, 120)  # x, y, width, height
 	label.text = str(upgadeLabels[upgradeType][upgrade_value])

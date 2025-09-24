@@ -6,6 +6,9 @@ extends Control
 @onready var load_button = $VBox/LoadButton
 @onready var quit_button = $VBox/QuitButton
 
+const OPTIONS_MENU = preload("res://scenes/OptionsMenu.tscn")
+var optionsMenu
+
 func _ready():
 	pass
 
@@ -14,7 +17,9 @@ func _on_play_button_pressed():
 	GameManager.newDay()
 
 func _on_options_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/OptionsMenu.tscn")
+	optionsMenu = OPTIONS_MENU.instantiate()
+	optionsMenu.z_index = 4096 
+	get_tree().current_scene.add_child(optionsMenu)
 
 func _on_load_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/LoadMenu.tscn")

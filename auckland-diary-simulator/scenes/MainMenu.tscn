@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxl30x1l7yj3l"]
+[gd_scene load_steps=3 format=3 uid="uid://bxl30x1l7yj3l"]
 
 [ext_resource type="Script" uid="uid://cyy52vea86gnm" path="res://scripts/MainMenu.gd" id="1_yqorp"]
+[ext_resource type="PackedScene" uid="uid://juhrxihsqedy" path="res://scenes/menuBackground.tscn" id="2_0ykhv"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -10,6 +11,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yqorp")
+
+[node name="Background" parent="." instance=ExtResource("2_0ykhv")]
+layout_mode = 1
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 1

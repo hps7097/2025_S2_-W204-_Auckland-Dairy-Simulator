@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3 uid="uid://juhrxihsqedy"]
+
+[ext_resource type="Script" uid="uid://c0wmwf5jfvnbe" path="res://scripts/shopBackground.gd" id="1_atv6y"]
+[ext_resource type="Texture2D" uid="uid://bt8p643lf6lps" path="res://assets/_ShopBackground.png" id="2_fdqky"]
+
+[sub_resource type="Gradient" id="Gradient_s327g"]
+offsets = PackedFloat32Array(0.0519481, 0.253247, 1)
+colors = PackedColorArray(0.2, 0.2, 0.2, 1, 0.2, 0.2, 0.2, 0.925974, 0.2, 0.2, 0.2, 0.4)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c78ci"]
+gradient = SubResource("Gradient_s327g")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[node name="Background" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="MovingCircles" type="Node2D" parent="."]
+
+[node name="Background2" type="Node2D" parent="MovingCircles"]
+position = Vector2(2020, 0)
+script = ExtResource("1_atv6y")
+
+[node name="Sprite2D" type="Sprite2D" parent="MovingCircles/Background2"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_fdqky")
+centered = false
+
+[node name="Background" type="Node2D" parent="MovingCircles"]
+script = ExtResource("1_atv6y")
+
+[node name="Sprite2D" type="Sprite2D" parent="MovingCircles/Background"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_fdqky")
+centered = false
+
+[node name="Background3" type="Node2D" parent="MovingCircles"]
+position = Vector2(2020, 1200)
+script = ExtResource("1_atv6y")
+
+[node name="Sprite2D" type="Sprite2D" parent="MovingCircles/Background3"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_fdqky")
+centered = false
+
+[node name="Background4" type="Node2D" parent="MovingCircles"]
+position = Vector2(0, 1200)
+script = ExtResource("1_atv6y")
+
+[node name="Sprite2D" type="Sprite2D" parent="MovingCircles/Background4"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_fdqky")
+centered = false
+
+[node name="ShadowGradient" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_c78ci")
