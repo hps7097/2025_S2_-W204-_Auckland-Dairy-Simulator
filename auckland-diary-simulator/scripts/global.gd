@@ -1,5 +1,8 @@
 extends Node
 
+const PAUSE_MENU = preload("res://scenes/PauseMenu.tscn")
+var pauseMenu
+
 func _ready() -> void:
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
@@ -10,6 +13,14 @@ func _input(event):
 			set_windowed()
 		else:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	if event.is_action_pressed("ui_pause"):
+		if get_tree().current_scene.has_node("PauseMenu"):
+			pauseMenu.queue_free()
+		elif get_tree().current_scene.name == "main" || get_tree().current_scene.name == "nightScreen":
+			pauseMenu = PAUSE_MENU.instantiate()
+			pauseMenu.z_index = 4096 
+			get_tree().current_scene.add_child(pauseMenu)
+		
 
 # Makes window small and centered
 func set_windowed() -> void:
