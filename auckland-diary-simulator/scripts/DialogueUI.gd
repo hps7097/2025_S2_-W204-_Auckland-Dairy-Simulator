@@ -11,6 +11,8 @@ var current_node: String = ""
 
 var purchaseArray: Array = []
 
+
+
 func _ready() -> void:
 	z_index = 4096
 	close_button.hide()
@@ -45,7 +47,7 @@ func show_node(node_id: String) -> void:
 	dialogue_text.visible_characters = 0
 	for i in dialogue_text.text.length():
 		dialogue_text.visible_characters = i
-		await get_tree().create_timer(0.05).timeout
+		await get_tree().create_timer(global.dialogSpeed).timeout
 		if Input.is_action_pressed("speed_up"):
 			break
 	dialogue_text.visible_characters = -1
