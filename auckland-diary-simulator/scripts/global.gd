@@ -3,6 +3,9 @@ extends Node
 const PAUSE_MENU = preload("res://scenes/PauseMenu.tscn")
 var pauseMenu
 
+var dialogSpeed = 0.05
+var volume = 1
+
 func _ready() -> void:
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
