@@ -5,15 +5,15 @@
 [ext_resource type="Texture2D" uid="uid://dfosdkugb4dgb" path="res://assets/_TillDesk.png" id="2_oar64"]
 [ext_resource type="PackedScene" uid="uid://dl3q0g6ug6c3" path="res://scenes/shopOverview.tscn" id="3_5rx4b"]
 [ext_resource type="PackedScene" uid="uid://b6e1i7tte4ujh" path="res://scenes/snappableArea.tscn" id="3_7l8q0"]
-[ext_resource type="Script" path="res://scripts/charAnimScript.gd" id="3_d28we"]
+[ext_resource type="Script" uid="uid://b3mbsfyaldnfj" path="res://scripts/charAnimScript.gd" id="3_d28we"]
 [ext_resource type="Texture2D" uid="uid://bied52v5xw86t" path="res://assets/_Monitor.png" id="5_5rx4b"]
-[ext_resource type="Script" path="res://scripts/rich_text_label.gd" id="6_e0esb"]
 [ext_resource type="Texture2D" uid="uid://c4rb8x7jmtjin" path="res://assets/_MonitorBase.png" id="6_wxbpj"]
+[ext_resource type="Script" uid="uid://b80lpuqomceh2" path="res://scripts/monitor_text.gd" id="7_e0esb"]
 [ext_resource type="PackedScene" uid="uid://cupywur4rfsw6" path="res://scenes/Scanner.tscn" id="10_72ia3"]
 [ext_resource type="PackedScene" uid="uid://do0o2eleyo6w3" path="res://scenes/moneyCounter.tscn" id="10_yufcq"]
 [ext_resource type="PackedScene" uid="uid://bm5yjpvdgsgcp" path="res://scenes/popup_text.tscn" id="12_d28we"]
-[ext_resource type="PackedScene" path="res://scenes/DialogueUI.tscn" id="13_e0esb"]
-[ext_resource type="PackedScene" path="res://scenes/TutorialOverlay.tscn" id="13_r3lu7"]
+[ext_resource type="PackedScene" uid="uid://cgckyykut0iad" path="res://scenes/DialogueUI.tscn" id="13_e0esb"]
+[ext_resource type="PackedScene" uid="uid://3luktonxgr8i" path="res://scenes/TutorialOverlay.tscn" id="13_r3lu7"]
 
 [sub_resource type="Gradient" id="Gradient_d28we"]
 colors = PackedColorArray(0.054902, 0.0235294, 0.0352941, 0.588235, 0.18845, 0.119973, 0.189886, 0)
@@ -201,7 +201,7 @@ bbcode_enabled = true
 text = "S&C Pie		$4.50
 V Energy		$5.00"
 tab_size = 21
-script = ExtResource("6_e0esb")
+script = ExtResource("7_e0esb")
 
 [node name="Timer" type="Timer" parent="UI/Monitor/MarginContainer/Panel/MonitorText"]
 one_shot = true
