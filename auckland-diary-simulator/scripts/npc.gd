@@ -150,3 +150,11 @@ func _get_idle_animation() -> String:
 	elif last_direction.y < 0:
 		return "idleBack"
 	return "idleFront"
+	
+func _input(event):
+	if event.is_action("speed_up"):
+		wait_timer = 0
+	if event.is_action_pressed("speed_up"): # when key is pressed down
+		move_speed = 500
+	elif event.is_action_released("speed_up"): # when key is released
+		move_speed = 70

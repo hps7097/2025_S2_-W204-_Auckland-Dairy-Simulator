@@ -42,10 +42,17 @@ func show_node(node_id: String) -> void:
 	current_node = node_id
 	npc_name_label.text = node.get("speaker", "")
 	dialogue_text.text = node.get("text", "")
+	dialogue_text.visible_characters = 0
+	for i in dialogue_text.text.length():
+		dialogue_text.visible_characters = i
+		await get_tree().create_timer(0.05).timeout
+		if Input.is_action_pressed("speed_up"):
+			break
+	dialogue_text.visible_characters = -1
 
 	var choices: Array = node.get("choices", [])
 	if choices.is_empty():
-		close_button.visible = true
+		close_button.visible = true	
 	else:
 		close_button.visible = false
 		for choice in choices:
