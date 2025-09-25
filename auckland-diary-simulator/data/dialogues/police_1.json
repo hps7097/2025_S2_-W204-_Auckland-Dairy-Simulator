@@ -4,7 +4,7 @@
   "nodes": {
 	"greet": {
 	  "speaker": "Officer",
-	  "text": "Evening. How Ya doin?",
+	  "text": "Evening. What’re you up to around here, eh?",
 	  "choices": [
 		{"text": "Great thanks! How are you?", "next": "casual", "flags_set": ["Police Return"]},
 		{"text": "Good. Thanks Sir.", "next": "formal", "flags_set": ["Police Return"]},
@@ -13,17 +13,17 @@
 	},
 	"casual": {
 	  "speaker": "Officer",
-	  "text": "Just the same old. Thanks for asking! Here, I'll be buying these today.",
+	  "text": "Heh, same old. Just… keepin’ an eye on things, y’know? Anyway, I’ll be grabbin’ these today.",
 	  "choices": []
 	},
 	"formal": {
 	  "speaker": "Officer",
-	  "text": "Relax! No need to be so formal, I'm off shift right now so It's all good. Here, I'll be buying these today.",
+	  "text": "Relax… don’t get me wrong, I’m off duty… but I see everything around here. I’ll be buying these today.",
 	  "choices": []
 	},
 	"silence": {
 	  "speaker": "Officer",
-	  "text": "Alright... Here, I'll be buying these today.",
+	  "text": "Hmm… quiet type, eh? Fine, I’ll be getting these today.",
 	  "choices": []
 	}
   }

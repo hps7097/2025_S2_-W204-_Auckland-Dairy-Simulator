@@ -8,16 +8,19 @@
 	  "purchases": ["9:1", "9:3"]
 	},
 	{
-	  "npc_id": "extra_customer",
+	"npc_id": "regular_customer2",
 	  "scene": "res://scenes/npc.tscn",
+	 "dialogue_id": "regular_customer2",
 	  "appears_on_days": [1,2,3,4,5],
-	  "show_conditions": ["upgrade2: 1"]
+	   "purchases": ["8:2", "7:3"]
+
 	},
 	{
-	  "npc_id": "extra_customer2",
+	  "npc_id": "regular_customer3",
 	  "scene": "res://scenes/npc.tscn",
-	  "appears_on_days": [1,2,3,4,5],
-	  "show_conditions": ["upgrade2: 2"]
+	"dialogue_id": "regular_customer3",
+	 "appears_on_days": [1,2,3,4,5],
+	 "purchases": ["9:1", "9:3", "8:1","2:1", "0:0", "0:3", "0:2"]
 	},
 	{
 	  "npc_id": "extra_customer3",

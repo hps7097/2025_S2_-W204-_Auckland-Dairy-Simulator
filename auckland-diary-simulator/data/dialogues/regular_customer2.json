@@ -1,0 +1,21 @@
+{
+  "npc_id": "regular_customer2",
+  "start": "hello",
+  "nodes": {
+	"hello": {
+	  "speaker": "Sione",
+	  "text": "Ey Names Sione bro, just popping in for some chips, cheers g!",
+	  "choices": [
+		{"text": "All good, cuz.", "next": "end", "flags_set": []},
+		{"text": "How’s it going, cuz?", "next": "end", "flags_set": []}
+	  ]
+	},
+	"end": {
+	  "speaker": "Sione",
+	  "text": "Sweet ass cuz I appreciate you sole.",
+	  "choices": [
+		{"text": "No worries Sione bro.", "next": "", "flags_set": []}
+	  ]
+	}
+  }
+}

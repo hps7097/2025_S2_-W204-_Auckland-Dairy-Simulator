@@ -1,0 +1,21 @@
+{
+  "npc_id": "regular_customer3",
+  "start": "hello",
+  "nodes": {
+	"hello": {
+	  "speaker": "Sam “Big Lad” Tavita",
+	  "text": "Chur bro, just here loadin’ up a mean bag of chips and a pie before the footy, ay! Gotta keep the tank sweet for all the hits.",
+	  "choices": [
+		{"text": "All good, cuz.", "next": "end", "flags_set": []},
+		{"text": "How’s it going, cuz?", "next": "end", "flags_set": []}
+	  ]
+	},
+	"end": {
+	  "speaker": "Sam “Big Lad” Tavita",
+	  "text": "Sweet as, bro. Can’t watch the game empty-handed—gotta be fully geared for yellin’ at every try!",
+	  "choices": [
+		{"text": "No worries  bro.", "next": "", "flags_set": []}
+	  ]
+	}
+  }
+}
