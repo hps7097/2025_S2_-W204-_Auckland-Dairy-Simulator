@@ -36,8 +36,7 @@ func resetScene():
 		
 		# Income Animation
 		for i in range(floor(total_price)):
-			var t = get_tree().create_timer(0.1) # 1 second
-			await t.timeout
+			await get_tree().create_timer(0.1).timeout
 			var coin1 = coin.instantiate()
 			coin1.type = 0
 			get_tree().current_scene.add_child(coin1)
