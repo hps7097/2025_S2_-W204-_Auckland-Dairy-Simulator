@@ -47,17 +47,3 @@ func add_flag(flag: String):
 
 func check_flag(flag: String):
 	return flag in flags
-
-func _ready2():
-	# Try to load save data when the game starts
-	if SaveManager.load_game():
-		money = SaveManager.save_data["money"]
-		day = SaveManager.save_data["day"]
-		inventory = SaveManager.save_data["inventory"]
-
-func _on_save_button_pressed():
-	SaveManager.save_data["money"] = money
-	SaveManager.save_data["day"] = day
-	SaveManager.save_data["inventory"] = inventory
-	SaveManager.save_game()
-
