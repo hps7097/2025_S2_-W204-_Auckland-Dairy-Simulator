@@ -1,0 +1,40 @@
+{
+  "npc_id": "gang_kid",
+  "start": "day2_intro",
+  "nodes": {
+	"day2_intro": {
+	  "speaker": "Tane “Big Lad” Moana",
+	  "text": "Oi unc, you reckon you could sell some of these hoons? Boss is tryna find suppliers, ay.",
+	  "choices": [
+		{"text": "Who’s Boss?", "next": "boss_info", "flags_set": []},
+		{"text": "Not right now.", "next": "decline", "flags_set": []},
+		{"text": "What’s in it for me?", "next": "incentive", "flags_set": []}
+	  ]
+	},
+	"boss_info": {
+	  "speaker": "Tane “Big Lad” Moana",
+	  "text": "Don’t worry ‘bout names… we’re part of the Gumboot Gang. Boss runs things tight, wants these hoons moved fast. Needs someone we can trust, bro.",
+	  "choices": [
+		{"text": "I’ll think about it.", "next": "leave", "flags_set": ["gang_rep"]}
+	  ]
+	},
+	"incentive": {
+	  "speaker": "Tane “Big Lad” Moana",
+	  "text": "Cash, bro. Easy money. You sell the hoons, we look after ya. Mean deal, ay?",
+	  "choices": [
+		{"text": "I’ll think about it.", "next": "leave", "flags_set": ["gang_rep"]},
+		{"text": "Nah, sounds dodgy.", "next": "decline", "flags_set": []}
+	  ]
+	},
+	"decline": {
+	  "speaker": "Tane “Big Lad” Moana",
+	  "text": "Fair enough unc. Offers still on the table tho. I’ll swing by tomorrow, see if you change ya mind.",
+	  "choices": []
+	},
+	"leave": {
+	  "speaker": "Tane “Big Lad” Moana",
+	  "text": "Shot bro, I’ll come back tomorrow. Keep it hush hush, ay.",
+	  "choices": []
+	}
+  }
+}
