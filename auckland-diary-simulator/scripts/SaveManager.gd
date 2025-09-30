@@ -2,39 +2,30 @@
 
 extends Node
 
-const SAVE_FMT := "user://save_slot_%d.json"
+const SAVE_PATH := "user://savegame.json"
 
-func save_game(slot: int = 1) -> bool:
-	var data := {
-		"day": GameManager.dayCount,
-		"money": ProductManager.money,
-		"flags": GameManager.flags,
-		"upgrades": UpgradeManager.upgrades,
-	}
-	var path := SAVE_FMT % slot
-	var f = FileAccess.open(path, FileAccess.WRITE)
-	if f == null:
-		push_error("Failed to open save file for writing: %s" % path)
-		return false
-	f.store_string(JSON.stringify(data))
-	f.close()
-	return true
+var save_data := {
+	"money": 0,
+	"day": 1,
+	"inventory": []
+}
 
-func load_game(slot: int = 1) -> bool:
-	var path := SAVE_FMT % slot
-	if not FileAccess.file_exists(path):
+func save_game():
+	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	if file:
+		file.store_string(JSON.stringify(save_data))
+		file.close()
+		print("Game saved!")
+
+func load_game() -> bool:
+	if not FileAccess.file_exists(SAVE_PATH):
+		print("No save file found.")
 		return false
-	var f = FileAccess.open(path, FileAccess.READ)
-	if f == null:
-		return false
-	var parsed = JSON.parse_string(f.get_as_text())
-	f.close()
-	if parsed.error != OK:
-		push_error("Save JSON parse error")
-		return false
-	var d = parsed.result
-	GameManager.dayCount = int(d.get("day", 1))
-	ProductManager.money = int(d.get("money", 0))
-	GameManager.flags = d.get("flags", {})
-	UpgradeManager.upgrades = d.get("upgrades", {})
-	return true
+	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
+	if file:
+		var parsed = JSON.parse_string(file.get_as_text())
+		if typeof(parsed) == TYPE_DICTIONARY:
+			save_data = parsed
+			print("Game loaded: ", save_data)
+			return true
+	return false
