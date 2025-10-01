@@ -7,6 +7,7 @@ extends CanvasLayer
 @onready var load_button: Button = $Panel/VBox/LoadButton
 @onready var quit_button: Button = $Panel/VBox/QuitButton
 @onready var music: AudioStreamPlayer = get_tree().root.get_node("Main/MusicPlayer") # adjust path
+@onready var click_sfx: AudioStream = preload("res://audio/ui_click.wav")
 
 func _ready() -> void:
 	resume_button.pressed.connect(_on_resume_pressed)
@@ -23,8 +24,9 @@ func toggle() -> void:
 	if music:
 		music.stream_paused = visible
 
-func _on_resume_pressed() -> void:
-	toggle()
+func _on_resume_pressed():
+    AudioManager.play_sfx(click_sfx)
+    toggle()
 
 func _on_options_pressed() -> void:
 	if get_tree().root.has_node("Main/OptionsMenu"):
