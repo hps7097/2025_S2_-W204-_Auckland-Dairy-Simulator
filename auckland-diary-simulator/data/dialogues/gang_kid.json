@@ -1,6 +1,11 @@
 {
   "npc_id": "gang_kid",
-  "start": "day2_intro",
+  "start_nodes": {
+	"2": "day2_intro",
+	"3": "day3_intro",
+	"4": "day4_intro",
+	"5": "day5_intro"
+  },
   "nodes": {
 	"day2_intro": {
 	  "speaker": "Tane “Big Lad” Moana",
@@ -34,6 +39,66 @@
 	"leave": {
 	  "speaker": "Tane “Big Lad” Moana",
 	  "text": "Shot bro, I’ll come back tomorrow. Keep it hush hush, ay.",
+	  "choices": []
+	},
+
+	"day3_intro": {
+	  "speaker": "Tane “Big Lad” Moana",
+	  "text": "Oi unc, I see you got the Hoons now? Sweettt. Hey, I gotta get into the club tomorrow but I’m underage… reckon you could sort me some Fake IDs?",
+	  "conditions": ["flag:gang_rep", "stock:hoons"],
+	  "choices": [
+		{"text": "I’ll look into it.", "next": "accept_fakeids", "flags_set": ["gang_rep"]},
+		{"text": "Maybe later.", "next": "decline_fakeids", "flags_set": []}
+	  ]
+	},
+	"accept_fakeids": {
+	  "speaker": "Tane “Big Lad” Moana",
+	  "text": "Choice sweet, bro. Means the boss can trust ya even more. I’ll be back tomorrow to check in.",
+	  "choices": []
+	},
+	"decline_fakeids": {
+	  "speaker": "Tane “Big Lad” Moana",
+	  "text": "Ahh fair, no stress. Don’t worry, I’ll swing by again.",
+	  "choices": []
+	},
+
+	"day4_intro": {
+	  "speaker": "Tane “Big Lad” Moana",
+	  "text": "Unc, boss was happy with those IDs. Said you’re low-key but solid. Now he’s askin’—could you hold a box of gear for us in the back? Nothin’ big, just stashin’ till we move it.",
+	  "conditions": ["flag:gang_rep"],
+	  "choices": [
+		{"text": "Yeah, I can stash it.", "next": "accept_stash", "flags_set": ["gang_trust"]},
+		{"text": "Nah, that’s risky.", "next": "decline_stash", "flags_set": []}
+	  ]
+	},
+	"accept_stash": {
+	  "speaker": "Tane “Big Lad” Moana",
+	  "text": "Ooshhh, you’re a real one. Boss is gonna rate you hard. Just keep it quiet, ay?",
+	  "choices": []
+	},
+	"decline_stash": {
+	  "speaker": "Tane “Big Lad” Moana",
+	  "text": "All good, bro. I’ll tell boss you weren’t keen this time.",
+	  "choices": []
+	},
+
+	"day5_intro": {
+	  "speaker": "Tane “Big Lad” Moana",
+	  "text": "Unc, boss says there’s a big thing comin’. If you’re in, you’ll be looked after proper. We’re talkin’ more cash, more respect. You down or nah?",
+	  "conditions": ["flag:gang_trust"],
+	  "choices": [
+		{"text": "I’m in.", "next": "big_job_accept", "flags_set": ["gang_bigjob"]},
+		{"text": "Nah, I’m out.", "next": "big_job_decline", "flags_set": []}
+	  ]
+	},
+	"big_job_accept": {
+	  "speaker": "Tane “Big Lad” Moana",
+	  "text": "Shot unc. Boss will come see you himself soon. Mean things ahead.",
+	  "choices": []
+	},
+	"big_job_decline": {
+	  "speaker": "Tane “Big Lad” Moana",
+	  "text": "Fair enough, bro. Can’t say I didn’t offer. Still mates tho.",
 	  "choices": []
 	}
   }
