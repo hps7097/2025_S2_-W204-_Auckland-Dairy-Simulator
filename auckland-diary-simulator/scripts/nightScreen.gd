@@ -6,6 +6,10 @@ extends Control
 const MAX_DAYS: int = 7   # replace 30 with your actual max days
 
 @onready var ending_manager: Node = get_tree().root.get_node("Main/EndingManager")
+@onready var night_music: AudioStream = preload("res://audio/night_theme.ogg")
+
+func _ready():
+    AudioManager.play_music(night_music)
 
 func check_for_game_end() -> void:
 	if GameState.current_day > MAX_DAYS:
