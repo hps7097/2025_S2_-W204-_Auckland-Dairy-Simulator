@@ -26,6 +26,7 @@ GameManager="*res://scripts/game_manager.gd"
 GameState="*res://scripts/GameState.gd"
 SaveManager="*res://scripts/SaveManager.gd"
 DialogueManager="*res://scripts/DialogueManager.gd"
+AudioManager="*res://scripts/AudioManager.gd"
 
 [display]
 
