@@ -1,3 +1,5 @@
+#MADE WITH CHATGPT
+
 extends Control
 
 const OPTIONS_MENU = preload("res://scenes/OptionsMenu.tscn")
@@ -16,14 +18,17 @@ func _process(delta: float) -> void:
 func _on_quit_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
 
+func _on_save_button_pressed():
+	SaveManager.save_data["money"] = money
+	SaveManager.save_data["day"] = dayCount
+	SaveManager.save_data["inventory"] = inventory
+	SaveManager.save_game()
 
-func _on_load_button_pressed() -> void:
-	pass # Replace with function body.
-
-
-func _on_save_button_pressed() -> void:
-	pass # Replace with function body.
-
+func _on_load_button_pressed():
+	if SaveManager.load_game():
+		money = SaveManager.save_data["money"]
+		dayCount = SaveManager.save_data["day"]
+		inventory = SaveManager.save_data["inventory"]
 
 func _on_options_button_pressed() -> void:
 	optionsMenu = OPTIONS_MENU.instantiate()

@@ -1,40 +1,59 @@
-# MADE WITH CHATGPT
+#MADE WITH CHATGPT
 
 extends Node
 
-const SAVE_FMT := "user://save_slot_%d.json"
 
-func save_game(slot: int = 1) -> bool:
-	var data := {
-		"day": GameManager.dayCount,
-		"money": ProductManager.money,
-		"flags": GameManager.flags,
-		"upgrades": UpgradeManager.upgrades,
-	}
-	var path := SAVE_FMT % slot
-	var f = FileAccess.open(path, FileAccess.WRITE)
-	if f == null:
-		push_error("Failed to open save file for writing: %s" % path)
-		return false
-	f.store_string(JSON.stringify(data))
-	f.close()
-	return true
+const SAVE_DIR := "user://saves/"
+const MAX_SLOTS := 10
 
-func load_game(slot: int = 1) -> bool:
-	var path := SAVE_FMT % slot
-	if not FileAccess.file_exists(path):
-		return false
-	var f = FileAccess.open(path, FileAccess.READ)
-	if f == null:
-		return false
-	var parsed = JSON.parse_string(f.get_as_text())
-	f.close()
-	if parsed.error != OK:
-		push_error("Save JSON parse error")
-		return false
-	var d = parsed.result
-	GameManager.dayCount = int(d.get("day", 1))
-	ProductManager.money = int(d.get("money", 0))
-	GameManager.flags = d.get("flags", {})
-	UpgradeManager.upgrades = d.get("upgrades", {})
-	return true
+
+func _ready():
+var dir = Directory.new()
+if not dir.dir_exists(SAVE_DIR):
+dir.make_dir_recursive(SAVE_DIR)
+
+
+# state should be a Dictionary serializable to JSON
+func save(slot:int, state:Dictionary) -> bool:
+slot = clamp(slot, 1, MAX_SLOTS)
+var file = File.new()
+var path = SAVE_DIR + "save_%d.json" % slot
+var err = file.open(path, File.WRITE)
+if err != OK:
+push_error("SaveManager: cannot open file "%s"" % path)
+return false
+file.store_string(to_json(state))
+file.close()
+return true
+
+
+# returns Dictionary or null on failure
+func load(slot:int) -> Dictionary:
+slot = clamp(slot, 1, MAX_SLOTS)
+var path = SAVE_DIR + "save_%d.json" % slot
+var file = File.new()
+if not file.file_exists(path):
+return null
+var err = file.open(path, File.READ)
+if err != OK:
+push_error("SaveManager: cannot open file for read: %s" % path)
+return null
+var text = file.get_as_text()
+file.close()
+var parsed = parse_json(text)
+if typeof(parsed) != TYPE_DICTIONARY:
+push_error("SaveManager: corrupted save file: %s" % path)
+return null
+return parsed
+
+
+func list_saves() -> Array:
+var dir = Directory.new()
+var saves = []
+if dir.open(SAVE_DIR) != OK:
+return saves
+dir.list_dir_begin(true, true)
+var fname = dir.get_next()
+while fname != "":
+if fname.ends_with('.json'):
+return int(a["slot"]) - int(b["slot"])
