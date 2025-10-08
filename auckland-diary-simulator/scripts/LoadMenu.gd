@@ -2,52 +2,38 @@
 
 extends Control
 
+const MAX_SLOTS := 10
+@onready var slot_list := $ScrollContainer/VBoxContainer
 
-signal load_requested(slot)
+func _ready() -> void:
+	refresh()
 
+func refresh() -> void:
+	slot_list.queue_free_children()
+	var saves := SaveManager.list_saves()
+	for i in range(1, MAX_SLOTS + 1):
+		var btn := Button.new()
+		btn.text = "Slot %d" % i
+		if i in saves:
+			btn.text += " — saved"
+		btn.connect("pressed", Callable(self, "_on_slot_pressed").bind(i))
+		slot_list.add_child(btn)
 
-onready var slot_list = $ScrollContainer/SlotList
-onready var load_confirm = $LoadConfirm # optional confirmation dialog
+func _on_slot_pressed(slot:int) -> void:
+	var data := SaveManager.load_game(slot)
+	if data.is_empty():
+		print("No save in slot %d, starting new game" % slot)
+		get_tree().change_scene_to_file("res://scenes/GameScene.tscn")
+		return
 
+	# Example: Apply player position or game flags (adjust for your game)
+	if data.has("player_pos") and get_tree().has_current_scene():
+		var player = get_tree().get_current_scene().get_node_or_null("Player")
+		if player:
+			player.global_position = data["player_pos"]
 
-func _ready():
-refresh()
+	if data.has("flags") and Engine.has_singleton("GameManager"):
+		var gm = Engine.get_singleton("GameManager")
+		gm.flags = data["flags"]
 
-
-func refresh():
-slot_list.clear()
-var saves = SaveManager.list_saves()
-for i in range(1, SaveManager.MAX_SLOTS + 1):
-var btn = Button.new()
-btn.name = "slot_%d" % i
-btn.text = "Slot %d" % i
-btn.connect("pressed", self, "_on_slot_pressed", [i])
-slot_list.add_child(btn)
-# If a save exists, show extra marker
-for s in saves:
-if s.slot == i:
-btn.text = "Slot %d — saved" % i
-break
-
-
-func _on_slot_pressed(slot:int):
-# optional: ask for confirmation / show details
-var data = SaveManager.load(slot)
-if data == null:
-# No save — maybe offer to start a new game or warn
-get_tree().change_scene("res://scenes/GameScene.tscn")
-return
-# apply loaded state
-_apply_state_to_game(data)
-
-
-func _apply_state_to_game(state:Dictionary) -> void:
-# Example: assume state contains player position and variables
-# This function must be adapted to your game's state layout
-var player = get_node_or_null("/root/Game/Player")
-if player and state.has("player_pos"):
-player.global_position = state["player_pos"]
-if state.has("variables"):
-for k,v in state["variables"]:
-GlobalVars.set(k, v) # replace with your variable manager
-# continue loading other parts
+	get_tree().change_scene_to_file("res://scenes/GameScene.tscn")
