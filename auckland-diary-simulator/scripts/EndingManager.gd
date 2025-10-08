@@ -2,49 +2,49 @@
 
 extends Node
 
-
-# Stores choice events for the current playthrough
-var current_choices := []
-# History of playthroughs (each is a Dictionary with summary and ending id)
-var history := []
-# How many replays before asking the quiz
+# Tracks all player choices per run
+var current_choices: Array = []
+var history: Array = []
 var QUIZ_AFTER := 3
 
+func register_choice(choice_id:String, params:Variant = null) -> void:
+	current_choices.append({"id": choice_id, "params": params})
 
-func register_choice(choice_id:String, params= null) -> void:
-# params can be any small Dictionary or value representing the player's choice
-current_choices.append({"id":choice_id, "params": params})
-
+# Determine ending type based on weighted choices or GameState flags
+func determine_ending() -> String:
+	var score := 0.0
+	for c in current_choices:
+		if typeof(c.params) == TYPE_DICTIONARY and c.params.has("weight"):
+			score += float(c.params.weight)
+		elif typeof(c.params) in [TYPE_INT, TYPE_FLOAT]:
+			score += float(c.params)
+	
+	if score >= 5:
+		return "good"
+	elif score <= -5:
+		return "bad"
+	
+	# fallback using GameState if available
+	if Engine.has_singleton("GameState"):
+		var gs = Engine.get_singleton("GameState")
+		if gs.get_flag("gang_path"):
+			return "gang"
+		if gs.get_flag("lawful_path"):
+			return "lawful"
+	
+	return "neutral"
 
 func calculate_ending() -> String:
-# Simple weighted example — replace with your project's branching logic
-var score := 0
-for c in current_choices:
-if typeof(c.params) == TYPE_DICTIONARY and c.params.has("weight"):
-score += c.params.weight
-elif typeof(c.params) in [TYPE_INT, TYPE_REAL]:
-score += float(c.params)
-var ending_id := "neutral"
-if score >= 5:
-ending_id = "good"
-elif score <= -5:
-ending_id = "bad"
-# store history snapshot (deep copy)
-history.append({"ending": ending_id, "choices": current_choices.duplicate(true)})
-# reset for next playthrough
-current_choices.clear()
-return ending_id
-
+	var ending_id = determine_ending()
+	history.append({"ending": ending_id, "choices": current_choices.duplicate(true)})
+	current_choices.clear()
+	return ending_id
 
 func get_play_count() -> int:
-return history.size()
-
+	return history.size()
 
 func should_show_quiz() -> bool:
-return get_play_count() >= QUIZ_AFTER
-
+	return get_play_count() >= QUIZ_AFTER
 
 func get_history() -> Array:
-return history
-
-
+	return history
