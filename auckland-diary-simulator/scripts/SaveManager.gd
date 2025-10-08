@@ -2,58 +2,53 @@
 
 extends Node
 
-
 const SAVE_DIR := "user://saves/"
 const MAX_SLOTS := 10
 
+func _ready() -> void:
+	# Ensure save directory exists
+	if not DirAccess.dir_exists_absolute(SAVE_DIR):
+		var err = DirAccess.make_dir_recursive_absolute(SAVE_DIR)
+		if err != OK:
+			push_error("SaveManager: Failed to create save directory!")
 
-func _ready():
-var dir = Directory.new()
-if not dir.dir_exists(SAVE_DIR):
-dir.make_dir_recursive(SAVE_DIR)
+func _save_path(slot:int) -> String:
+	slot = clamp(slot, 1, MAX_SLOTS)
+	return SAVE_DIR + "save_%d.json" % slot
 
+# Save the given dictionary to a JSON file
+func save_game(slot:int, state:Dictionary) -> bool:
+	var path = _save_path(slot)
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	if f == null:
+		push_error("SaveManager: Failed to open file for write: %s" % path)
+		return false
+	f.store_string(JSON.stringify(state, "\t"))
+	f.close()
+	return true
 
-# state should be a Dictionary serializable to JSON
-func save(slot:int, state:Dictionary) -> bool:
-slot = clamp(slot, 1, MAX_SLOTS)
-var file = File.new()
-var path = SAVE_DIR + "save_%d.json" % slot
-var err = file.open(path, File.WRITE)
-if err != OK:
-push_error("SaveManager: cannot open file "%s"" % path)
-return false
-file.store_string(to_json(state))
-file.close()
-return true
+# Load a dictionary from a JSON file
+func load_game(slot:int) -> Dictionary:
+	var path = _save_path(slot)
+	if not FileAccess.file_exists(path):
+		return {}
+	var f := FileAccess.open(path, FileAccess.READ)
+	if f == null:
+		push_error("SaveManager: Failed to open file for read: %s" % path)
+		return {}
+	var text := f.get_as_text()
+	f.close()
 
+	var result = JSON.parse_string(text)
+	if typeof(result) != TYPE_DICTIONARY:
+		push_error("SaveManager: Invalid save data in %s" % path)
+		return {}
+	return result
 
-# returns Dictionary or null on failure
-func load(slot:int) -> Dictionary:
-slot = clamp(slot, 1, MAX_SLOTS)
-var path = SAVE_DIR + "save_%d.json" % slot
-var file = File.new()
-if not file.file_exists(path):
-return null
-var err = file.open(path, File.READ)
-if err != OK:
-push_error("SaveManager: cannot open file for read: %s" % path)
-return null
-var text = file.get_as_text()
-file.close()
-var parsed = parse_json(text)
-if typeof(parsed) != TYPE_DICTIONARY:
-push_error("SaveManager: corrupted save file: %s" % path)
-return null
-return parsed
-
-
+# Returns a list of save slots that exist
 func list_saves() -> Array:
-var dir = Directory.new()
-var saves = []
-if dir.open(SAVE_DIR) != OK:
-return saves
-dir.list_dir_begin(true, true)
-var fname = dir.get_next()
-while fname != "":
-if fname.ends_with('.json'):
-return int(a["slot"]) - int(b["slot"])
+	var saves := []
+	for i in range(1, MAX_SLOTS + 1):
+		if FileAccess.file_exists(_save_path(i)):
+			saves.append(i)
+	return saves
