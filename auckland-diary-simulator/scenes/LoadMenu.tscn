@@ -1,9 +1,29 @@
-[gd_scene format=3 uid="uid://cs3r2hooyhark"]
+[gd_scene load_steps=3 format=3]
 
 [node name="LoadMenu" type="Control"]
-layout_mode = 3
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+script = ExtResource("res://scripts/LoadMenu.gd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+margin_left = 50
+margin_top = 50
+margin_right = -50
+margin_bottom = -50
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+text = "Load Saved Game"
+align = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="SaveList" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+text = "Back"
