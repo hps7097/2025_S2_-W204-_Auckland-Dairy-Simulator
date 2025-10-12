@@ -51,4 +51,14 @@ func get_play_count() -> int:
 func should_show_quiz() -> bool:
 	return get_play_count() >= QUIZ_AFTER
 
+func on_story_end():
+	var ending = calculate_ending()
+	game_state.save_to_file("autosave")
+
+	if should_show_quiz():
+		_show_external_quiz_message()
+	else:
+		get_tree().change_scene("res://scenes/MainMenu.tscn")
+
+
 
