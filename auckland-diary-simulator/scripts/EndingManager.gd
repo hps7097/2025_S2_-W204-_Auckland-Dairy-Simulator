@@ -1,76 +1,75 @@
 # MADE WITH CHATGPT
+
+# EndingManager.gd — calculates endings, records choices, triggers quiz
 extends Node
 
-@onready var game_state = get_node("/root/GameState")
+@onready var game_state = get_node_or_null("/root/GameState")
 
-# Tracks all player choices per run
 var current_choices: Array = []
 var history: Array = []
 const QUIZ_AFTER := 3
 
-# Called at start of new playthrough
+func _ready():
+    if game_state == null:
+        push_error("GameState not found. Make sure GameState.gd is autoloaded as 'GameState'.")
+
 func start_new_run():
-	current_choices.clear()
-	game_state.start_new_run()
+    current_choices.clear()
+    if game_state:
+        game_state.start_new_run()
 
 func register_choice(choice_id: String, params: Variant = null) -> void:
-	current_choices.append({"id": choice_id, "params": params})
-	game_state.record_choice(choice_id)
+    current_choices.append({"id": choice_id, "params": params})
+    if game_state:
+        game_state.record_choice(choice_id)
 
-# Determine ending type based on weighted choices or GameState flags
 func determine_ending() -> String:
-	var score := 0.0
-	for c in current_choices:
-		if typeof(c.params) == TYPE_DICTIONARY and c.params.has("weight"):
-			score += float(c.params.weight)
-		elif typeof(c.params) in [TYPE_INT, TYPE_FLOAT]:
-			score += float(c.params)
-	
-	if score >= 5:
-		return "good"
-	elif score <= -5:
-		return "bad"
-	return "neutral" # fallback
+    var score := 0.0
+    for c in current_choices:
+        if typeof(c.params) == TYPE_DICTIONARY and c.params.has("weight"):
+            score += float(c.params.weight)
+        elif typeof(c.params) in [TYPE_INT, TYPE_FLOAT]:
+            score += float(c.params)
+    if score >= 5:
+        return "good"
+    elif score <= -5:
+        return "bad"
+    return "neutral"
 
-# Finalize and record ending
 func calculate_ending() -> String:
-	var ending_id = determine_ending()
-	history.append({
-		"ending": ending_id,
-		"choices": current_choices.duplicate(true)
-	})
-	game_state.set_ending(ending_id)
-	current_choices.clear()
-	return ending_id
+    var ending_id = determine_ending()
+    history.append({"ending": ending_id, "choices": current_choices.duplicate(true)})
+    if game_state:
+        game_state.set_ending(ending_id)
+    current_choices.clear()
+    return ending_id
 
 func get_play_count() -> int:
-	return history.size()
+    return history.size()
 
 func should_show_quiz() -> bool:
-	return get_play_count() >= QUIZ_AFTER
+    return get_play_count() >= QUIZ_AFTER
 
 func on_story_end():
-	var ending = calculate_ending()
-	game_state.save_to_file("autosave")
-
-	if should_show_quiz():
-		_show_external_quiz_message()
-	else:
-		get_tree().change_scene("res://scenes/MainMenu.tscn")
+    var ending = calculate_ending()
+    if game_state:
+        game_state.save_to_file("autosave")
+    if should_show_quiz():
+        _show_external_quiz_message()
+    else:
+        get_tree().change_scene("res://scenes/MainMenu.tscn")
 
 func _show_external_quiz_message():
-	print("Player reached 3 playthroughs – prompt for external quiz.")
-
-	var popup = AcceptDialog.new()
-	popup.dialog_text = "🎉 You've finished 3 playthroughs! Please take our short replay value quiz outside the game.\n\nLink: https://forms.gle/YOUR_REAL_QUIZ_LINK"
-	get_tree().root.add_child(popup)
-	popup.popup_centered()
-	popup.connect("confirmed", Callable(self, "_on_quiz_prompt_closed"))
-
-	# Optionally open the link automatically
-	OS.shell_open("https://forms.gle/YOUR_REAL_QUIZ_LINK")
+    print("Player reached 3 playthroughs – prompt for external quiz.")
+    var popup = AcceptDialog.new()
+    popup.dialog_text = "🎉 You've finished 3 playthroughs! Please take our short replay value quiz outside the game.\n\nLink: https://forms.gle/YOUR_REAL_QUIZ_LINK"
+    get_tree().root.add_child(popup)
+    popup.popup_centered()
+    popup.connect("confirmed", Callable(self, "_on_quiz_prompt_closed"))
+    # Optionally open the link automatically:
+    # OS.shell_open("https://forms.gle/YOUR_REAL_QUIZ_LINK")
 
 func _on_quiz_prompt_closed():
-	get_tree().change_scene("res://scenes/MainMenu.tscn")
+    get_tree().change_scene("res://scenes/MainMenu.tscn")
 
 
