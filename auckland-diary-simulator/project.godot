@@ -27,6 +27,7 @@ GameState="*res://scripts/GameState.gd"
 SaveManager="*res://scripts/SaveManager.gd"
 DialogueManager="*res://scripts/DialogueManager.gd"
 EndingManager="*res://scripts/EndingManager.gd"
+GameState=*res://scripts/GameState.gd"
 
 [display]
 
