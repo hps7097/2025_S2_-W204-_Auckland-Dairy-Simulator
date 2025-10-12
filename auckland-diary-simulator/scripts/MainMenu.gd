@@ -21,11 +21,8 @@ func _on_options_button_pressed():
 	optionsMenu.z_index = 4096 
 	get_tree().current_scene.add_child(optionsMenu)
 
-func _on_load_button_pressed():
-	if SaveManager.load_game():
-		money = SaveManager.save_data["money"]
-		dayCount = SaveManager.save_data["day"]
-		inventory = SaveManager.save_data["inventory"]
+func _on_LoadGame_pressed():
+    get_tree().change_scene("res://scenes/LoadMenu.tscn")
 
 func _on_quit_button_pressed():
 	get_tree().quit()
