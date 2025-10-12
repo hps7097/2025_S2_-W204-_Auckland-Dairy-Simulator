@@ -1,7 +1,7 @@
 # MADE WITH CHATGPT
 extends Node
 
-@onready var game_state = GameState
+@onready var game_state = get_node("/root/GameState")
 
 # Tracks all player choices per run
 var current_choices: Array = []
@@ -30,9 +30,7 @@ func determine_ending() -> String:
 		return "good"
 	elif score <= -5:
 		return "bad"
-
-	# fallback logic (optional)
-	return "neutral"
+	return "neutral" # fallback
 
 # Finalize and record ending
 func calculate_ending() -> String:
@@ -62,16 +60,17 @@ func on_story_end():
 
 func _show_external_quiz_message():
 	print("Player reached 3 playthroughs – prompt for external quiz.")
-	
-	# Show a message in-game
+
 	var popup = AcceptDialog.new()
-	popup.dialog_text = "You've finished 3 playthroughs! Please take our short replay value quiz outside the game.\n\nLink: https://example.com/your-quiz-link"
-	add_child(popup)
+	popup.dialog_text = "🎉 You've finished 3 playthroughs! Please take our short replay value quiz outside the game.\n\nLink: https://forms.gle/YOUR_REAL_QUIZ_LINK"
+	get_tree().root.add_child(popup)
 	popup.popup_centered()
 	popup.connect("confirmed", Callable(self, "_on_quiz_prompt_closed"))
 
+	# Optionally open the link automatically
+	OS.shell_open("https://forms.gle/YOUR_REAL_QUIZ_LINK")
+
 func _on_quiz_prompt_closed():
 	get_tree().change_scene("res://scenes/MainMenu.tscn")
-
 
 
