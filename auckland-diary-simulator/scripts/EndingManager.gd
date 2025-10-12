@@ -60,5 +60,18 @@ func on_story_end():
 	else:
 		get_tree().change_scene("res://scenes/MainMenu.tscn")
 
+func _show_external_quiz_message():
+	print("Player reached 3 playthroughs – prompt for external quiz.")
+	
+	# Show a message in-game
+	var popup = AcceptDialog.new()
+	popup.dialog_text = "You've finished 3 playthroughs! Please take our short replay value quiz outside the game.\n\nLink: https://example.com/your-quiz-link"
+	add_child(popup)
+	popup.popup_centered()
+	popup.connect("confirmed", Callable(self, "_on_quiz_prompt_closed"))
+
+func _on_quiz_prompt_closed():
+	get_tree().change_scene("res://scenes/MainMenu.tscn")
+
 
 
