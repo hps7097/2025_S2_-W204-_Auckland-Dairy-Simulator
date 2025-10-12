@@ -2,38 +2,30 @@
 
 extends Control
 
-const MAX_SLOTS := 10
-@onready var slot_list := $ScrollContainer/VBoxContainer
+@onready var game_state = GameState
+@onready var save_list = $ScrollContainer/SaveList
 
-func _ready() -> void:
-	refresh()
+func _ready():
+    populate_saves()
 
-func refresh() -> void:
-	slot_list.queue_free_children()
-	var saves := SaveManager.list_saves()
-	for i in range(1, MAX_SLOTS + 1):
-		var btn := Button.new()
-		btn.text = "Slot %d" % i
-		if i in saves:
-			btn.text += " — saved"
-		btn.connect("pressed", Callable(self, "_on_slot_pressed").bind(i))
-		slot_list.add_child(btn)
+func populate_saves():
+    save_list.queue_free_children() # clear old buttons
+    var saves = game_state.list_saves()
+    for save_name in saves:
+        var btn = Button.new()
+        btn.text = save_name
+        btn.connect("pressed", Callable(self, "_on_save_selected").bind(save_name))
+        save_list.add_child(btn)
 
-func _on_slot_pressed(slot:int) -> void:
-	var data := SaveManager.load_game(slot)
-	if data.is_empty():
-		print("No save in slot %d, starting new game" % slot)
-		get_tree().change_scene_to_file("res://scenes/GameScene.tscn")
-		return
+func _on_save_selected(save_name: String):
+    var success = game_state.load_from_file(save_name)
+    if success:
+        print("Loaded save: ", save_name)
+        # Load whatever scene corresponds to that state:
+        get_tree().change_scene("res://scenes/MainScene.tscn")
+    else:
+        print("Failed to load save!")
 
-	# Example: Apply player position or game flags (adjust for your game)
-	if data.has("player_pos") and get_tree().has_current_scene():
-		var player = get_tree().get_current_scene().get_node_or_null("Player")
-		if player:
-			player.global_position = data["player_pos"]
+func _on_Back_pressed():
+    get_tree().change_scene("res://scenes/MainMenu.tscn")
 
-	if data.has("flags") and Engine.has_singleton("GameManager"):
-		var gm = Engine.get_singleton("GameManager")
-		gm.flags = data["flags"]
-
-	get_tree().change_scene_to_file("res://scenes/GameScene.tscn")
