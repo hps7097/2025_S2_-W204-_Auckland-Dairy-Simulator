@@ -55,3 +55,12 @@ func list_saves() -> Array:
         f = dir.get_next()
     dir.list_dir_end()
     return saves
+
+# Optional helper for flexible state flags
+var flags := {}
+
+func set_flag(key: String, value: bool):
+	flags[key] = value
+
+func get_flag(key: String) -> bool:
+	return flags.get(key, false)
