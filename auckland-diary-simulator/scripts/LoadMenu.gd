@@ -1,40 +1,29 @@
-#MADE WITH CHATGPT
-
+# MADE WITH CHATGPT
 extends Control
 
-@onready var game_state = get_node_or_null("/root/GameState")
-@onready var save_list = $"ScrollContainer/SaveList"
+@onready var save_list := $ScrollContainer/SaveList
 
-func _ready():
-    populate_saves()
-    $Back.connect("pressed", Callable(self, "_on_Back_pressed"))
+func _ready() -> void:
+    populate_save_list()
 
-func populate_saves():
-    # clear list
-    for child in save_list.get_children():
-        child.queue_free()
-    var saves = []
-    if game_state:
-        saves = game_state.list_saves()
-    for s in saves:
-        var btn = Button.new()
-        btn.text = s
-        btn.connect("pressed", Callable(self, "_on_save_selected").bind(s))
-        save_list.add_child(btn)
-    if saves.empty():
-        var label = Label.new()
-        label.text = "No saved games found."
-        save_list.add_child(label)
+func populate_save_list() -> void:
+    save_list.queue_free_children()
+    var saves := GameState.list_saves()
+    for filename in saves:
+        var button := Button.new()
+        button.text = filename
+        button.connect("pressed", Callable(self, "_on_load_pressed").bind(filename))
+        save_list.add_child(button)
 
-func _on_save_selected(save_name: String):
-    if game_state:
-        var ok = game_state.load_from_file(save_name)
-        if ok:
-            print("Loaded save:", save_name)
-            # Optionally change scene; choose the scene that resumes gameplay
-            get_tree().change_scene("res://scenes/MainScene.tscn")
-        else:
-            print("Failed to load save:", save_name)
+func _on_load_pressed(filename: String) -> void:
+    var success := GameState.load_from_file(filename)
+    if success:
+        get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
+    else:
+        _show_error_popup("Failed to load save: " + filename)
 
-func _on_Back_pressed():
-    get_tree().change_scene("res://scenes/MainMenu.tscn")
+func _show_error_popup(msg: String) -> void:
+    var popup := AcceptDialog.new()
+    popup.dialog_text = msg
+    add_child(popup)
+    popup.popup_centered()
