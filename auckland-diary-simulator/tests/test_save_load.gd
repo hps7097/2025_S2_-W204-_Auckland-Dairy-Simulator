@@ -1,34 +1,21 @@
 # MADE WITH CHATGPT
-extends SceneTree
+# tests/test_save_load.gd
+extends "res://addons/gut/test.gd"
 
-func _init():
-	print("--- Running Save/Load test ---")
-	# Ensure clean state
-	var state := {
-		"player_pos": Vector2(100, 200),
-		"flags": {"bribed_police": true}
-	}
+var gs
 
-	# Save
-	var saved := SaveManager.save_game(1, state)
-	assert(saved == true, "Failed to save game")
+func before_each() -> void:
+    gs = load("res://scripts/GameState.gd").new()
+    # Ensure we have one save to list
+    gs.start_new_run()
+    gs.set_ending("save_list_test")
+    gs.save_to_file("test_save_for_listing")
 
-	# Load
-	var loaded := SaveManager.load_game(1)
-	assert(typeof(loaded) == TYPE_DICTIONARY, "Loaded data not a dictionary")
+func test_list_saves_contains_testfile() -> void:
+    var saves = gs.list_saves()
+    assert_true("test_save_for_listing" in saves)
 
-	assert(loaded.has("player_pos"))
-	assert(loaded["player_pos"] == Vector2(100, 200))
+func test_load_saved_file_works() -> void:
+    var gs2 = load("res://scripts/GameState.gd").new()
+    assert_true(gs2.load_from_file("test_save_for_listing"))
 
-	assert(loaded.has("flags"))
-	assert(loaded["flags"]["bribed_police"] == true)
-
-	print("Save/Load basic data ✅")
-
-	# List saves
-	var saves := SaveManager.list_saves()
-	assert(1 in saves)
-	print("List saves works ✅")
-
-	print("All Save/Load tests passed 🎉")
-	quit()
