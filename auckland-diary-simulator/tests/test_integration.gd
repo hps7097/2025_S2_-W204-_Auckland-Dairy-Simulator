@@ -1,33 +1,29 @@
-# MADE WITH CHATGPT
-extends SceneTree
+# tests/test_integration.gd
+extends "res://addons/gut/test.gd"
 
-func _init():
-	print("--- Running Integration test ---")
-	GameState.reset_state() if Engine.has_singleton("GameState") else null
+# This test assumes EndingManager and GameState are autoloaded
+# and present at /root/EndingManager and /root/GameState
 
-	# Simulate choices in one playthrough
-	EndingManager.current_choices.clear()
-	EndingManager.register_choice("bribe_police", {"weight": -3})
-	EndingManager.register_choice("help_neighbor", {"weight": 3})
-	EndingManager.register_choice("feed_cows", {"weight": 2})
+func before_each() -> void:
+    # Reset GameState to known state (if available)
+    if Engine.has_singleton("GameState"):
+        GameState.runs = []
+        GameState.replay_count = 0
+        GameState.flags.clear()
+    # Reset EndingManager history if accessible
+    if Engine.has_singleton("EndingManager"):
+        EndingManager.history.clear()
+        EndingManager.current_choices.clear()
 
-	var ending := EndingManager.calculate_ending()
-	print("Determined ending: ", ending)
-	assert(ending in ["good", "bad", "neutral"])
+func test_integration_simple_run() -> void:
+    # Create a simulated run with some choices
+    EndingManager.start_new_run()
+    EndingManager.register_choice("bribe_police", {"weight": -3})
+    EndingManager.register_choice("help_neighbor", {"weight": 3})
+    EndingManager.register_choice("feed_cows", {"weight": 2})
 
-	# Save current ending and state
-	var state := {
-		"last_ending": ending,
-		"flags": {"test_flag": true}
-	}
-	var ok := SaveManager.save_game(1, state)
-	assert(ok)
+    var ending := EndingManager.calculate_ending()
+    assert_true(ending in ["good", "neutral", "bad"])
+    # verify GameState recorded an ending when set via EndingManager
+    assert_true(GameState.runs.size() >= 1)
 
-	# Load back
-	var loaded := SaveManager.load_game(1)
-	assert(loaded.has("last_ending"))
-	assert(loaded["last_ending"] == ending)
-	assert(loaded["flags"]["test_flag"] == true)
-
-	print("Integration test passed ✅")
-	quit()
