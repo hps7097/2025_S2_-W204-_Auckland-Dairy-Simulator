@@ -1,3 +1,4 @@
+# MADE WITH CHATGPT
 # tests/test_integration.gd
 extends "res://addons/gut/test.gd"
 
