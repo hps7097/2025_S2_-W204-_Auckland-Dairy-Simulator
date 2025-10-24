@@ -67,6 +67,8 @@ func _on_pressed() -> void:
 		UpgradeManager.upgrade(upgradeType)
 		var moneyTotal = ProductManager.money - price
 		
+		GameManager.setMoneyStart(moneyTotal)
+		
 		for i in range(floor(price / 2)):
 			var t = get_tree().create_timer(0.1) # 1 second
 			await t.timeout
@@ -94,6 +96,7 @@ func _on_pressed() -> void:
 		
 		var t = get_tree().create_timer(1) # 1 second
 		await t.timeout
+	
 		
 		nextDayButton.disabled = false
 		disabled = false

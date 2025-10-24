@@ -30,10 +30,9 @@ func _load_npc_data() -> void:
 
 # Spawn NPCs for a day into a given parent container
 func spawn_for_day(day: int, parent: Node) -> void:
-
+	
 	if not npc_data.has("npcs"):
 		return
-	
 	var npcs: Array = npc_data["npcs"]
 	for entry in npcs:
 		if _npc_should_spawn(entry, day):
@@ -57,6 +56,8 @@ func spawn_for_day(day: int, parent: Node) -> void:
 				npc.connect("interacted", Callable(self, "_on_npc_interacted"))
 			print("spawned in " + entry.get("npc_id", ""))
 			await get_tree().create_timer(10.0).timeout
+			if !get_tree().current_scene.scene_file_path.ends_with("dayScreen.tscn"):
+				break
 
 func _npc_should_spawn(entry: Dictionary, day: float) -> bool:
 	print("checking")

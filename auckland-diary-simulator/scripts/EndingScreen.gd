@@ -5,5 +5,5 @@ extends Control
 func set_text(txt: String):
 	ending_text.text = txt
 
-func _on_return_pressed():
+func _on_return_to_main_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")

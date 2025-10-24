@@ -27,3 +27,5 @@ offset_top = 142.0
 offset_right = 383.0
 offset_bottom = 173.0
 text = "Return to Main Menu"
+
+[connection signal="pressed" from="Return to Main Menu" to="." method="_on_return_to_main_menu_pressed"]

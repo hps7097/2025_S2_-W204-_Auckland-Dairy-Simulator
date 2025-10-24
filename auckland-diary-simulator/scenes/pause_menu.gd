@@ -4,6 +4,8 @@ extends Control
 const OPTIONS_MENU = preload("res://scenes/OptionsMenu.tscn")
 var optionsMenu
 
+@onready var popup_text: Node2D = $PopupText
+
 func _ready() -> void:
 	pass
 
@@ -20,26 +22,20 @@ func _on_quit_button_pressed() -> void:
 func _on_save_button_pressed() -> void:
 	# Example: fetch data from GameState or your main scene
 	var game_state = {
-		"money": ProductManager.money,
+		"money": GameManager.getMoneyStart(),
 		"day": GameManager.getDayCount(),
+		"dayNight": GameManager.getDayNight(),
+		"upgrades": UpgradeManager.upgrades,
+		"flags": GameManager.getFlags()
 	}
 	
 	var success = SaveManager.save_game("1", game_state)
 	if success:
 		print("Game saved successfully ✅")
+		popup_text.calling("Game saved successfully")
 	else:
 		printerr("Failed to save game ❌")
-
-# Disabled because doesnt work and only want loading on main menu
-func _on_load_button_pressed() -> void:
-	var loaded_data = SaveManager.load_game("1")
-	if loaded_data:
-		ProductManager.money = loaded_data.get("money", 0)
-		GameManager.day_count = loaded_data.get("day", 1)
-		print("Game loaded successfully ✅")
-	else:
-		printerr("Failed to load game ❌")
-
+		popup_text.calling("Failed to save game")
 
 func _on_options_button_pressed() -> void:
 	optionsMenu = OPTIONS_MENU.instantiate()
