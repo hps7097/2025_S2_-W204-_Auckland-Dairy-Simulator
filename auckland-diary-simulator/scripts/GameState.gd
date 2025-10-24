@@ -50,6 +50,8 @@ func set_ending(ending_id: String) -> void:
     # FIXED BY CHATGPT: typo in your file (“endin\ng_id”)
     current_run["ending"] = ending_id
 
+EndingManager.go_to_ending()
+
 func save_to_file(filename: String) -> bool:
     # Create directory if missing
     if DirAccess.open(SAVE_DIR) == null:
