@@ -1,11 +1,12 @@
+# FIXED BY CHATGPT
 class_name EndingManager
 extends Node
 
 @onready var game_state: GameState = GameState
 
-var current_choices: Array = []
-var history: Array = []
-const QUIZ_AFTER := 3
+var current_choices: Array = []       # [{id: String, params: {weight:int}}]
+var history: Array = []               # [{ending:String, choices:Array}]
+const QUIZ_AFTER := 3                 # show quiz after N playthroughs
 
 func start_new_run() -> void:
     current_choices.clear()
@@ -16,14 +17,12 @@ func register_choice(choice_id: String, params: Variant = null) -> void:
     game_state.record_choice(choice_id)
 
 func determine_ending() -> String:
-    # Very small scoring heuristic — adapt weights as needed
-    var score := 0.0
+    # Simple scoring rule: sum "weight" from params
+    var score := 0
     for c in current_choices:
-        var p := c.get("params", null)
+        var p = c.get("params", null)
         if typeof(p) == TYPE_DICTIONARY and p.has("weight"):
-            score += float(p["weight"])
-        elif typeof(p) in [TYPE_INT, TYPE_FLOAT]:
-            score += float(p)
+            score += int(p["weight"])
     if score >= 5:
         return "good"
     elif score <= -5:
@@ -40,29 +39,26 @@ func calculate_ending() -> String:
     current_choices.clear()
     return ending_id
 
-func get_play_count() -> int:
-    return history.size()
-
 func should_show_quiz() -> bool:
     return get_play_count() >= QUIZ_AFTER
 
-func on_story_end() -> void:
-    var ending := calculate_ending()
-    var saved := game_state.save_to_file("autosave")
-    if not saved:
-        push_warning("EndingManager.on_story_end: autosave failed.")
+func get_play_count() -> int:
+    return game_state.replay_count
+
+func go_to_ending() -> void:
+    var ending_id := calculate_ending()
+    # If you want to gate with quiz after N runs:
     if should_show_quiz():
         _show_external_quiz_message()
     else:
-        get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
+        get_tree().change_scene_to_file("res://scenes/EndingScreen.tscn")
 
 func _show_external_quiz_message() -> void:
-    print("Player reached %d playthroughs – prompt for external quiz." % QUIZ_AFTER)
     var popup := AcceptDialog.new()
-    popup.dialog_text = "You've finished %d playthroughs! Please take the replay value quiz outside the game.\\n\\nLink: https://example.com/your-quiz-link" % QUIZ_AFTER
+    popup.dialog_text = "You've finished %d playthroughs!\nPlease complete the external quiz, then return to the main menu." % QUIZ_AFTER
     add_child(popup)
     popup.popup_centered()
-    popup.connect("confirmed", Callable(self, "_on_quiz_prompt_closed"))
+    popup.confirmed.connect(_on_quiz_prompt_closed)
 
 func _on_quiz_prompt_closed() -> void:
     get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
