@@ -79,3 +79,14 @@ func _open_node(node_id: String) -> void:
 	ui_instance.start(current_data, purchaseArray)
 
 	current_node_id = node_id
+
+# ADDED EXTRA FUNCTION WITH CHATGPT
+
+func _on_choice_made(choice: Dictionary) -> void:
+    # Set flags
+    for flag in choice.get("flags_set", []):
+        GameState.set_flag(flag, true)
+    # Apply effects
+    var eff := choice.get("effects", {})
+    if typeof(eff) == TYPE_DICTIONARY and eff.has("money"):
+        GameState.money += int(eff["money"])
