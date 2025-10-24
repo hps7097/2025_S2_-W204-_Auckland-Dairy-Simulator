@@ -23,11 +23,9 @@ NpcManager="*res://scripts/npc_manager.gd"
 ProductManager="*res://scripts/product_manager.gd"
 UpgradeManager="*res://scripts/upgrade_manager.gd"
 GameManager="*res://scripts/game_manager.gd"
-SaveManager="*res://scripts/SaveManager.gd"
 DialogueManager="*res://scripts/DialogueManager.gd"
 EndingManager="*res://scripts/EndingManager.gd"
 GameState="*res://scripts/GameState.gd"
-SaveSystem="*res://scripts/GameSystem.gd"
 
 [display]
 
