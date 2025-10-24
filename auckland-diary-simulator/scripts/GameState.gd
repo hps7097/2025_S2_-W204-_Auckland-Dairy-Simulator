@@ -1,12 +1,24 @@
+# FIXED BY CHATGPT
 class_name GameState
 extends Node
 
 # Central game state and simple JSON save/load helpers.
 # Works with Godot 4.5. Saves to user://saves/<name>.json
 
+# --- Core run history (used by EndingManager and tests) ---
 var runs: Array = []
 var current_run: Dictionary = {}
 var replay_count: int = 0
+
+# --- Optional gameplay fields (so UI and saves referencing them won’t crash) ---
+var day_count: int = 1
+var money: int = 0
+var inventory: Array = []
+
+# --- Flexible flags/options buckets if you want them later ---
+var flags: Dictionary = {}
+var options: Dictionary = {}
+
 const SAVE_DIR := "user://saves"
 
 func _ready() -> void:
@@ -15,7 +27,11 @@ func _ready() -> void:
         DirAccess.make_dir_recursive(SAVE_DIR)
 
 func start_new_run() -> void:
-    current_run = {"choices": [], "events": [], "ending": ""}
+    current_run = {
+        "choices": [],
+        "events": [],
+        "ending": ""
+    }
     runs.append(current_run)
     replay_count += 1
 
@@ -24,7 +40,14 @@ func record_choice(choice_id: String) -> void:
         current_run["choices"] = []
     current_run["choices"].append(choice_id)
 
+func record_event(event_id: String) -> void:
+    # FIXED BY CHATGPT: tests call record_event; make sure it exists
+    if not current_run.has("events"):
+        current_run["events"] = []
+    current_run["events"].append(event_id)
+
 func set_ending(ending_id: String) -> void:
+    # FIXED BY CHATGPT: typo in your file (“endin\ng_id”)
     current_run["ending"] = ending_id
 
 func save_to_file(filename: String) -> bool:
@@ -32,7 +55,17 @@ func save_to_file(filename: String) -> bool:
     if DirAccess.open(SAVE_DIR) == null:
         DirAccess.make_dir_recursive(SAVE_DIR)
     var path := SAVE_DIR + "/" + filename + ".json"
-    var data := {"runs": runs, "replay_count": replay_count}
+
+    var data := {
+        "runs": runs,
+        "replay_count": replay_count,
+        # include optional gameplay fields so UI save/load is stable
+        "day_count": day_count,
+        "money": money,
+        "inventory": inventory,
+        "flags": flags,
+        "options": options
+    }
 
     var file := FileAccess.open(path, FileAccess.WRITE)
     if file == null:
@@ -54,17 +87,28 @@ func load_from_file(filename: String) -> bool:
     file.close()
 
     var parsed := JSON.parse_string(text)
-    if parsed.error != OK:
+    if typeof(parsed) != TYPE_DICTIONARY:
         push_warning("GameState.load_from_file: JSON parse error in %s" % path)
         return false
-    var data := parsed.result
+    var data: Dictionary = parsed
+
     runs = data.get("runs", [])
     replay_count = int(data.get("replay_count", 0))
+
+    # restore optional gameplay fields if present
+    day_count = int(data.get("day_count", day_count))
+    money = int(data.get("money", money))
+    inventory = data.get("inventory", inventory)
+
+    flags = data.get("flags", flags)
+    options = data.get("options", options)
+
     # restore the most recent run into current_run
     if runs.size() > 0:
         current_run = runs[runs.size() - 1]
     else:
         current_run = {"choices": [], "events": [], "ending": ""}
+
     return true
 
 func list_saves() -> Array:
@@ -80,9 +124,6 @@ func list_saves() -> Array:
         f = dir.get_next()
     dir.list_dir_end()
     return saves
-
-# Optional helper for flexible state flags
-var flags: Dictionary = {}
 
 func set_flag(key: String, value: bool) -> void:
     flags[key] = value
