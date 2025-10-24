@@ -44,7 +44,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_n4fnq")
 
-[node name="RamRaided" type="TextureRect" parent="."]
+[node name="EndingTitle" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -61,6 +61,7 @@ grow_vertical = 2
 texture = ExtResource("6_7ipjw")
 
 [node name="Return to Main Menu" type="Button" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5

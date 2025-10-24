@@ -44,6 +44,8 @@ func customerServed() -> void:
 	characterSprite.leave_scene()
 	if dayCustomerCount <= 0:
 		await get_tree().create_timer(3.5).timeout
+		if !get_tree().current_scene.scene_file_path.ends_with("dayScreen.tscn"):
+			return
 		if dayCount == 7:
 			get_tree().change_scene_to_file("res://scenes/EndingScreen.tscn")
 		else:

@@ -16,9 +16,7 @@ func _process(delta: float) -> void:
 		displayMessage = true
 	elif not displayMessage:
 		text = "TOTAL: $" + str(ProductManager.total_price).pad_decimals(2) + \
-		"\n\n Day: " + str(GameManager.dayCount) + \
-		"\n Customers Left: " + str(GameManager.dayCustomerCount) + \
-		"\n Upgrades: " + str(UpgradeManager.upgrades)
+		"\n\n\n\n\n Day: " + str(GameManager.dayCount)
 
 func _on_timer_timeout() -> void:
 	ProductManager.message = ""

@@ -14,6 +14,7 @@ func _ready():
 
 func _on_play_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/dayScreen.tscn")
+	GameManager.setDayCount(0)
 	GameManager.newDay()
 
 func _on_options_button_pressed():
