@@ -21,8 +21,16 @@ func _on_options_button_pressed():
 	optionsMenu.z_index = 4096 
 	get_tree().current_scene.add_child(optionsMenu)
 
-func _on_LoadGame_pressed():
-    get_tree().change_scene("res://scenes/LoadMenu.tscn")
-
 func _on_quit_button_pressed():
 	get_tree().quit()
+
+func _on_load_button_pressed() -> void:
+	var loaded_data = SaveManager.load_game("1")
+	if loaded_data:
+		ProductManager.money = loaded_data.get("money", 0)
+		GameManager.setDayCount(loaded_data.get("day", 1))
+		get_tree().change_scene_to_file("res://scenes/dayScreen.tscn")
+		GameManager.loadDay()
+		print("Game loaded successfully ✅")
+	else:
+		printerr("Failed to load game ❌")

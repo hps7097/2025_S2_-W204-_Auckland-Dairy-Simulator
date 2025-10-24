@@ -38,4 +38,3 @@ func list_saves() -> Array:
 		file = dir.get_next()
 	dir.list_dir_end()
 	return saves
-

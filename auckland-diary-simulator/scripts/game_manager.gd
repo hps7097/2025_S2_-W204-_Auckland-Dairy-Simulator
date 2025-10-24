@@ -47,3 +47,15 @@ func add_flag(flag: String):
 
 func check_flag(flag: String):
 	return flag in flags
+	
+func getDayCount() -> int:
+	return dayCount
+	
+func setDayCount(day: int):
+	dayCount = day
+	
+func loadDay() -> void:
+	await get_tree().create_timer(0.1).timeout
+	characterSprite = $"../main/NPC/Sprite2D"
+	shop_overview_main = $"../main/UI/SubViewportContainer/SubViewport/shopOverviewMain"
+	NpcManager.spawn_for_day(GameManager.dayCount, shop_overview_main)

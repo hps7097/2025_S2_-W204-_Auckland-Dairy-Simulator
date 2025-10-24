@@ -45,7 +45,6 @@ text = "Options
 "
 
 [node name="LoadButton" type="Button" parent="VBox"]
-visible = false
 layout_mode = 2
 text = "Load"
 

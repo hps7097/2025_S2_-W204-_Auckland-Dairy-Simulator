@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Auckland Diary Simulator"
 run/main_scene="uid://bxl30x1l7yj3l"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -27,7 +27,6 @@ GameState="*res://scripts/GameState.gd"
 SaveManager="*res://scripts/SaveManager.gd"
 DialogueManager="*res://scripts/DialogueManager.gd"
 EndingManager="*res://scripts/EndingManager.gd"
-GameState="*res://scripts/GameState.gd"
 
 [display]
 
