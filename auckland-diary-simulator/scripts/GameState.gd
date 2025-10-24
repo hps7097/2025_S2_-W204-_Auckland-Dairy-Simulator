@@ -130,3 +130,30 @@ func set_flag(key: String, value: bool) -> void:
 
 func get_flag(key: String) -> bool:
     return flags.get(key, false)
+
+# Add at the end of GameState.gd
+
+func reset_state() -> void:
+    runs = []
+    current_run = {}
+    replay_count = 0
+    day_count = 1
+    money = 0
+    inventory = []
+    flags.clear()
+    options.clear()
+
+func reset() -> void:
+    reset_state()
+
+func add_upgrade(name: String) -> void:
+    if not options.has("upgrades"):
+        options["upgrades"] = []
+    var arr: Array = options["upgrades"]
+    if name not in arr:
+        arr.append(name)
+    options["upgrades"] = arr
+
+func has_upgrade(name: String) -> bool:
+    return options.has("upgrades") and name in options["upgrades"]
+
