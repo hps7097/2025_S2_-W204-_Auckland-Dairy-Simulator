@@ -24,7 +24,7 @@ func _ready() -> void:
 					dialogues = loaded
 
 # Public: start dialogue for a given NPC/dialogue id (filename without extension)
-func start_dialogue(npc_dialogue_id: String, purchases: Array) -> void:
+func start_dialogue(npc_dialogue_id: String, purchases: Array = []) -> void: # FIXED LINE WITH CHATGPT
 	current_npc = npc_dialogue_id
 	purchaseArray = purchases
 	var path: String = "res://data/dialogues/%s.json" % npc_dialogue_id
