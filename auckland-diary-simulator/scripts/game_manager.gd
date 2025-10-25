@@ -1,7 +1,7 @@
 extends Node
 
 var dayCustomerCount: int
-var dayCount: int = 0
+var dayCount: int = 1
 var flags: Array = []
 
 var customerAtDesk: bool = false

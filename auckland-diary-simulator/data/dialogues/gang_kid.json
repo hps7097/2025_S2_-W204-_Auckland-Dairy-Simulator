@@ -8,97 +8,100 @@
   },
   "nodes": {
 	"day2_intro": {
-	  "speaker": "Tane “Big Lad” Moana",
+	  "speaker": "Tane \"Big Lad\" Moana",
 	  "text": "Oi unc, you reckon you could sell some of these hoons? Boss is tryna find suppliers, ay.",
 	  "choices": [
-		{"text": "Who’s Boss?", "next": "boss_info", "flags_set": []},
+		{"text": "Who's Boss?", "next": "boss_info", "flags_set": []},
 		{"text": "Not right now.", "next": "decline", "flags_set": []},
-		{"text": "What’s in it for me?", "next": "incentive", "flags_set": []}
+		{"text": "What's in it for me?", "next": "incentive", "flags_set": []}
 	  ]
 	},
 	"boss_info": {
-	  "speaker": "Tane “Big Lad” Moana",
-	  "text": "Don’t worry ‘bout names… we’re part of the Gumboot Gang. Boss runs things tight, wants these hoons moved fast. Needs someone we can trust, bro.",
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "Don't worry 'bout names... we're part of the Gumboot Gang. Boss runs things, keeps it tight. He wants these hoons moved fast, and we need someone we can trust.",
 	  "choices": [
-		{"text": "I’ll think about it.", "next": "leave", "flags_set": ["gang_rep"]}
+		{"text": "I'll think about it.", "next": "leave", "flags_set": ["gang_rep"]}
 	  ]
 	},
 	"incentive": {
-	  "speaker": "Tane “Big Lad” Moana",
+	  "speaker": "Tane \"Big Lad\" Moana",
 	  "text": "Cash, bro. Easy money. You sell the hoons, we look after ya. Mean deal, ay?",
 	  "choices": [
-		{"text": "I’ll think about it.", "next": "leave", "flags_set": ["gang_rep"]},
+		{"text": "I'll think about it.", "next": "leave", "flags_set": ["gang_rep"]},
 		{"text": "Nah, sounds dodgy.", "next": "decline", "flags_set": []}
 	  ]
 	},
 	"decline": {
-	  "speaker": "Tane “Big Lad” Moana",
-	  "text": "Fair enough unc. Offers still on the table tho. I’ll swing by tomorrow, see if you change ya mind.",
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "Fair enough. Offers still on the table. I'll swing by tomorrow and see what you decide.",
 	  "choices": []
 	},
 	"leave": {
-	  "speaker": "Tane “Big Lad” Moana",
-	  "text": "Shot bro, I’ll come back tomorrow. Keep it hush hush, ay.",
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "Shot bro, I'll come back tomorrow. Keep it hush hush, ay.",
 	  "choices": []
 	},
-
 	"day3_intro": {
-	  "speaker": "Tane “Big Lad” Moana",
-	  "text": "Oi unc, I see you got the Hoons now? Sweettt. Hey, I gotta get into the club tomorrow but I’m underage… reckon you could sort me some Fake IDs?",
-	  "conditions": ["flag:gang_rep", "stock:hoons"],
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "Hey unc, about those hoons... you gonna sell them or what?",
 	  "choices": [
-		{"text": "I’ll look into it.", "next": "accept_fakeids", "flags_set": ["gang_rep"]},
-		{"text": "Maybe later.", "next": "decline_fakeids", "flags_set": []}
+		{"text": "Yeah I'll sell the hoons", "next": "selling_hoons", "flags_set": ["selling_hoons"]},
+		{"text": "Nah not selling them", "next": "not_selling", "flags_set": []}
 	  ]
 	},
+	"selling_hoons": {
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "Sweettt. Hey, I got to get into the club tomorrow but I'm underage. You reckon you could start selling Fake IDs?",
+	  "choices": [
+		{"text": "I'll look into it", "next": "accept_fakeids", "flags_set": ["gang_rep"]},
+		{"text": "Maybe kid", "next": "decline_fakeids", "flags_set": []}
+	  ]
+	},
+	"not_selling": {
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "What?? Boss ain't gonna like this... You're all goods man, stay safe",
+	  "choices": []
+	},
 	"accept_fakeids": {
-	  "speaker": "Tane “Big Lad” Moana",
-	  "text": "Choice sweet, bro. Means the boss can trust ya even more. I’ll be back tomorrow to check in.",
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "Alright man, well I gotta gap. Stay safe unc!",
 	  "choices": []
 	},
 	"decline_fakeids": {
-	  "speaker": "Tane “Big Lad” Moana",
-	  "text": "Ahh fair, no stress. Don’t worry, I’ll swing by again.",
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "No worries, catch ya later.",
 	  "choices": []
 	},
-
 	"day4_intro": {
-	  "speaker": "Tane “Big Lad” Moana",
-	  "text": "Unc, boss was happy with those IDs. Said you’re low-key but solid. Now he’s askin’—could you hold a box of gear for us in the back? Nothin’ big, just stashin’ till we move it.",
-	  "conditions": ["flag:gang_rep"],
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "Hey man, you got the Fake IDs?",
 	  "choices": [
-		{"text": "Yeah, I can stash it.", "next": "accept_stash", "flags_set": ["gang_trust"]},
-		{"text": "Nah, that’s risky.", "next": "decline_stash", "flags_set": []}
+		{"text": "Yeah, here you go", "next": "ids_ready", "flags_set": ["gang_trust"]},
+		{"text": "Not yet", "next": "day4_no_ids", "flags_set": []}
 	  ]
 	},
-	"accept_stash": {
-	  "speaker": "Tane “Big Lad” Moana",
-	  "text": "Ooshhh, you’re a real one. Boss is gonna rate you hard. Just keep it quiet, ay?",
+	"ids_ready": {
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "Sweettt, thanks m'bro, I appreciate it. Hey, I also heard the big boss was planning to ram raid local dairys. But don't worry man, I'll make sure you're not on the list. Just continue selling boss's stock and you'll be fine.",
+	  "choices": [
+		{"text": "Sweet", "next": "leave", "flags_set": []}
+	  ]
+	},
+	"day4_no_ids": {
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "No IDs yet? Alright... just remember, boss likes people who deliver.",
 	  "choices": []
 	},
-	"decline_stash": {
-	  "speaker": "Tane “Big Lad” Moana",
-	  "text": "All good, bro. I’ll tell boss you weren’t keen this time.",
-	  "choices": []
-	},
-
 	"day5_intro": {
-	  "speaker": "Tane “Big Lad” Moana",
-	  "text": "Unc, boss says there’s a big thing comin’. If you’re in, you’ll be looked after proper. We’re talkin’ more cash, more respect. You down or nah?",
-	  "conditions": ["flag:gang_trust"],
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "Hey... look, I usually don't say this stuff but you looked out for me the other day. Word is the boys are planning a ram raid soon. I don't want you getting hurt, so... just thought you should know.",
 	  "choices": [
-		{"text": "I’m in.", "next": "big_job_accept", "flags_set": ["gang_bigjob"]},
-		{"text": "Nah, I’m out.", "next": "big_job_decline", "flags_set": []}
+		{"text": "Do you know when?", "next": "raid_warning", "flags_set": []}
 	  ]
 	},
-	"big_job_accept": {
-	  "speaker": "Tane “Big Lad” Moana",
-	  "text": "Shot unc. Boss will come see you himself soon. Mean things ahead.",
-	  "choices": []
-	},
-	"big_job_decline": {
-	  "speaker": "Tane “Big Lad” Moana",
-	  "text": "Fair enough, bro. Can’t say I didn’t offer. Still mates tho.",
+	"raid_warning": {
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "I can't tell you anymore than this, sorry. Stay safe unc.",
 	  "choices": []
 	}
   }

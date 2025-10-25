@@ -1,20 +1,118 @@
 {
   "npc_id": "regular_customer2",
-  "start": "hello",
+  "start_nodes": {
+	"1": "day1_intro",
+	"2": "day2_intro",
+	"3": "day3_intro",
+	"4": "day4_intro",
+	"5": "day5_intro",
+	"6": "day6_intro",
+	"7": "day7_intro"
+  },
   "nodes": {
-	"hello": {
+	"day1_intro": {
 	  "speaker": "Sione",
-	  "text": "Ey Names Sione bro, just popping in for some chips, cheers g!",
+	  "text": "Ey names Sione bro, just popping in for some chips, cheers g!",
 	  "choices": [
 		{"text": "All good, cuz.", "next": "end", "flags_set": []},
-		{"text": "How’s it going, cuz?", "next": "end", "flags_set": []}
+		{"text": "How's it going, cuz?", "next": "end", "flags_set": []}
+	  ]
+	},
+	"day2_intro": {
+	  "speaker": "Sione",
+	  "text": "Ey cuz, saw that Gumboot Gang kid hanging round earlier. They're getting bold, bro. Watch yourself.",
+	  "choices": [
+		{"text": "Cheers for the heads up, cuz", "next": "end", "flags_set": []},
+		{"text": "What you know about them?", "next": "gang_info", "flags_set": []}
+	  ]
+	},
+	"gang_info": {
+	  "speaker": "Sione",
+	  "text": "Small time crew but getting hungry, cuz. Boss is proper dodgy. Don't get too deep with them.",
+	  "choices": [
+		{"text": "Good looking out", "next": "end", "flags_set": []}
+	  ]
+	},
+	"day3_intro": {
+	  "speaker": "Sione",
+	  "text": "Ey cuz, heard the Gumboots are pushing new product. Fake IDs and that. Police been asking questions too.",
+	  "choices": [
+		{"text": "Stay safe out there", "next": "end", "flags_set": []},
+		{"text": "They causing trouble?", "next": "trouble_info", "flags_set": []}
+	  ]
+	},
+	"trouble_info": {
+	  "speaker": "Sione",
+	  "text": "Nah just moving weight for now. But when gangs get comfortable, they get stupid, cuz.",
+	  "choices": [
+		{"text": "True that", "next": "end", "flags_set": []}
+	  ]
+	},
+	"day4_intro": {
+	  "speaker": "Sione",
+	  "text": "Ey heard the Gumboots planning something big, cuz. Ram raids maybe. Keep your head down.",
+	  "choices": [
+		{"text": "Appreciate you looking out", "next": "end", "flags_set": []},
+		{"text": "They hitting dairies?", "next": "raid_info", "flags_set": []}
+	  ]
+	},
+	"raid_info": {
+	  "speaker": "Sione",
+	  "text": "Word is they're scoping places. You're probably safe if you're moving their product, but who knows with these guys, cuz.",
+	  "choices": [
+		{"text": "Cheers bro", "next": "end", "flags_set": []}
+	  ]
+	},
+	"day5_intro": {
+	  "speaker": "Sione",
+	  "text": "Things getting tense, cuz. Police all over the Gumboots. Might go down soon.",
+	  "choices": [
+		{"text": "Stay safe Sione", "next": "end", "flags_set": []},
+		{"text": "You think they'll get caught?", "next": "police_info", "flags_set": []}
+	  ]
+	},
+	"police_info": {
+	  "speaker": "Sione",
+	  "text": "They'll get some of the young fellas, but the boss? Nah, he's slippery, cuz.",
+	  "choices": [
+		{"text": "True", "next": "end", "flags_set": []}
+	  ]
+	},
+	"day6_intro": {
+	  "speaker": "Sione",
+	  "text": "Ey cuz, big news - police grabbed that Gumboot kid. Boss is proper angry. Watch your back.",
+	  "choices": [
+		{"text": "Damn, cheers for telling me", "next": "end", "flags_set": []},
+		{"text": "The boss still out there?", "next": "boss_info", "flags_set": []}
+	  ]
+	},
+	"boss_info": {
+	  "speaker": "Sione",
+	  "text": "Yeah and he's dangerous when cornered, cuz. Might come see you himself now.",
+	  "choices": [
+		{"text": "Stay safe bro", "next": "end", "flags_set": []}
+	  ]
+	},
+	"day7_intro": {
+	  "speaker": "Sione",
+	  "text": "Last day cuz. Whatever goes down tonight, you got this. Just be smart about it.",
+	  "choices": [
+		{"text": "Cheers for everything Sione", "next": "final_end", "flags_set": []},
+		{"text": "You been a real one", "next": "final_end", "flags_set": []}
+	  ]
+	},
+	"final_end": {
+	  "speaker": "Sione",
+	  "text": "Always looking out for my people, cuz. Sweet as, I appreciate you sole.",
+	  "choices": [
+		{"text": "No worries Sione bro", "next": "", "flags_set": []}
 	  ]
 	},
 	"end": {
 	  "speaker": "Sione",
-	  "text": "Sweet ass cuz I appreciate you sole.",
+	  "text": "Sweet as cuz I appreciate you sole.",
 	  "choices": [
-		{"text": "No worries Sione bro.", "next": "", "flags_set": []}
+		{"text": "No worries Sione bro", "next": "", "flags_set": []}
 	  ]
 	}
   }
