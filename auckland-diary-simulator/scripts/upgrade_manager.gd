@@ -13,3 +13,6 @@ func upgrade(type: int) -> void:
 
 func getUpgrade(type: int) -> int:
 	return upgrades[type]
+
+func resetUpgrades():
+	upgrades = [0, 0, 0]

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d14jkhok8smpd" path="res://assets/Endings/EndingScreenTop.png" id="2_iw8ys"]
 [ext_resource type="Script" uid="uid://14u2uwnog1wj" path="res://scenes/endingBackgrounds.gd" id="3_7ipjw"]
 [ext_resource type="Texture2D" uid="uid://bfo3vp1ijf8ba" path="res://assets/Endings/EndingScreenRamRaided.png" id="4_3ukqe"]
-[ext_resource type="Texture2D" uid="uid://cgoj4l46pvvla" path="res://assets/Endings/EndingTitlesDay7.png" id="5_n4fnq"]
+[ext_resource type="Texture2D" uid="uid://ddpsb1l5rpshy" path="res://assets/Endings/EndingTitlesNextDay.png" id="5_7ipjw"]
 [ext_resource type="Texture2D" uid="uid://bpurrbxpyi4tt" path="res://assets/Endings/EndingTitlesRamRaided.png" id="6_7ipjw"]
 
 [node name="EndingScreen" type="Control"]
@@ -42,7 +42,7 @@ offset_right = 250.0
 offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("5_n4fnq")
+texture = ExtResource("5_7ipjw")
 
 [node name="EndingTitle" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -71,7 +71,7 @@ anchor_bottom = 1.0
 offset_left = -86.5
 offset_top = -31.0
 offset_right = 86.5
-offset_bottom = -381.0
+offset_bottom = -450.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Return to Main Menu"

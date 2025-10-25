@@ -1,4 +1,3 @@
-#MADE WITH CHATGPT
 extends Control
 @onready var day_7: TextureRect = $Day7
 @onready var top: Sprite2D = $Top
@@ -20,7 +19,7 @@ func _ready() -> void:
 	tween.tween_property(day_7, "modulate:a", 0, 2.0)
 	await get_tree().create_timer(5.0).timeout
 	ending_title.modulate.a = 1.0
-	await get_tree().create_timer(5.0).timeout
+	await get_tree().create_timer(3.0).timeout
 	return_to_main_menu.show()
 
 func _on_return_to_main_menu_pressed() -> void:

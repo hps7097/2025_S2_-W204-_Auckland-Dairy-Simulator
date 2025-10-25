@@ -1,10 +1,10 @@
-# MADE WITH CHATGPT
 extends Control
 
 @onready var play_button = $VBox/PlayButton
 @onready var options_button = $VBox/OptionsButton
 @onready var load_button = $VBox/LoadButton
 @onready var quit_button = $VBox/QuitButton
+@onready var popup_text: Node2D = $PopupText
 
 const OPTIONS_MENU = preload("res://scenes/OptionsMenu.tscn")
 var optionsMenu
@@ -15,6 +15,7 @@ func _ready():
 func _on_play_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/dayScreen.tscn")
 	GameManager.setDayCount(0)
+	UpgradeManager.resetUpgrades()
 	GameManager.newDay()
 
 func _on_options_button_pressed():
@@ -36,4 +37,5 @@ func _on_load_button_pressed() -> void:
 		GameManager.loadDay()
 		print("Game loaded successfully ✅")
 	else:
+		popup_text.calling("No Save File Found")
 		printerr("Failed to load game ❌")
