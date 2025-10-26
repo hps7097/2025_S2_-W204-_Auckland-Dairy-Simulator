@@ -1,7 +1,9 @@
 # MADE WITH CHATGPT
-extends GutTest
+extends "res://addons/gut/test.gd"
+
+func before_each():
+    GameState.reset_state()
 
 func test_add_upgrade():
-	GameState.reset()
-	GameState.add_upgrade("fast_scanner")
-	assert_true(GameState.has_upgrade("fast_scanner"))
+    GameState.add_upgrade("fast_scanner")
+    assert_true(GameState.has_upgrade("fast_scanner"))
