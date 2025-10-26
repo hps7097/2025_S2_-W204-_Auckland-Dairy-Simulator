@@ -3,19 +3,14 @@ extends Node
 var dayCustomerCount: int
 var dayCount: int = 1
 var flags: Array = []
-
 var customerAtDesk: bool = false
 
 @onready var shop_overview_main: Node = $"../main/UI/SubViewportContainer/SubViewport/shopOverviewMain"
-
 @onready var characterSprite: Sprite2D = $"../main/NPC/Sprite2D"
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
@@ -40,10 +35,11 @@ func customerServed() -> void:
 		await get_tree().create_timer(5).timeout
 		get_tree().change_scene_to_file("res://scenes/nightScreen.tscn")
 
+# --- FLAG SYSTEM ---
 func add_flag(flag: String):
 	if flag not in flags:
 		flags.append(flag)
-	print(str(flags))
+	print("Flag added:", flag, "| Current flags:", flags)
 
-func check_flag(flag: String):
+func check_flag(flag: String) -> bool:
 	return flag in flags
