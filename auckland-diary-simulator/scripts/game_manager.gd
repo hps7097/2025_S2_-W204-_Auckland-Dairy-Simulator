@@ -17,7 +17,6 @@ func _process(delta: float) -> void:
 	pass
 
 func newDay() -> void:
-	ProductManager.setMoney(999)
 	dayCount += 1
 	dayNight = 0
 	dayCustomerCount = 0
@@ -29,7 +28,7 @@ func newDay() -> void:
 
 func customerAppear(dialogue_id: String, purchases: Array) -> void:
 	customerAtDesk = true
-	characterSprite.enter_scene()
+	characterSprite.enter_scene(dialogue_id)
 	await get_tree().create_timer(1.0).timeout
 	DialogueManager.start_dialogue(dialogue_id, purchases)
 

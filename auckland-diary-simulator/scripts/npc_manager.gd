@@ -55,9 +55,10 @@ func spawn_for_day(day: int, parent: Node) -> void:
 			if npc.has_signal("interacted"):
 				npc.connect("interacted", Callable(self, "_on_npc_interacted"))
 			print("spawned in " + entry.get("npc_id", ""))
-			await get_tree().create_timer(10.0).timeout
-			if !get_tree().current_scene.scene_file_path.ends_with("dayScreen.tscn"):
-				break
+			for i in range(20):
+				await get_tree().create_timer(0.5).timeout
+				if !get_tree().current_scene.scene_file_path.ends_with("dayScreen.tscn"):
+					return
 
 func _npc_should_spawn(entry: Dictionary, day: float) -> bool:
 	print("checking")

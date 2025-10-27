@@ -4,46 +4,115 @@
 	  "npc_id": "regular_customer1",
 	  "scene": "res://scenes/npc.tscn",
 	  "dialogue_id": "regular_customer1",
-	  "appears_on_days": [1,4,5,6,7],
+	  "appears_on_days": [1,4,5,6],
 	  "purchases": ["9:1", "9:3"]
 	},
-
-{
-  "npc_id": "gang_kid",
-  "scene": "res://scenes/npc.tscn", 
-  "dialogue_id": "gang_kid",
-  "appears_on_days": [2,3,4,5],
-  "purchases": ["10:0"]
-},
+	{
+	  "npc_id": "regular_customer4",
+	  "scene": "res://scenes/npc.tscn",
+	  "dialogue_id": "regular_customer4",
+	  "appears_on_days": [2,3,4,6],
+	  "show_conditions": ["upgrade2: 1"],
+	  "purchases": ["6:1", "5:3"]
+	},
+	{
+	  "npc_id": "regular_customer5",
+	  "scene": "res://scenes/npc.tscn",
+	  "dialogue_id": "regular_customer5",
+	  "appears_on_days": [2,3,5,6],
+	"show_conditions": ["upgrade2: 2"],
+	  "purchases": ["1:0", "5:3"]
+	},
+	
+	
+	{
+	  "npc_id": "gang_kid",
+	  "scene": "res://scenes/npc.tscn", 
+	  "dialogue_id": "gang_kid",
+	  "appears_on_days": [2],
+	  "purchases": ["5:2", "1:1"]
+	},
+	{
+	  "npc_id": "gang_kid",
+	  "scene": "res://scenes/npc.tscn", 
+	  "dialogue_id": "gang_kid",
+	  "appears_on_days": [3],
+	  "purchases": ["10:0"]
+	},
+	{
+	  "npc_id": "gang_kid",
+	  "scene": "res://scenes/npc.tscn", 
+	  "dialogue_id": "gang_kid",
+	  "appears_on_days": [4],
+	  "purchases": ["10:0", "10:1"]
+	},
+	{
+	  "npc_id": "gang_kid",
+	  "scene": "res://scenes/npc.tscn", 
+	  "dialogue_id": "gang_kid",
+	  "appears_on_days": [5],
+	  "purchases": ["10:2", "10:3"]
+	},
+	
+	
 	{
 	  "npc_id": "regular_customer3",
 	  "scene": "res://scenes/npc.tscn",
 	"dialogue_id": "regular_customer3",
-	 "appears_on_days": [1,2,3,4,5,6,7],
-	 "purchases": ["9:1", "9:3"]
+	 "appears_on_days": [2,4,5,6],
+	 "purchases": ["1:0", "8:0", "8:2", "8:3", "3:2"]
 	},
-		{
+	{
+	  "npc_id": "regular_customer3",
+	  "scene": "res://scenes/npc.tscn",
+	"dialogue_id": "regular_customer3",
+	 "appears_on_days": [7],
+	 "purchases": ["1:1", "8:0"]
+	},
+	
+	
+	{
 	"npc_id": "regular_customer2",
 	  "scene": "res://scenes/npc.tscn",
 	 "dialogue_id": "regular_customer2",
 	  "appears_on_days": [1,2,3,4,5,6,7],
 	   "purchases": ["8:2", "7:3"]
-
 	},
-{
+	
+	
+	{
+	  "npc_id": "regular_customer3",
+	  "scene": "res://scenes/npc.tscn",
+	"dialogue_id": "regular_customer3",
+	 "appears_on_days": [3],
+	 "purchases": ["1:0", "8:0", "8:1", "8:2", "3:2"]
+	},
+	
+	
+	{
 	  "npc_id": "police_1",
 	  "scene": "res://scenes/npc.tscn",
 	  "dialogue_id": "police_1",
 	  "appears_on_days": [1,2,3,4,5,6,7],
-	  "purchases": ["1:1", "3:1", "4:2"]
+	  "purchases": ["1:1", "3:1"]
 	},
-{
-  "npc_id": "gang_boss",
-  "scene": "res://scenes/npc.tscn",
-  "dialogue_id": "gang_boss",
-  "appears_on_days": [6,7],
-
-},
+	
+	
+	{
+	  "npc_id": "regular_customer3",
+	  "scene": "res://scenes/npc.tscn",
+	"dialogue_id": "regular_customer3",
+	 "appears_on_days": [1],
+	 "purchases": ["1:0", "8:0", "8:1", "8:2", "8:3", "3:2"]
+	},
+	
+	
+	{
+	  "npc_id": "gang_boss",
+	  "scene": "res://scenes/npc.tscn",
+	  "dialogue_id": "gang_boss",
+	  "appears_on_days": [6,7],
+	},
 
 	
   ]

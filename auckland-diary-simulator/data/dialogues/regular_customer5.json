@@ -1,0 +1,13 @@
+{
+  "npc_id": "regular_customer5",
+  "start": "hello",
+  "nodes": {
+	"hello": {
+	  "speaker": "Customer",
+	  "text": "Just these please!",
+	  "choices": [
+		{"text": "Alright!", "next": "", "flags_set": []}
+	  ]
+	}
+  }
+}

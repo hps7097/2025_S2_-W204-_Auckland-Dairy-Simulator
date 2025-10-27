@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://manualtestrunner"]
+[gd_scene load_steps=0 format=3 uid="uid://d04v2tuci6j46"]
 
 [ext_resource type="Script" path="res://tests/ManualTestRunner.gd" id="1_abc"]
 

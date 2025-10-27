@@ -1,0 +1,13 @@
+{
+  "npc_id": "regular_customer4",
+  "start": "hello",
+  "nodes": {
+	"hello": {
+	  "speaker": "Customer",
+	  "text": "Whats up big man.",
+	  "choices": [
+		{"text": "Sup bro!", "next": "", "flags_set": []}
+	  ]
+	}
+  }
+}

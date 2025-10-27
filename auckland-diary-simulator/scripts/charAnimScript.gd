@@ -17,7 +17,32 @@ func _ready() -> void:
 	position = start_position
 	modulate.a = 0.0
 
-func enter_scene() -> void:
+func enter_scene(dialogue_id: String) -> void:
+	var file_path
+	match dialogue_id:
+		"regular_customer1":
+			file_path = "res://assets/_NPC_Character6.png"
+		"regular_customer2":
+			file_path = "res://assets/_NPC_Character5.png"
+		"regular_customer3":
+			file_path = "res://assets/_NPC_Character4.png"
+		"gang_kid":
+			file_path = "res://assets/_NPC_Character3.png"
+		"police_1":
+			file_path = "res://assets/_NPC_Character1.png"
+		"gang_boss":
+			file_path = "res://assets/_NPC_Character2.png"
+		"regular_customer4":
+			file_path = "res://assets/_NPC_Character7.png"
+		"regular_customer5":
+			file_path = "res://assets/_NPC_Character8.png"
+		
+		
+	var new_texture = load(file_path)
+	if new_texture:
+		texture = new_texture
+	else:
+		push_warning("Texture not found: " + file_path)
 	position = start_position
 	modulate.a = 0.0
 	fade_in(1.0)

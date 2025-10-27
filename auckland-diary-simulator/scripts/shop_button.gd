@@ -13,9 +13,9 @@ var upgadeLabels = [
 ["Vapes", "Fake IDs", "Zaza", "White Stuff"]]
 
 var upgradePrices = [
-[10, 15, 25, 30, 60], 
-[10, 20, 30], 
-[15, 25, 30, 40]]
+[40, 55, 75, 80, 100], 
+[30, 40, 50], 
+[25, 30, 40, 50]]
 
 @export var upgradeType: int
 var price: float
