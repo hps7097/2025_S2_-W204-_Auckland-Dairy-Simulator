@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxl30x1l7yj3l"]
+[gd_scene load_steps=5 format=3 uid="uid://bxl30x1l7yj3l"]
 
 [ext_resource type="Script" uid="uid://cyy52vea86gnm" path="res://scripts/MainMenu.gd" id="1_yqorp"]
 [ext_resource type="PackedScene" uid="uid://juhrxihsqedy" path="res://scenes/menuBackground.tscn" id="2_0ykhv"]
+[ext_resource type="Texture2D" uid="uid://cate733gp4moe" path="res://assets/Title.png" id="3_2wh52"]
+[ext_resource type="PackedScene" uid="uid://bm5yjpvdgsgcp" path="res://scenes/popup_text.tscn" id="4_ow34m"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -30,10 +32,11 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Title" type="Label" parent="VBox"]
+[node name="EndingTitle" type="TextureRect" parent="VBox"]
+custom_minimum_size = Vector2(0, 650)
 layout_mode = 2
-text = "Auckland Diary Simulator
-"
+texture = ExtResource("3_2wh52")
+stretch_mode = 3
 
 [node name="PlayButton" type="Button" parent="VBox"]
 layout_mode = 2
@@ -45,13 +48,15 @@ text = "Options
 "
 
 [node name="LoadButton" type="Button" parent="VBox"]
-visible = false
 layout_mode = 2
 text = "Load"
 
 [node name="QuitButton" type="Button" parent="VBox"]
 layout_mode = 2
 text = "Quit"
+
+[node name="PopupText" parent="." instance=ExtResource("4_ow34m")]
+position = Vector2(105, 757)
 
 [connection signal="pressed" from="VBox/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBox/OptionsButton" to="." method="_on_options_button_pressed"]

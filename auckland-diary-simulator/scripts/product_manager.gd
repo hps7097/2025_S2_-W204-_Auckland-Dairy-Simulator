@@ -5,7 +5,7 @@ var scanned_objects: Array = []
 var bagged_objects: Array = []
 var total_price: float
 
-var money: float = 999
+var money: float
 
 var message: String
 
@@ -85,3 +85,6 @@ func unbag(value: Node2D):
 	if !bagged_objects.has(value):
 		return
 	bagged_objects.erase(value)
+
+func setMoney(value: float):
+	money = value

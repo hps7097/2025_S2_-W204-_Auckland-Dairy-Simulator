@@ -26,3 +26,8 @@ func _process(_delta: float) -> void:
 		hud_icon.texture = preload("res://assets/corrupt.png")
 	else:
 		hud_icon.texture = preload("res://assets/lawful.png")
+
+func check_for_game_end() -> void:
+    if GameState.current_day > MAX_DAYS:
+        EndingManager.trigger_ending()
+

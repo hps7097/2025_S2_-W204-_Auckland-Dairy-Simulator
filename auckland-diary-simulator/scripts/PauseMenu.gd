@@ -32,20 +32,11 @@ func _on_options_pressed() -> void:
 	else:
 		get_tree().change_scene_to_file("res://scenes/UI/OptionsMenu.tscn")
 
-func _on_save_pressed() -> void:
-	if Engine.has_singleton("SaveSystem"):
-		SaveSystem.save_game()
-	else:
-		var ss = get_tree().root.get_node_or_null("Main/SaveSystem")
-		if ss:
-			ss.save_game()
-	print("Game saved!")
+func _on_LoadGame_pressed():
+    get_tree().change_scene("res://scenes/LoadMenu.tscn")
 
-func _on_load_pressed() -> void:
-	if get_tree().root.has_node("Main/LoadMenu"):
-		get_tree().root.get_node("Main/LoadMenu").show()
-	else:
-		get_tree().change_scene_to_file("res://scenes/UI/LoadMenu.tscn")
+func _on_SaveGame_pressed():
+    GameState.save_to_file("manual_save")
 
 func _on_quit_pressed() -> void:
 	get_tree().paused = false

@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3bk3y6ljfb4f"]
+[gd_scene load_steps=7 format=3 uid="uid://c3bk3y6ljfb4f"]
 
 [ext_resource type="Script" uid="uid://4ftqmjut631w" path="res://scripts/EndingScreen.gd" id="1_jkc7j"]
+[ext_resource type="Texture2D" uid="uid://d14jkhok8smpd" path="res://assets/Endings/EndingScreenTop.png" id="2_iw8ys"]
+[ext_resource type="Script" uid="uid://14u2uwnog1wj" path="res://scenes/endingBackgrounds.gd" id="3_7ipjw"]
+[ext_resource type="Texture2D" uid="uid://bfo3vp1ijf8ba" path="res://assets/Endings/EndingScreenRamRaided.png" id="4_3ukqe"]
+[ext_resource type="Texture2D" uid="uid://ddpsb1l5rpshy" path="res://assets/Endings/EndingTitlesNextDay.png" id="5_7ipjw"]
+[ext_resource type="Texture2D" uid="uid://bpurrbxpyi4tt" path="res://assets/Endings/EndingTitlesRamRaided.png" id="6_7ipjw"]
 
 [node name="EndingScreen" type="Control"]
 layout_mode = 3
@@ -11,19 +16,64 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jkc7j")
 
-[node name="ending_text" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 159.0
-offset_top = 8.0
-offset_right = 463.0
-offset_bottom = 119.0
-text = "ending_text
-"
+[node name="Top" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(3, 3)
+texture = ExtResource("2_iw8ys")
+script = ExtResource("3_7ipjw")
+
+[node name="Bottom" type="Sprite2D" parent="."]
+position = Vector2(960, 1620)
+scale = Vector2(3, 3)
+texture = ExtResource("4_3ukqe")
+script = ExtResource("3_7ipjw")
+
+[node name="Day7" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -75.0
+offset_right = 250.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_7ipjw")
+
+[node name="EndingTitle" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -75.0
+offset_right = 250.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_7ipjw")
 
 [node name="Return to Main Menu" type="Button" parent="."]
-layout_mode = 0
-offset_left = 210.0
-offset_top = 142.0
-offset_right = 383.0
-offset_bottom = 173.0
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -86.5
+offset_top = -31.0
+offset_right = 86.5
+offset_bottom = -450.0
+grow_horizontal = 2
+grow_vertical = 0
 text = "Return to Main Menu"
+
+[connection signal="pressed" from="Return to Main Menu" to="." method="_on_return_to_main_menu_pressed"]
