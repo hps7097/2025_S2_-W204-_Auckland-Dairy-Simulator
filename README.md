@@ -1,7 +1,7 @@
 Draft Version of read.me file, please check and see what you would like to keep
 #AI was used in this assignment; it was copied and rewritten when appropriate.
 
-# Auckland Dairy Simulator 🥛  
+# Auckland Dairy Simulator  
 **Semester 2, 2025 – Team W204**
 
 ---
@@ -67,7 +67,7 @@ Players manage a dairy shop, interact with customers (NPCs), and make choices th
 
 ---
 
-## 🧾 License
+## License
 This project is for educational use only (COMP602 coursework).  
 All assets used fall under fair use for academic purposes.
 
