@@ -5,19 +5,14 @@ var dayCount: int = 0
 var dayNight: int = 0 # day = 0 night = 1
 var moneyAtDayStart: float
 var flags: Array = []
-
 var customerAtDesk: bool = false
 
 @onready var shop_overview_main: Node = $"../main/UI/SubViewportContainer/SubViewport/shopOverviewMain"
-
 @onready var characterSprite: Sprite2D = $"../main/NPC/Sprite2D"
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
@@ -53,12 +48,13 @@ func customerServed() -> void:
 			dayNight = 1;
 			moneyAtDayStart = ProductManager.money;
 
+# --- FLAG SYSTEM ---
 func add_flag(flag: String):
 	if flag not in flags:
 		flags.append(flag)
-	print(str(flags))
+	print("Flag added:", flag, "| Current flags:", flags)
 
-func check_flag(flag: String):
+func check_flag(flag: String) -> bool:
 	return flag in flags
 	
 func getDayCount() -> int:

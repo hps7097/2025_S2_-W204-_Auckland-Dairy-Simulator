@@ -17,6 +17,15 @@ func _ready() -> void:
 	z_index = 4096
 	close_button.hide()
 
+# NEW METHOD: For day-based dialogue system
+func show_dialogue_node(dialogue_data: Dictionary, node_id: String, purchases: Array) -> void:
+	current_dialogue = dialogue_data
+	purchaseArray = purchases
+	print("Showing dialogue node: ", node_id)
+	show()
+	show_node(node_id)
+
+# Existing method (for backward compatibility)
 func start(dialogue: Dictionary, purchases: Array) -> void:
 	current_dialogue = dialogue
 	purchaseArray = purchases
@@ -29,7 +38,6 @@ func start(dialogue: Dictionary, purchases: Array) -> void:
 		return
 	show()
 	show_node(current_node)
-	
 
 func show_node(node_id: String) -> void:
 	# clear old choices
@@ -38,7 +46,9 @@ func show_node(node_id: String) -> void:
 
 	var node: Dictionary = current_dialogue["nodes"].get(node_id, null)
 	if node == null:
+		print("Node not found: ", node_id)
 		hide()
+		ProductManager.spawnNew(purchaseArray)
 		return
 
 	current_node = node_id

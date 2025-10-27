@@ -1,5 +1,5 @@
 {
-  "npc_id": "regular_customer",
+  "npc_id": "regular_customer1",
   "start": "hello",
   "nodes": {
 	"hello": {

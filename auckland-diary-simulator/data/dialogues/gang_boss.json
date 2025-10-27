@@ -1,0 +1,101 @@
+{
+  "npc_id": "gang_boss",
+  "start_nodes": {
+	"6": "day6_intro",
+	"7": "day7_finale"
+  },
+  "nodes": {
+	"day6_intro": {
+	  "speaker": "The Boss",
+	  "text": "So you're the one Tane's been dealing with. Nice little operation you got here.",
+	  "choices": [
+		{"text": "Who are you?", "next": "boss_identity", "flags_set": []},
+		{"text": "What do you want?", "next": "boss_demand", "flags_set": []}
+	  ]
+	},
+	"boss_identity": {
+	  "speaker": "The Boss",
+	  "text": "Names don't matter. What matters is you've been moving our product. Tane's been... detained. So now you deal with me directly.",
+	  "choices": [
+		{"text": "What happened to Tane?", "next": "tane_fate", "flags_set": []},
+		{"text": "I want out", "next": "want_out", "flags_set": []}
+	  ]
+	},
+	"boss_demand": {
+	  "speaker": "The Boss",
+	  "text": "Simple. You keep selling our gear, we keep you in business. Stop selling... and well, this nice shop of yours might have some unfortunate accidents.",
+	  "choices": [
+		{"text": "I understand", "next": "comply", "flags_set": ["boss_met"]},
+		{"text": "I'm not scared of you", "next": "defy", "flags_set": ["boss_defied"]}
+	  ]
+	},
+	"tane_fate": {
+	  "speaker": "The Boss",
+	  "text": "Police got him. Too sloppy. You don't want to be sloppy. Now, are you in or out?",
+	  "choices": [
+		{"text": "I'm in", "next": "comply", "flags_set": ["boss_met"]},
+		{"text": "I'm out", "next": "defy", "flags_set": ["boss_defied"]}
+	  ]
+	},
+	"want_out": {
+	  "speaker": "The Boss",
+	  "text": "There's no 'out'. Not after you've moved our product. You're part of this now. Make your choice.",
+	  "choices": [
+		{"text": "Fine, I'll keep selling", "next": "comply", "flags_set": ["boss_met"]},
+		{"text": "I said I'm out", "next": "defy", "flags_set": ["boss_defied"]}
+	  ]
+	},
+	"comply": {
+	  "speaker": "The Boss",
+	  "text": "Smart choice. We'll have more product for you tomorrow. Don't disappoint me.",
+	  "choices": []
+	},
+	"defy": {
+	  "speaker": "The Boss",
+	  "text": "Wrong answer. Remember this moment when your shop's in pieces tomorrow night.",
+	  "choices": []
+	},
+
+	"day7_finale": {
+	  "speaker": "The Boss",
+	  "text": "Final day. Time to settle up. You've been useful... for the most part.",
+	  "conditions": ["flag:boss_met"],
+	  "choices": [
+		{"text": "What now?", "next": "final_demand", "flags_set": []},
+		{"text": "I want my cut", "next": "demand_payment", "flags_set": []}
+	  ]
+	},
+	"final_demand": {
+	  "speaker": "The Boss",
+	  "text": "Now you keep quiet. We're moving operations. If you talk to the cops, we'll know. And we'll be back.",
+	  "choices": [
+		{"text": "I'll keep quiet", "next": "gang_ending", "flags_set": ["gang_affiliated"]},
+		{"text": "I'm going to the police", "next": "betray_ending", "flags_set": []}
+	  ]
+	},
+	"demand_payment": {
+	  "speaker": "The Boss",
+	  "text": "Your cut? You're still breathing, that's your cut. Take it and be grateful.",
+	  "choices": [
+		{"text": "Fine", "next": "gang_ending", "flags_set": ["gang_affiliated"]},
+		{"text": "This isn't right", "next": "betray_ending", "flags_set": []}
+	  ]
+	},
+	"gang_ending": {
+	  "speaker": "The Boss",
+	  "text": "Good doing business with you. Stay out of trouble... and we'll stay out of yours.",
+	  "choices": []
+	},
+	"betray_ending": {
+	  "speaker": "The Boss",
+	  "text": "Big mistake. Boys... trash the place.",
+	  "choices": []
+	},
+	"day7_ramraid": {
+	  "speaker": "The Boss",
+	  "text": "Should have taken the deal when you had the chance. Say goodbye to your shop.",
+	  "conditions": ["flag:boss_defied"],
+	  "choices": []
+	}
+  }
+}
