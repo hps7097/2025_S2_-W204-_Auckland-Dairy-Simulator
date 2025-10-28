@@ -1,16 +1,21 @@
 extends Button
 
 @onready var label: Label = $Label
+@onready var sfx: AudioStreamPlayer2D = get_node_or_null("AudioStreamPlayer2D")
+# @onready var sfx: AudioStreamPlayer = get_node_or_null("AudioStreamPlayer")
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass # Nothing else needed here
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	label.text = "START DAY " + str(GameManager.dayCount + 1)
 
 func _on_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/dayScreen.tscn")
+	# --- Play click sound (safe check)
+	if sfx:
+		sfx.play()
+		# wait briefly so the sound can be heard before changing scene
+		await get_tree().create_timer(0.12).timeout
+
 	GameManager.newDay()
+	get_tree().change_scene_to_file("res://scenes/dayScreen.tscn")

@@ -5,22 +5,29 @@ extends Button
 @onready var priceLabel: Label = $VBoxContainer/PanelContainer2/ColorRect1/Label
 @onready var nextDayButton: Button = $"../../Button"
 
+# ---- AUDIO: make sure the child is named "AudioStreamPlayer2D"
+@onready var sfx: AudioStreamPlayer2D = get_node_or_null("AudioStreamPlayer2D")
+# If you use a non-2D player instead, change to:
+# @onready var sfx: AudioStreamPlayer = get_node_or_null("AudioStreamPlayer")
+
 var coin = preload("res://scenes/coin.tscn")
 
 var upgadeLabels = [
-["New flooring", "Better Lighting", "Shutter Grates", "Reinforced Glass", "Bollards / Steel Posts"], 
-["XXL Pies", "V Refresh Series", "More Chip Flavours"], 
-["Vapes", "Fake IDs", "Zaza", "White Stuff"]]
+	["New flooring", "Better Lighting", "Shutter Grates", "Reinforced Glass", "Bollards / Steel Posts"], 
+	["XXL Pies", "V Refresh Series", "More Chip Flavours"], 
+	["Vapes", "Fake IDs", "Zaza", "White Stuff"]
+]
 
 var upgradePrices = [
 [40, 55, 75, 80, 100], 
 [30, 40, 50], 
-[25, 30, 40, 50]]
+[25, 30, 40, 50]
+]
+
 
 @export var upgradeType: int
 var price: float
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var atlas := AtlasTexture.new()
 	atlas.atlas = load("res://assets/_Upgrades.png")
@@ -51,12 +58,16 @@ func _ready() -> void:
 		nextDayButton.disabled = false
 		return
 	
-	image.texture.region = Rect2(upgradeType * 120, upgrade_value * 120, 120, 120)  # x, y, width, height
+	image.texture.region = Rect2(upgradeType * 120, upgrade_value * 120, 120, 120)
 	label.text = str(upgadeLabels[upgradeType][upgrade_value])
 	price = upgradePrices[upgradeType][upgrade_value]
 	priceLabel.text = "$" + "%0.2f" % price
 
 func _on_pressed() -> void:
+	# --- Play click SFX (guarded so it never crashes if missing)
+	if sfx:
+		sfx.play()
+
 	"""
 	MAKE CHECK IF BALANCE SUFFICIENT
 	THEN CREATE MONEY ANIMATION
@@ -70,7 +81,7 @@ func _on_pressed() -> void:
 		GameManager.setMoneyStart(moneyTotal)
 		
 		for i in range(floor(price / 2)):
-			var t = get_tree().create_timer(0.1) # 1 second
+			var t = get_tree().create_timer(0.1)
 			await t.timeout
 			var coin1 = coin.instantiate()
 			coin1.type = upgradeType + 1
@@ -94,10 +105,9 @@ func _on_pressed() -> void:
 		label.text = str(upgadeLabels[upgradeType][upgrade_value])
 		priceLabel.text = "$" + "%0.2f" % price
 		
-		var t = get_tree().create_timer(1) # 1 second
+		var t = get_tree().create_timer(1)
 		await t.timeout
 	
 		
 		nextDayButton.disabled = false
 		disabled = false
-	

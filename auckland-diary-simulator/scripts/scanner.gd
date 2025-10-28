@@ -12,12 +12,23 @@ var scaleBy: float = 1
 @onready var scanner_area: Area2D = $ScannerArea
 @onready var scan_timer: Timer = $ScannerArea/ScanTimer
 
+@export var scan_ping: AudioStream
+var _ping_player: AudioStreamPlayer = AudioStreamPlayer.new()
 
 func _ready() -> void:
 	scale = Vector2(scaleBy, scaleBy)
 	initialPos = position
 	MouseManager.push(scanner_click_area)
 	sprite_2d.region_rect = Rect2(0, 0, 128, 128)  # (x, y, w, h)
+
+	add_child(_ping_player)
+	if AudioServer.get_bus_index("SFX") == -1:
+		_ping_player.bus = "Master"  # fallback if SFX bus doesn't exist
+	else:
+		_ping_player.bus = "SFX"
+	_ping_player.volume_db = -6.0
+	_ping_player.stream = scan_ping
+	assert(_ping_player.stream != null, "Assign 'scan_ping' in the Scanner node Inspector")
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if Input.is_action_just_pressed("click"):
@@ -106,7 +117,13 @@ func check_top_scanner() -> void:
 
 func _on_scan_timer_timeout() -> void:
 	var area = MouseManager.pick_top_object(scanner_area.global_position)
+	# debug:
+	# print("timeout, area==area_ref? ", area == area_ref, " stream set? ", _ping_player.stream != null)
 	if area == area_ref:
+		if _ping_player and _ping_player.stream:
+			_ping_player.stop()
+			_ping_player.play()
+
 		area_ref.get_parent().scanned = true;
 		area_ref.get_parent().flash_white(area);
 		ProductManager.scan(area_ref.get_parent())
