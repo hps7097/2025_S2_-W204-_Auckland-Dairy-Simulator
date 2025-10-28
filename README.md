@@ -25,12 +25,6 @@ Players manage a dairy shop, interact with customers (NPCs), and make choices th
 
 ---
 
-## Saving & Loading
-- Use **Save** or **Load** buttons in the Pause Menu
-- Use can **Load** old saves or **Save** your current position to come back later
-
----  
-
 ## Team
 - **Team W204** – Auckland University of Technology
 - Product Owner: Dhon Lao
