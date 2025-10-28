@@ -30,7 +30,7 @@ func _load_npc_data() -> void:
 
 # Spawn NPCs for a day into a given parent container
 func spawn_for_day(day: int, parent: Node) -> void:
-	
+	counterFree = true
 	if not npc_data.has("npcs"):
 		return
 	var npcs: Array = npc_data["npcs"]
