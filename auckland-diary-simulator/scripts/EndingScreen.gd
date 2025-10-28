@@ -6,9 +6,26 @@ extends Control
 @onready var return_to_main_menu: Button = $"Return to Main Menu"
 
 func _ready() -> void:
-	
+	var backgroundFilePath
+	var titleFilePath
+	if GameManager.check_flag("ending_clean"):
+		backgroundFilePath = "res://assets/Endings/EndingScreenBackupArrived.png"
+		titleFilePath = "res://assets/Endings/EndingTitlesBackupArrived.png"
+	elif GameManager.check_flag("ending_busted"):
+		backgroundFilePath = "res://assets/Endings/EndingScreenBusted.png"
+		titleFilePath = "res://assets/Endings/EndingTitlesBusted.png"
+	elif GameManager.check_flag("gang_affiliated"):
+		backgroundFilePath = "res://assets/Endings/EndingScreenGangAffiliated.png"
+		titleFilePath = "res://assets/Endings/EndingTitlesGangAffiliated.png"
+	elif UpgradeManager.getUpgrade(0) == 5:
+		backgroundFilePath = "res://assets/Endings/EndingScreenFullyArmoured.png"
+		titleFilePath = "res://assets/Endings/EndingTitlesFullyArmoured.png"
+	else:
+		backgroundFilePath = "res://assets/Endings/EndingScreenRamRaided.png"
+		titleFilePath = "res://assets/Endings/EndingTitlesRamRaided.png"
 	# HAVE CHECK THE FLAGS FOR THE ENDING
-	
+	ending_title.texture = load(titleFilePath)
+	bottom.texture = load(backgroundFilePath)
 	await get_tree().create_timer(1.0).timeout
 	top.moveAnimation()
 	bottom.moveAnimation()

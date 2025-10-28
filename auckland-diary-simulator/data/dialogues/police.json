@@ -1,0 +1,127 @@
+{
+  "npc_id": "police_1",
+  "start_nodes": {
+	"1": "day1_intro",
+	"2": "day2_intro",
+	"3": "day3_intro",
+	"4": "day4_intro",
+	"5": "day5_intro",
+	"6": "day6_intro",
+	"7": "day7_check_ending"
+  },
+  "nodes": {
+	"day1_intro": {
+	  "speaker": "Officer Dave",
+	  "text": "Afternoon mate. How's it going, mate?",
+	  "choices": [
+		{"text": "Good thanks, mate", "next": "friendly", "flags_set": ["police_rep"]},
+		{"text": "What do you want, mate?", "next": "suspicious", "flags_set": []}
+	  ]
+	},
+	"friendly": {
+	  "speaker": "Officer Dave",
+	  "text": "Sweet as mate, just doing the rounds. Keep up the good work, mate.",
+	  "choices": []
+	},
+	"suspicious": {
+	  "speaker": "Officer Dave",
+	  "text": "Just checking in, mate. Everything all goods here, mate?",
+	  "choices": [
+		{"text": "Yeah, all good mate", "next": "end", "flags_set": []}
+	  ]
+	},
+	"end": {
+	  "speaker": "Officer Dave",
+	  "text": "Cheers mate, catch ya later.",
+	  "choices": []
+	},
+
+
+
+
+	"day2_intro": {
+	  "speaker": "Officer Dave",
+	  "text": "G'day mate. Saw that young fella hanging around earlier. Word is the Gumboot Gang's getting a bit keen, mate.",
+	  "choices": [
+		{"text": "No worries mate", "next": "acknowledge", "flags_set": []},
+		{"text": "Can you guys help out, mate?", "next": "request_help", "flags_set": ["police_trust_request"]}
+	  ]
+	},
+	"acknowledge": {
+	  "speaker": "Officer Dave",
+	  "text": "Chur mate, just keep your eyes open, ay? Cheers mate.",
+	  "choices": []
+	},
+	"request_help": {
+	  "speaker": "Officer Dave",
+	  "text": "We'll keep an eye out mate, but we can't watch your shop 24/7. Just give us a hoy if anything looks dodgy, alright mate?",
+	  "choices": []
+	},
+
+
+
+
+	"day3_intro": {
+	  "speaker": "Officer Dave",
+	  "text": "How's it going mate? Seen anything sus lately?",
+	  "choices": [
+		{"text": "Nah nothing mate", "next": "nothing", "flags_set": []},
+		{"text": "What's the deal with this gang, mate?", "next": "ask_about_gang", "flags_set": ["police_interest"]}
+	  ]
+	},
+	"nothing": {
+	  "speaker": "Officer Dave",
+	  "text": "Sweet as mate, stay sharp though, ay?",
+	  "choices": []
+	},
+	"ask_about_gang": {
+	  "speaker": "Officer Dave",
+	  "text": "Ah the Gumboot boys? Bit of a nuisance mostly, but getting cheeky lately. Let us know if you spot anything, mate.",
+	  "choices": []
+	},
+
+
+
+
+	"day4_intro": {
+	  "speaker": "Officer Dave",
+	  "text": "G'day mate. Everything quiet on your end?",
+	  "choices": [
+		{"text": "All quiet mate", "next": "quiet", "flags_set": ["no_police"]},
+		{"text": "Actually mate...", "next": "share_info", "flags_set": ["police_trust"]}
+	  ]
+	},
+	"quiet": {
+	  "speaker": "Officer Dave",
+	  "text": "Good to hear mate, we'll keep patrolling the area.",
+	  "choices": []
+	},
+	"share_info": {
+	  "speaker": "Officer Dave",
+	  "text": "What's up mate? You heard something?",
+	  "choices": [
+		{"text": "Heard about possible ram raids, mate", "next": "raid_info", "flags_set": []}
+	  ]
+	},
+	"raid_info": {
+	  "speaker": "Officer Dave",
+	  "text": "Ram raids? That's proper serious, mate. We'll bump up the patrols. Good on ya for speaking up, mate.",
+	  "choices": []
+	},
+
+
+	"day7_check_ending": {
+	  "speaker": "Officer Dave",
+	  "text": "Hey mate, it's been a while. How ya doin.",
+	  "choices": [
+		{"text": "Good...", "next": "ending_branch", "flags_set": []}
+	  ]
+	},
+	"ending_branch": {
+	  "speaker": "Officer Dave",
+	  "text": "I'll be having this please.",
+	  "choices": []
+	}
+  }
+}
+ 

@@ -41,6 +41,7 @@ func customerServed() -> void:
 		if !get_tree().current_scene.scene_file_path.ends_with("dayScreen.tscn"):
 			return
 		if dayCount == 7:
+			await get_tree().create_timer(1.5).timeout
 			get_tree().change_scene_to_file("res://scenes/EndingScreen.tscn")
 		else:
 			get_tree().change_scene_to_file("res://scenes/nightScreen.tscn")

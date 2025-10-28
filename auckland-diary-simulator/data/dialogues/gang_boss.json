@@ -52,14 +52,13 @@
 	},
 	"defy": {
 	  "speaker": "The Boss",
-	  "text": "Wrong answer. Remember this moment when your shop's in pieces tomorrow night.",
+	  "text": "Wrong answer. I'll remember this moment.",
 	  "choices": []
 	},
 
 	"day7_finale": {
 	  "speaker": "The Boss",
-	  "text": "Final day. Time to settle up. You've been useful... for the most part.",
-	  "conditions": ["flag:boss_met"],
+	  "text": "Final day. Time to settle up. You've been useful.",
 	  "choices": [
 		{"text": "What now?", "next": "final_demand", "flags_set": []},
 		{"text": "I want my cut", "next": "demand_payment", "flags_set": []}
@@ -88,13 +87,7 @@
 	},
 	"betray_ending": {
 	  "speaker": "The Boss",
-	  "text": "Big mistake. Boys... trash the place.",
-	  "choices": []
-	},
-	"day7_ramraid": {
-	  "speaker": "The Boss",
-	  "text": "Should have taken the deal when you had the chance. Say goodbye to your shop.",
-	  "conditions": ["flag:boss_defied"],
+	  "text": "Big mistake. Watch out bud.",
 	  "choices": []
 	}
   }

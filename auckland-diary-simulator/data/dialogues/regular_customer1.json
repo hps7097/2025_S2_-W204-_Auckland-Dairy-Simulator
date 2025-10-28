@@ -4,7 +4,7 @@
   "nodes": {
 	"hello": {
 	  "speaker": "Customer",
-	  "text": "Just grabbing some milk and bread, thanks!",
+	  "text": "Just grabbing these, thanks!",
 	  "choices": [
 		{"text": "Alright!", "next": "", "flags_set": []}
 	  ]

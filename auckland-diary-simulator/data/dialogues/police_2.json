@@ -1,0 +1,41 @@
+{
+  "npc_id": "police_1",
+  "start_nodes": {
+	"7": "day7_check_ending"
+  },
+  "nodes": {
+	"day7_check_ending": {
+	  "speaker": "Officer Dave",
+	  "text": "Right mate, final day. We've been watching your shop all week...",
+	  "choices": [
+		{"text": "What's going on?", "next": "ending_branch", "flags_set": []}
+	  ]
+	},
+	"ending_branch": {
+	  "speaker": "Officer Dave",
+	  "conditions_not": ["police_inform"],
+	  "text": "We know everything. The hoons, the fake IDs, all of it. You've been running a shady operation here, mate.",
+	  "choices": [
+		{"text": "I can explain...", "next": "busted_ending", "flags_set": ["ending_busted"]},
+		{"text": "You got proof?", "next": "defiant_ending", "flags_set": ["ending_busted"]},
+		{"text": "I was helping you the whole time!", "next": "cooperation_ending", "flags_set": ["ending_busted"]}
+	  ]
+	},
+	"busted_ending": {
+	  "speaker": "Officer Dave",
+	  "text": "Explain it to the judge, mate. You're under arrest for dealing illegal goods.",
+	  "choices": []
+	},
+	"defiant_ending": {
+	  "speaker": "Officer Dave",
+	  "text": "We've got CCTV, witness statements, the lot. Trying to be a tough guy just makes it worse for you, mate. Cuffs on, now.",
+	  "choices": []
+	},
+	"cooperation_ending": {
+	  "speaker": "Officer Dave",
+	  "text": "Helping us? You were making money off their operation, mate. That makes you part of the gang in our books. Time to come with us.",
+	  "choices": []
+	},
+  }
+}
+ 

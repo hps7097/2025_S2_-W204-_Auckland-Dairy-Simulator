@@ -26,11 +26,21 @@ func enter_scene(dialogue_id: String) -> void:
 			file_path = "res://assets/_NPC_Character5.png"
 		"regular_customer3":
 			file_path = "res://assets/_NPC_Character4.png"
+		"regular_customer31":
+			file_path = "res://assets/_NPC_Character4.png"
 		"gang_kid":
 			file_path = "res://assets/_NPC_Character3.png"
+		"gang_kid1":
+			file_path = "res://assets/_NPC_Character3.png"
+		"police":
+			file_path = "res://assets/_NPC_Character1.png"
 		"police_1":
 			file_path = "res://assets/_NPC_Character1.png"
+		"police_2":
+			file_path = "res://assets/_NPC_Character1.png"
 		"gang_boss":
+			file_path = "res://assets/_NPC_Character2.png"
+		"gang_boss2":
 			file_path = "res://assets/_NPC_Character2.png"
 		"regular_customer4":
 			file_path = "res://assets/_NPC_Character7.png"

@@ -33,4 +33,4 @@ func pick_top_object(position : Vector2, layer_mask = 1) -> Node2D:
 
 func signalAllObjects() -> void:
 	for obj in z_index_order:
-		obj.get_parent().check_top()
+			obj.get_parent().check_top()

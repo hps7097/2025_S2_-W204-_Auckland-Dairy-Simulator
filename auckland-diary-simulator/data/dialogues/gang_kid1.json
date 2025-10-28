@@ -1,0 +1,70 @@
+{
+  "npc_id": "gang_kid",
+  "start_nodes": {
+	"3": "day3_intro",
+	"4": "day4_intro",
+	"5": "day5_intro"
+  },
+  "nodes": {
+	"day3_intro": {
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "Hey unc, about those hoons... you gonna sell them or what?",
+	  "choices": [
+		{"text": "Yeah I'm selling the hoons", "next": "selling_hoons", "flags_set": ["sold_hoons"]},
+	  ]
+	},
+	"selling_hoons": {
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "Sweettt. Hey, I got to get into the club tomorrow but I'm underage. You reckon you could start selling Fake IDs?",
+	  "choices": [
+		{"text": "I'll look into it", "next": "accept_fakeids", "flags_set": []},
+		{"text": "Maybe kid", "next": "decline_fakeids", "flags_set": []}
+	  ]
+	},
+	"accept_fakeids": {
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "Alright man, well I gotta gap. Stay safe unc!",
+	  "choices": []
+	},
+	"decline_fakeids": {
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "No worries, catch ya later.",
+	  "choices": []
+	},
+	
+	
+	
+	
+	"day4_intro": {
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "Hey man, you got the Fake IDs?",
+	  "choices": [
+		{"text": "Yeah, here you go", "next": "ids_ready", "flags_set": ["gang_trust"]},
+	  ]
+	},
+	"ids_ready": {
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "Sweettt, thanks m'bro, I appreciate it. Hey, I also heard the big boss was planning to ram raid local dairys. But don't worry man, I'll make sure you're not on the list. Just continue selling boss's stock and you'll be fine.",
+	  "choices": [
+		{"text": "Sweet", "next": "leave", "flags_set": []}
+	  ]
+	},
+	
+	
+	
+	
+	
+	"day5_intro": {
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "Hey... look, I usually don't say this stuff but you looked out for me the other day. Word is the boys are planning a ram raid soon. I don't want you getting hurt, so... just thought you should know.",
+	  "choices": [
+		{"text": "Do you know when?", "next": "raid_warning", "flags_set": []}
+	  ]
+	},
+	"raid_warning": {
+	  "speaker": "Tane \"Big Lad\" Moana",
+	  "text": "I can't tell you anymore than this, sorry. Stay safe unc.",
+	  "choices": []
+	}
+  }
+}

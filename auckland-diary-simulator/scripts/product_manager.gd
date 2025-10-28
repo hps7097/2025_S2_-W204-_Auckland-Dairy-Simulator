@@ -59,6 +59,7 @@ func spawnNew(purchaseArray: Array):
 	if purchaseArray.is_empty():
 		# Next Customer
 		resetScene()
+		return
 	for item in purchaseArray.size():
 		total_objects.append(object.instantiate())
 		var i: Array = purchaseArray[item].split(":")
@@ -66,7 +67,17 @@ func spawnNew(purchaseArray: Array):
 		var type = keys[int(i[0])]
 		total_objects[item].item_type = total_objects[item].Type[type]
 		total_objects[item].item_flavour = int(i[1])
-		get_tree().current_scene.add_child(total_objects[item])
+		if type == keys[10]:
+			if int(i[1]) == 0 && UpgradeManager.getUpgrade(2) >= 1:
+				get_tree().current_scene.add_child(total_objects[item])
+			elif int(i[1]) == 1 && UpgradeManager.getUpgrade(2) >= 2:
+				get_tree().current_scene.add_child(total_objects[item])
+			elif int(i[1]) == 2 && UpgradeManager.getUpgrade(2) >= 3:
+				get_tree().current_scene.add_child(total_objects[item])
+			elif int(i[1]) == 3 && UpgradeManager.getUpgrade(2) >= 4:
+				get_tree().current_scene.add_child(total_objects[item])
+		else:
+			get_tree().current_scene.add_child(total_objects[item])
 
 func scan(value: Node2D):
 	if scanned_objects.has(value):

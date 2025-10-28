@@ -1,0 +1,40 @@
+{
+  "npc_id": "gang_boss",
+  "start_nodes": {
+	"6": "day6_ignore",
+	"7": "day7_finale"
+  },
+  "nodes": {
+	"day6_ignore": {
+	  "speaker": "The Boss",
+	  "text": "...",
+	  "choices": []
+	},
+	
+	"day7_finale": {
+	  "speaker": "The Boss",
+	  "text": "Final day. You've been useful... for the most part.",
+	  "choices": [
+		{"text": "What do you mean 'for the most part'?", "next": "finale", "flags_set": []},
+	  ]
+	},
+	"finale": {
+	  "speaker": "The Boss",
+	  "text": "You sold our stock, but not enough of it. You've failed to meet quota...",
+	  "choices": [
+		{"text": "So what happens now?", "next": "youll_see", "flags_set": []},
+		{"text": "I've sold enough!", "next": "goodbye", "flags_set": []}
+	  ]
+	},
+	"youll_see": {
+	  "speaker": "The Boss",
+	  "text": "Should have met the quota. You'll see what happens now. Say goodbye.",
+	  "choices": []
+	},
+	"goodbye": {
+	  "speaker": "The Boss",
+	  "text": "I've no time for pointless argue. You're done. Goodbye.",
+	  "choices": []
+	}
+  }
+}

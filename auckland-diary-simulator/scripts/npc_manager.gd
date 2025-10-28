@@ -68,20 +68,21 @@ func _npc_should_spawn(entry: Dictionary, day: float) -> bool:
 		print(str(day) + " " + str(arr))
 		if day not in arr:
 			return false
+	var spawnable: bool = true
 	if entry.has("show_conditions"):
 		var conditions: Array = entry["show_conditions"]
 		for cond in conditions:
 			var p: Array = cond.split(":")
 			if p[0] == "flag" and not GameManager.check_flag(p[1]):
 				print("not flag")
-				return false
-			if p[0] == "upgrade1" and int(p[1]) > UpgradeManager.getUpgrade(0):
+				spawnable = false
+			if p[0] == "upgrade1" and int(p[1]) != UpgradeManager.getUpgrade(0):
 				print("not upgrade1")
-				return false
-			if p[0] == "upgrade2" and int(p[1]) > UpgradeManager.getUpgrade(1):
+				spawnable = false
+			if p[0] == "upgrade2" and int(p[1]) != UpgradeManager.getUpgrade(1):
 				print("not upgrade2")
-				return false
-			if p[0] == "upgrade3" and int(p[1]) > UpgradeManager.getUpgrade(2):
+				spawnable = false
+			if p[0] == "upgrade3" and int(p[1]) != UpgradeManager.getUpgrade(2):
 				print("not upgrade3")
-				return false
-	return true
+				spawnable = false
+	return spawnable
