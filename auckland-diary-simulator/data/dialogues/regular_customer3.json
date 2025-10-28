@@ -14,112 +14,132 @@
 	  "speaker": "Sam \"Big Lad\" Tavita",
 	  "text": "Chur bro, just here loadin' up a mean bag of chips and a pie before the footy, ay! Gotta keep the tank sweet for all the hits.",
 	  "choices": [
-		{"text": "All good, cuz.", "next": "end", "flags_set": []},
-		{"text": "How's it going, cuz?", "next": "end", "flags_set": []}
+		{"text": "All good, cuz.", "next": "end_day1", "flags_set": []},
+		{"text": "How's it going, cuz?", "next": "end_day1", "flags_set": []}
 	  ]
 	},
+	"end_day1": {
+	  "speaker": "Sam \"Big Lad\" Tavita",
+	  "text": "Sweet bro, catch ya after the game. Gotta see if the Warriors actually show up tonight!",
+	  "choices": [{"text": "Later bro", "next": "", "flags_set": []}]
+	},
+
 	"day2_intro": {
 	  "speaker": "Sam \"Big Lad\" Tavita", 
 	  "text": "Ey saw my cuz Tane in here earlier. Good kid that one, just mixed up with the wrong crowd, ay.",
 	  "choices": [
-		{"text": "He seems alright", "next": "end", "flags_set": []},
+		{"text": "He seems alright", "next": "end_day2", "flags_set": []},
 		{"text": "You know him?", "next": "tane_connection", "flags_set": []}
 	  ]
 	},
 	"tane_connection": {
 	  "speaker": "Sam \"Big Lad\" Tavita",
 	  "text": "Yeah grew up with his older brother. Whole family's connected to the Gumboots, bro. Just how it is round here.",
-	  "choices": [
-		{"text": "Right", "next": "end", "flags_set": []}
-	  ]
+	  "choices": [{"text": "Right", "next": "end_day2", "flags_set": []}]
 	},
+	"end_day2": {
+	  "speaker": "Sam \"Big Lad\" Tavita",
+	  "text": "Mean chat bro, I’ll catch you round. Stay outta the drama, ay.",
+	  "choices": [{"text": "All good", "next": "", "flags_set": []}]
+	},
+
 	"day3_intro": {
 	  "speaker": "Sam \"Big Lad\" Tavita",
 	  "text": "Heard Tane's trying to move some product for the boys. Good opportunity if you're smart about it, bro.",
 	  "choices": [
-		{"text": "Not sure about that", "next": "end", "flags_set": []},
+		{"text": "Not sure about that", "next": "end_day3", "flags_set": []},
 		{"text": "The gang pays well?", "next": "gang_money", "flags_set": []}
 	  ]
 	},
 	"gang_money": {
 	  "speaker": "Sam \"Big Lad\" Tavita", 
 	  "text": "Boss looks after his people, bro. Just don't cross him. Seen what happens to snitches.",
-	  "choices": [
-		{"text": "Noted", "next": "end", "flags_set": []}
-	  ]
+	  "choices": [{"text": "Noted", "next": "end_day3", "flags_set": []}]
 	},
+	"end_day3": {
+	  "speaker": "Sam \"Big Lad\" Tavita",
+	  "text": "Anyway, I better bounce. Got a few errands before kickoff. Later, cuz.",
+	  "choices": [{"text": "Later bro", "next": "", "flags_set": []}]
+	},
+
 	"day4_intro": {
 	  "speaker": "Sam \"Big Lad\" Tavita",
 	  "text": "Boss is impressed you're moving the gear. Keep it up and you'll be proper looked after, bro.",
 	  "conditions": ["stock:hoons"],
 	  "choices": [
-		{"text": "Good to know", "next": "end", "flags_set": []},
+		{"text": "Good to know", "next": "end_day4", "flags_set": []},
 		{"text": "The boss knows me?", "next": "boss_notice", "flags_set": []}
 	  ]
 	},
 	"boss_notice": {
 	  "speaker": "Sam \"Big Lad\" Tavita",
 	  "text": "He knows everyone, bro. Especially people making him money. Stay on his good side.",
-	  "choices": [
-		{"text": "Righto", "next": "end", "flags_set": []}
-	  ]
+	  "choices": [{"text": "Righto", "next": "end_day4", "flags_set": []}]
 	},
 	"day4_normal": {
 	  "speaker": "Sam \"Big Lad\" Tavita",
 	  "text": "Just here for the usual, bro. Gotta keep the energy up for training.",
 	  "conditions": ["!stock:hoons"],
-	  "choices": [
-		{"text": "Sweet", "next": "end", "flags_set": []}
-	  ]
+	  "choices": [{"text": "Sweet", "next": "end_day4", "flags_set": []}]
 	},
+	"end_day4": {
+	  "speaker": "Sam \"Big Lad\" Tavita",
+	  "text": "Alright bro, stay steady. Things are heating up round here.",
+	  "choices": [{"text": "See ya bro", "next": "", "flags_set": []}]
+	},
+
 	"day5_intro": {
 	  "speaker": "Sam \"Big Lad\" Tavita",
 	  "text": "Big things coming bro. Boss planning something that'll put the Gumboots on the map proper.",
 	  "conditions": ["flag:gang_trust"],
 	  "choices": [
 		{"text": "Yeah?", "next": "big_plans", "flags_set": []},
-		{"text": "Stay safe out there", "next": "end", "flags_set": []}
+		{"text": "Stay safe out there", "next": "end_day5", "flags_set": []}
 	  ]
 	},
 	"big_plans": {
 	  "speaker": "Sam \"Big Lad\" Tavita",
 	  "text": "Can't say too much but... let's just say some dairies gonna have a bad night soon. Not yours though, you're with us.",
-	  "choices": [
-		{"text": "Cheers bro", "next": "end", "flags_set": []}
-	  ]
+	  "choices": [{"text": "Cheers bro", "next": "end_day5", "flags_set": []}]
 	},
 	"day5_normal": {
 	  "speaker": "Sam \"Big Lad\" Tavita",
 	  "text": "Just grabbing some snacks before the game, bro. Warriors better not choke this time.",
 	  "conditions": ["!flag:gang_trust"],
-	  "choices": [
-		{"text": "Hope so", "next": "end", "flags_set": []}
-	  ]
+	  "choices": [{"text": "Hope so", "next": "end_day5", "flags_set": []}]
 	},
+	"end_day5": {
+	  "speaker": "Sam \"Big Lad\" Tavita",
+	  "text": "See ya round bro, something’s brewing… stay ready.",
+	  "choices": [{"text": "Gotcha", "next": "", "flags_set": []}]
+	},
+
 	"day6_intro": {
 	  "speaker": "Sam \"Big Lad\" Tavita", 
 	  "text": "Heard about Tane? Police got him. Boss is proper pissed. Might be coming to see you himself, bro.",
 	  "conditions": ["flag:gang_trust"],
 	  "choices": [
 		{"text": "Damn", "next": "boss_visit", "flags_set": []},
-		{"text": "Stay out of trouble", "next": "end", "flags_set": []}
+		{"text": "Stay out of trouble", "next": "end_day6", "flags_set": []}
 	  ]
 	},
 	"boss_visit": {
 	  "speaker": "Sam \"Big Lad\" Tavita",
 	  "text": "Just be respectful to the boss and you'll be sweet. He values loyalty above everything, bro.",
-	  "choices": [
-		{"text": "Got it", "next": "end", "flags_set": []}
-	  ]
+	  "choices": [{"text": "Got it", "next": "end_day6", "flags_set": []}]
 	},
 	"day6_normal": {
 	  "speaker": "Sam \"Big Lad\" Tavita",
 	  "text": "Big game tonight bro! Gotta load up on all the goods.",
 	  "conditions": ["!flag:gang_trust"],
-	  "choices": [
-		{"text": "Enjoy", "next": "end", "flags_set": []}
-	  ]
+	  "choices": [{"text": "Enjoy", "next": "end_day6", "flags_set": []}]
 	},
+	"end_day6": {
+	  "speaker": "Sam \"Big Lad\" Tavita",
+	  "text": "Stay sharp bro, streets been wild lately.",
+	  "choices": [{"text": "Take care", "next": "", "flags_set": []}]
+	},
+
 	"day7_intro": {
 	  "speaker": "Sam \"Big Lad\" Tavita",
 	  "text": "Final day bro. Whatever happens tonight, remember - loyalty is everything in this game.",
@@ -133,23 +153,17 @@
 	  "speaker": "Sam \"Big Lad\" Tavita",
 	  "text": "Last pie before the big final! Gotta represent the boys.",
 	  "conditions": ["!flag:gang_trust"],
-	  "choices": [
-		{"text": "Go hard", "next": "end", "flags_set": []}
-	  ]
+	  "choices": [{"text": "Go hard", "next": "end_day7", "flags_set": []}]
 	},
 	"final_end": {
 	  "speaker": "Sam \"Big Lad\" Tavita",
 	  "text": "You're one of us now bro. Look after the family and the family looks after you.",
-	  "choices": [
-		{"text": "Chur bro", "next": "", "flags_set": []}
-	  ]
+	  "choices": [{"text": "Chur bro", "next": "", "flags_set": []}]
 	},
-	"end": {
+	"end_day7": {
 	  "speaker": "Sam \"Big Lad\" Tavita",
-	  "text": "Sweet as, bro. Can't watch the game empty-handed—gotta be fully geared for yellin' at every try!",
-	  "choices": [
-		{"text": "No worries bro", "next": "", "flags_set": []}
-	  ]
+	  "text": "That’s me bro, time to back the boys. Catch ya on the flipside.",
+	  "choices": [{"text": "Laters", "next": "", "flags_set": []}]
 	}
   }
 }

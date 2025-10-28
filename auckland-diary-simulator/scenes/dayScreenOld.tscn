@@ -1,0 +1,116 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvb84syy0dss2"]
+
+[ext_resource type="Texture2D" uid="uid://cl8mys0nso8ll" path="res://assets/_NPC_Police.png" id="1_p4ulj"]
+[ext_resource type="Texture2D" uid="uid://dfosdkugb4dgb" path="res://assets/_TillDesk.png" id="2_pienu"]
+[ext_resource type="PackedScene" uid="uid://b6e1i7tte4ujh" path="res://scenes/snappableArea.tscn" id="3_wmq1h"]
+[ext_resource type="PackedScene" uid="uid://dy20m3mlng3a7" path="res://scenes/draggableObject.tscn" id="4_r0ttt"]
+
+[sub_resource type="Curve2D" id="Curve2D_p4ulj"]
+
+[node name="DayScreen" type="Node2D"]
+
+[node name="NPC" type="Node2D" parent="."]
+position = Vector2(329, 496)
+
+[node name="Sprite2D" type="Sprite2D" parent="NPC"]
+position = Vector2(33, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("1_p4ulj")
+
+[node name="Control" type="Control" parent="NPC"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="LeftVBoxContainer" type="VBoxContainer" parent="UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_constants/separation = 0
+
+[node name="TillVBoxContainer" type="VBoxContainer" parent="UI/HBoxContainer/LeftVBoxContainer"]
+custom_minimum_size = Vector2(0, 380)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/separation = 0
+
+[node name="TillTop" type="ColorRect" parent="UI/HBoxContainer/LeftVBoxContainer/TillVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+color = Color(0.379566, 0.495062, 1, 1)
+
+[node name="TillUnder" type="ColorRect" parent="UI/HBoxContainer/LeftVBoxContainer/TillVBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+mouse_filter = 2
+color = Color(0.34902, 0.34902, 0.341176, 1)
+
+[node name="RightVBoxContainer" type="VBoxContainer" parent="UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 10.0
+theme_override_constants/separation = 0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/HBoxContainer/RightVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SubViewport" type="SubViewport" parent="UI/HBoxContainer/RightVBoxContainer/SubViewportContainer"]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Desk" type="ColorRect" parent="UI/HBoxContainer/RightVBoxContainer"]
+custom_minimum_size = Vector2(0, 580)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+size_flags_stretch_ratio = 6.0
+mouse_filter = 2
+color = Color(0.372939, 0.493642, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -657.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("2_pienu")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="snappableArea" parent="." instance=ExtResource("3_wmq1h")]
+position = Vector2(1224, 768)
+
+[node name="snappableArea2" parent="." instance=ExtResource("3_wmq1h")]
+position = Vector2(80, 832)
+
+[node name="draggableObject" parent="." instance=ExtResource("4_r0ttt")]
+position = Vector2(819, 304)
+
+[node name="CustomerPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_p4ulj")
