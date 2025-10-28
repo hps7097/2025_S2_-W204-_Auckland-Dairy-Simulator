@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3bk3y6ljfb4f"]
+[gd_scene load_steps=10 format=3 uid="uid://c3bk3y6ljfb4f"]
 
 [ext_resource type="Script" uid="uid://4ftqmjut631w" path="res://scripts/EndingScreen.gd" id="1_jkc7j"]
 [ext_resource type="Texture2D" uid="uid://d14jkhok8smpd" path="res://assets/Endings/EndingScreenTop.png" id="2_iw8ys"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://bfo3vp1ijf8ba" path="res://assets/Endings/EndingScreenRamRaided.png" id="4_3ukqe"]
 [ext_resource type="Texture2D" uid="uid://ddpsb1l5rpshy" path="res://assets/Endings/EndingTitlesNextDay.png" id="5_7ipjw"]
 [ext_resource type="Texture2D" uid="uid://bpurrbxpyi4tt" path="res://assets/Endings/EndingTitlesRamRaided.png" id="6_7ipjw"]
+[ext_resource type="AudioStream" uid="uid://xo1tgh0dk071" path="res://sounds/street-ambience-traffic-410714.mp3" id="7_3ukqe"]
+[ext_resource type="AudioStream" uid="uid://c452nhhx4uaah" path="res://sounds/police-car-298078.mp3" id="8_nbavy"]
+[ext_resource type="AudioStream" uid="uid://yay3064ib6ao" path="res://sounds/sound-effect-car-crash-394903.mp3" id="9_oj0vg"]
 
 [node name="EndingScreen" type="Control"]
 layout_mode = 3
@@ -60,6 +63,26 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_7ipjw")
 
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.581
+offset_left = -20.0
+offset_top = 40.0
+offset_right = 20.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 22
+theme_override_font_sizes/font_size = 29
+text = "PLAY AGAIN TO FIND THE OTHER ENDINGS"
+
 [node name="Return to Main Menu" type="Button" parent="."]
 visible = false
 layout_mode = 1
@@ -71,9 +94,20 @@ anchor_bottom = 1.0
 offset_left = -86.5
 offset_top = -31.0
 offset_right = 86.5
-offset_bottom = -450.0
+offset_bottom = -380.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Return to Main Menu"
+text = "Main Menu"
+
+[node name="street ambience" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_3ukqe")
+autoplay = true
+
+[node name="sirens" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_nbavy")
+
+[node name="crash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_oj0vg")
+pitch_scale = 0.77
 
 [connection signal="pressed" from="Return to Main Menu" to="." method="_on_return_to_main_menu_pressed"]

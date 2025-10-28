@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxl30x1l7yj3l"]
+[gd_scene load_steps=7 format=3 uid="uid://bxl30x1l7yj3l"]
 
 [ext_resource type="Script" uid="uid://cyy52vea86gnm" path="res://scripts/MainMenu.gd" id="1_yqorp"]
 [ext_resource type="PackedScene" uid="uid://juhrxihsqedy" path="res://scenes/menuBackground.tscn" id="2_0ykhv"]
-[ext_resource type="Texture2D" uid="uid://cate733gp4moe" path="res://assets/Title.png" id="3_2wh52"]
-[ext_resource type="PackedScene" uid="uid://bm5yjpvdgsgcp" path="res://scenes/popup_text.tscn" id="4_ow34m"]
 [ext_resource type="AudioStream" uid="uid://cw8agq482pta7" path="res://sounds/PEVA X UNALOTO NATANE - TONGAN SIREN JAM 🔥🔥.wav" id="3_2wh52"]
+[ext_resource type="Texture2D" uid="uid://cate733gp4moe" path="res://assets/Title.png" id="3_826wr"]
 [ext_resource type="AudioStream" uid="uid://ft82ytyowji2" path="res://sounds/mixkit-select-click-1109.wav" id="3_ow34m"]
+[ext_resource type="PackedScene" uid="uid://bm5yjpvdgsgcp" path="res://scenes/popup_text.tscn" id="4_ow34m"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -37,7 +37,7 @@ alignment = 1
 [node name="EndingTitle" type="TextureRect" parent="VBox"]
 custom_minimum_size = Vector2(0, 650)
 layout_mode = 2
-texture = ExtResource("3_2wh52")
+texture = ExtResource("3_826wr")
 stretch_mode = 3
 
 [node name="PlayButton" type="Button" parent="VBox"]
@@ -63,11 +63,11 @@ text = "Load"
 layout_mode = 2
 text = "Quit"
 
-[node name="PopupText" parent="." instance=ExtResource("4_ow34m")]
-position = Vector2(105, 757)
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="VBox/QuitButton"]
 stream = ExtResource("3_ow34m")
+
+[node name="PopupText" parent="." instance=ExtResource("4_ow34m")]
+position = Vector2(105, 757)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_2wh52")

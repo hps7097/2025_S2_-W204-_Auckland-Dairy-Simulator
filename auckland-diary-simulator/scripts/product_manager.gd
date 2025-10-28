@@ -85,7 +85,10 @@ func scan(value: Node2D):
 		return
 	scanned_objects.append(value)
 	message = "SCANNED ITEM"
-	total_price += value.type_values[value.item_type]
+	var multiplier: float = 1.0
+	if UpgradeManager.getUpgrade(1) == 3:
+		multiplier = 1.3
+	total_price += value.type_values[value.item_type] * multiplier
 
 func bag(value: Node2D):
 	if bagged_objects.has(value):
