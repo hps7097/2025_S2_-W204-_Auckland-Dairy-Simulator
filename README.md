@@ -1,4 +1,4 @@
-#AI was used in this Task; it was copied and rewritten when appropriate.
+#AI was used in this task (to create the read.me); it was copied and rewritten when appropriate.
 
 # Auckland Dairy Simulator  
 **Semester 2, 2025 – Team W204**
