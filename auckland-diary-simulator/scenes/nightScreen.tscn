@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dvp45h7yyscpj"]
 
-[ext_resource type="Script" uid="uid://0qg602ylvfke" path="res://scenes/night_screen.gd" id="1_aescc"]
+[ext_resource type="Script" uid="uid://0qg602ylvfke" path="res://scripts/night_screen.gd" id="1_aescc"]
 [ext_resource type="PackedScene" uid="uid://juhrxihsqedy" path="res://scenes/menuBackground.tscn" id="1_fw4in"]
 [ext_resource type="PackedScene" uid="uid://do0o2eleyo6w3" path="res://scenes/moneyCounter.tscn" id="3_at8um"]
 [ext_resource type="AudioStream" uid="uid://ft82ytyowji2" path="res://sounds/mixkit-select-click-1109.wav" id="4_at8um"]

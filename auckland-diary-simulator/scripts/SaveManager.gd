@@ -24,17 +24,3 @@ func load_game(filename: String) -> Dictionary:
 	var data = JSON.parse_string(file.get_as_text())
 	file.close()
 	return data
-
-func list_saves() -> Array:
-	var saves = []
-	var dir = DirAccess.open(SAVE_PATH)
-	if dir == null:
-		return saves
-	dir.list_dir_begin()
-	var file = dir.get_next()
-	while file != "":
-		if file.ends_with(".json"):
-			saves.append(file.replace(".json", ""))
-		file = dir.get_next()
-	dir.list_dir_end()
-	return saves

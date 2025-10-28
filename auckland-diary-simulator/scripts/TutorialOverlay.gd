@@ -2,9 +2,9 @@ extends Control
 
 var stepsDay = [
 	"Welcome to the store! Its your at first day at Auckland's \nFinest Dairy! Are we ready to grow your business?",
-	"Customers will start converstations, converse with the locals\nand make dialogue choices that may affect the story.",
-	"When serving customers, Drag items to the scanning desk. Only here\ncan items be scanned. Then drag the scanner to scan the item.",
-	"Hover the scanner's beam over the item long enough, and when\nthe scanner beeps, Bag the item to sell it to the NPC.",
+	"Customers will start converstations! converse with the locals\nand make dialogue choices that may affect the story.",
+	"When serving customers, Drag items to the scanning desk. Only here\ncan items be scanned. Then drag the scanner towards the item.",
+	"Hold the steady so the scanner's beam scans the item. When the \nscanner beeps, Bag the item to the left to sell it to the NPC.",
 ]
 var stepsNight = [
 	"Welcome to the After Hours Shop!",
