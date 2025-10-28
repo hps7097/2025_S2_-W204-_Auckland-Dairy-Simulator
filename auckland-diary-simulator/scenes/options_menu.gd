@@ -30,3 +30,4 @@ func _on_dialogue_speed_slider_drag_ended(value_changed: bool) -> void:
 
 func _on_volume_slider_drag_ended(value_changed: bool) -> void:
 	global.volume = volume_slider.value
+	global.updateVolume()

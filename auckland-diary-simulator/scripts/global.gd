@@ -43,3 +43,7 @@ func set_windowed() -> void:
 	pos.x = max(pos.x, 0)
 	pos.y = max(pos.y, 0)
 	DisplayServer.window_set_position(pos)
+
+func updateVolume() -> void:
+	var dB = linear_to_db(volume)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), dB)
