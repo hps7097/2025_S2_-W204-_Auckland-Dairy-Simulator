@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Auckland Diary Simulator"
 run/main_scene="uid://bxl30x1l7yj3l"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -26,7 +26,6 @@ GameManager="*res://scripts/game_manager.gd"
 GameState="*res://scripts/GameState.gd"
 SaveManager="*res://scripts/SaveManager.gd"
 DialogueManager="*res://scripts/DialogueManager.gd"
-AudioManager="*res://scripts/AudioManager.gd"
 
 [display]
 
@@ -64,26 +63,3 @@ speed_up={
 textures/canvas_textures/default_texture_filter=0
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap_controls_to_pixels=false
-
-[audio]
-
-bus/0/name="Master"
-bus/0/volume_db=0.0
-bus/0/mute=false
-bus/0/solo=false
-bus/0/bypass_fx=false
-
-bus/1/name="Music"
-bus/1/volume_db=0.0
-bus/1/mute=false
-bus/1/solo=false
-bus/1/bypass_fx=false
-bus/1/send="Master"
-
-bus/2/name="SFX"
-bus/2/volume_db=0.0
-bus/2/mute=false
-bus/2/solo=false
-bus/2/bypass_fx=false
-bus/2/send="Master"
-

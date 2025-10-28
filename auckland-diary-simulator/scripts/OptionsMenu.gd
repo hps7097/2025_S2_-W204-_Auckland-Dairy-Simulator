@@ -14,17 +14,14 @@ func _ready():
 	dialogue_speed_slider.connect("value_changed", Callable(self, "_on_dialogue_speed_changed"))
 	back_button.connect("pressed", Callable(self, "_on_back_pressed"))
 
-# func _on_volume_changed(val):
-#	AudioServer.set_bus_volume_db(0, linear_to_db(val))
-#	GameState.options["volume"] = val
-func _on_music_slider_value_changed(value: float):
-    AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), value)
+func _on_volume_changed(val):
+	AudioServer.set_bus_volume_db(0, linear_to_db(val))
+	GameState.options["volume"] = val
 
 func _on_dialogue_speed_changed(val):
 	GameState.options["dialogue_speed"] = val
 
 func _on_back_pressed():
-	$ClickSound.play()
 	self.visible = false
 	get_node("/root/Main/MainMenu").visible = true
 	SaveSystem.save_options()

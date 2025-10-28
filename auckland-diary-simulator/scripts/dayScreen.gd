@@ -5,14 +5,10 @@ extends Control
 @onready var npc_manager_node: Node = $NPCManager
 @onready var emblem: TextureRect = $PathEmblem
 @onready var hud_icon: TextureRect = $HUD/BranchIcon
-@onready var day_music: AudioStream = preload("res://audio/day_theme.ogg")
 
 func _ready() -> void:
 	# spawn conditionally for today's day
 	npc_manager_node.spawn_for_day(GameState.current_day, npc_holder)
-
-func _ready2():
-    AudioManager.play_music(day_music)
 
 func _process(_delta: float) -> void:
 	# Update emblem on the store wall

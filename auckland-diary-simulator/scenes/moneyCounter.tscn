@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://do0o2eleyo6w3"]
+[gd_scene load_steps=5 format=3 uid="uid://do0o2eleyo6w3"]
 
 [ext_resource type="Texture2D" uid="uid://cukr3k50tp5ot" path="res://assets/_Coins.png" id="1_dyohy"]
 [ext_resource type="Script" uid="uid://caxqytfaken75" path="res://scripts/money_count.gd" id="2_e7ykm"]
+[ext_resource type="AudioStream" uid="uid://pdahx74uhb52" path="res://sounds/mixkit-coins-sound-2003.wav" id="3_e7ykm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_at8um"]
 atlas = ExtResource("1_dyohy")
@@ -35,3 +36,7 @@ theme_override_font_sizes/font_size = 32
 text = "99.99"
 vertical_alignment = 1
 script = ExtResource("2_e7ykm")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="MoneyCount"]
+stream = ExtResource("3_e7ykm")
+volume_db = 3.962

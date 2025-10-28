@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxl30x1l7yj3l"]
+[gd_scene load_steps=5 format=3 uid="uid://bxl30x1l7yj3l"]
 
 [ext_resource type="Script" uid="uid://cyy52vea86gnm" path="res://scripts/MainMenu.gd" id="1_yqorp"]
 [ext_resource type="PackedScene" uid="uid://juhrxihsqedy" path="res://scenes/menuBackground.tscn" id="2_0ykhv"]
+[ext_resource type="AudioStream" uid="uid://cw8agq482pta7" path="res://sounds/PEVA X UNALOTO NATANE - TONGAN SIREN JAM 🔥🔥.wav" id="3_2wh52"]
+[ext_resource type="AudioStream" uid="uid://ft82ytyowji2" path="res://sounds/mixkit-select-click-1109.wav" id="3_ow34m"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -39,10 +41,16 @@ text = "Auckland Diary Simulator
 layout_mode = 2
 text = "Play"
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="VBox/PlayButton"]
+stream = ExtResource("3_ow34m")
+
 [node name="OptionsButton" type="Button" parent="VBox"]
 layout_mode = 2
 text = "Options
 "
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="VBox/OptionsButton"]
+stream = ExtResource("3_ow34m")
 
 [node name="LoadButton" type="Button" parent="VBox"]
 visible = false
@@ -52,6 +60,13 @@ text = "Load"
 [node name="QuitButton" type="Button" parent="VBox"]
 layout_mode = 2
 text = "Quit"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="VBox/QuitButton"]
+stream = ExtResource("3_ow34m")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_2wh52")
+autoplay = true
 
 [connection signal="pressed" from="VBox/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBox/OptionsButton" to="." method="_on_options_button_pressed"]
