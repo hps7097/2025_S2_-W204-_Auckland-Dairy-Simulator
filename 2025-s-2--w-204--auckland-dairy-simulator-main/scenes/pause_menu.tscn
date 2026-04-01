@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbai15dej6c23"]
+
+[ext_resource type="Script" uid="uid://o5n6kmprhogr" path="res://scripts/PauseMenu.gd" id="1_n87rw"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.0017533245
+script = ExtResource("1_n87rw")
+
+[node name="BtnResume" type="Button" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 29.0
+offset_right = 194.0
+offset_bottom = 74.0
+text = "RESUME"
+script = ExtResource("1_n87rw")
+
+[node name="BtnOptions" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.058000002
+anchor_bottom = 0.062000003
+offset_left = 47.0
+offset_top = 89.0
+offset_right = 83.64
+offset_bottom = 84.03999
+text = "OPTIONS"
+script = ExtResource("1_n87rw")
+
+[node name="BtnSave" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.037
+anchor_bottom = 0.037
+offset_left = 628.0
+offset_top = 93.0
+offset_right = 714.96
+offset_bottom = 143.04001
+text = "SAVE"
+script = ExtResource("1_n87rw")
+
+[node name="BtnLoad" type="Button" parent="."]
+layout_mode = 0
+offset_left = 337.0
+offset_top = 120.0
+offset_right = 570.0
+offset_bottom = 254.0
+text = "LOAD"
+script = ExtResource("1_n87rw")
+
+[node name="BtnTitle" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "TITLE
+"

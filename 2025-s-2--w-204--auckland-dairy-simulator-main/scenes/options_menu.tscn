@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3 uid="uid://bm5fhdk22mx76"]
+
+[ext_resource type="Script" uid="uid://di66qh04i4uc3" path="res://scripts/OptionsMenu.gd" id="1_lbr8e"]
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lbr8e")
+
+[node name="Music" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 461.79987
+offset_right = 832.0
+offset_bottom = 477.79987
+scale = Vector2(10, 10)
+script = ExtResource("1_lbr8e")
+
+[node name="Sfx" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 1076.8
+offset_top = 248.59985
+offset_right = 1084.8
+offset_bottom = 264.59985
+scale = Vector2(10, 10)
+script = ExtResource("1_lbr8e")
+
+[node name="DialogueSpeed" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 270.8
+offset_top = 589.3997
+offset_right = 278.8
+offset_bottom = 605.3997
+rotation = 0.0001412111
+scale = Vector2(10, 10)
+script = ExtResource("1_lbr8e")
+
+[node name="Graphics" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 1270.8
+offset_top = 692.5997
+offset_right = 1302.8
+offset_bottom = 712.5997
+scale = Vector2(10, 10)
+script = ExtResource("1_lbr8e")
+
+[node name="BtnClose" type="Button" parent="."]
+layout_mode = 0
+offset_left = 470.8
+offset_top = 264.59967
+offset_right = 478.8
+offset_bottom = 272.59967
+text = "CLOSE"
+script = ExtResource("1_lbr8e")

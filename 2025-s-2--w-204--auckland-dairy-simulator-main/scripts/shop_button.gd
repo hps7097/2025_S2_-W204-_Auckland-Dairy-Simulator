@@ -32,6 +32,8 @@ func _ready() -> void:
 	image.texture = atlas
 	
 	var upgrade_value = UpgradeManager.getUpgrade(upgradeType)
+<<<<<<< HEAD:auckland-diary-simulator/scripts/shop_button.gd
+=======
 	
 	if (upgradeType == 0 and upgrade_value == 5) \
 	or (upgradeType == 1 and upgrade_value == 3) \
@@ -43,6 +45,7 @@ func _ready() -> void:
 		nextDayButton.disabled = false
 		return
 	
+>>>>>>> NPC:2025-s-2--w-204--auckland-dairy-simulator-main/scripts/shop_button.gd
 	image.texture.region = Rect2(upgradeType * 120, upgrade_value * 120, 120, 120)  # x, y, width, height
 	label.text = str(upgadeLabels[upgradeType][upgrade_value])
 	price = upgradePrices[upgradeType][upgrade_value]
@@ -59,14 +62,26 @@ func _on_pressed() -> void:
 		UpgradeManager.upgrade(upgradeType)
 		var moneyTotal = ProductManager.money - price
 		
+<<<<<<< HEAD:auckland-diary-simulator/scripts/shop_button.gd
+		for i in range(floor(price)):
+=======
 		for i in range(floor(price / 2)):
+>>>>>>> NPC:2025-s-2--w-204--auckland-dairy-simulator-main/scripts/shop_button.gd
 			var t = get_tree().create_timer(0.1) # 1 second
 			await t.timeout
 			var coin1 = coin.instantiate()
 			coin1.type = upgradeType + 1
 			get_tree().current_scene.add_child(coin1)
+<<<<<<< HEAD:auckland-diary-simulator/scripts/shop_button.gd
+		while ProductManager.money > moneyTotal:
+			var t = get_tree().create_timer(0.01) # 1 second
+			await t.timeout
+			ProductManager.money -= 0.1
+		ProductManager.money = moneyTotal
+=======
 		var tween = get_tree().create_tween()
 		tween.tween_property(ProductManager, "money", moneyTotal, 1.0)
+>>>>>>> NPC:2025-s-2--w-204--auckland-dairy-simulator-main/scripts/shop_button.gd
 		
 		var upgrade_value = UpgradeManager.getUpgrade(upgradeType)
 		if (upgradeType == 0 and upgrade_value == 5) \
@@ -83,10 +98,13 @@ func _on_pressed() -> void:
 		image.texture.region = Rect2(upgradeType * 120, UpgradeManager.getUpgrade(upgradeType) * 120, 120, 120)
 		label.text = str(upgadeLabels[upgradeType][upgrade_value])
 		priceLabel.text = "$" + "%0.2f" % price
+<<<<<<< HEAD:auckland-diary-simulator/scripts/shop_button.gd
+=======
 		
 		var t = get_tree().create_timer(1) # 1 second
 		await t.timeout
 		
+>>>>>>> NPC:2025-s-2--w-204--auckland-dairy-simulator-main/scripts/shop_button.gd
 		nextDayButton.disabled = false
 		disabled = false
 	
